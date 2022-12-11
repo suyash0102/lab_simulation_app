@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "200198356587",
+    "project_id": "lsapp-68019",
+    "storage_bucket": "lsapp-68019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200198356587:android:5e9980a481e73a685c7b2e",
+        "android_client_info": {
+          "package_name": "com.synchronizers.lab_simulation_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200198356587-6jq6n5c3jr1aoica3vpkcr7hn8uoe6cj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5ajS0s3XisHYY_xrYfjU-kTOhXzo9QY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200198356587-6jq6n5c3jr1aoica3vpkcr7hn8uoe6cj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200198356587-d84slhcu9031idfe5l0vqocbjgq09ubd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lsapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200198356587:android:f89c70cd65a9ad9f5c7b2e",
+        "android_client_info": {
+          "package_name": "com.synchronizers.lsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200198356587-6jq6n5c3jr1aoica3vpkcr7hn8uoe6cj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5ajS0s3XisHYY_xrYfjU-kTOhXzo9QY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200198356587-6jq6n5c3jr1aoica3vpkcr7hn8uoe6cj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200198356587-d84slhcu9031idfe5l0vqocbjgq09ubd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lsapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
