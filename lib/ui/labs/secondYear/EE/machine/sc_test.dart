@@ -20,23 +20,19 @@ class _SCTestScreenState extends State<SCTestScreen> {
         data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
         child: SfSlider.vertical(
           min: 1.0,
-          max: 300.0,
+          max: 25.0,
           // onChanged: null,
           onChanged: switchOn
               ? (dynamic values) {
             setState(() {
-              V1 = values;
-              V1 = roundDouble(V1, 1);
-              Im = V1 / X0;
-              Iw = V1 / R0;
-              I0 = sqrt(pow(Im, 2) + pow(Iw, 2));
-              Phi = acos(Iw / I0) * (180.0 / pi);
-              W = V1 * I0 * (cos(Phi * pi / 180));
-              V2 = (1 / 2) * V1;
+              Vsc=values;
+              Vsc = roundDouble(Vsc, 1);
+              I0=(Vsc/Zsc);
+              W=pow(I0,2)*Rsc;
             });
           }
               : null,
-          value: switchOn ? V1 : 0,
+          value: switchOn ? Vsc : 0,
           // enableTooltip: true,
           numberFormat: NumberFormat('#'),
         ));
@@ -44,6 +40,9 @@ class _SCTestScreenState extends State<SCTestScreen> {
 
   bool switchOn = false;
   double V1 = 0.0;
+  double Vsc = 0.0;
+  double Rsc = 1.75;
+  double Zsc = 5.01;
   double Im = 0.0;
   double R0 = 623.711;
   double X0 = 96.688;
@@ -187,7 +186,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                   onTap: () {
                                     setState(() {
                                       switchOn = !switchOn;
-                                      switchOn ? V1 = 230 : null;
+                                      switchOn ? V1 = 20 : null;
                                       switchOn ? I0 : I0 = 0;
                                       switchOn ? W : W = 0;
                                       switchOn ? V2 : V2 = 0;
@@ -195,13 +194,8 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                       print(fieldOne.length == 0
                                           ? "True"
                                           : "False");
-                                      Im = V1 / X0;
-                                      Iw = V1 / R0;
-                                      I0 = sqrt(pow(Im, 2) + pow(Iw, 2));
-                                      Phi = acos(Iw / I0) * (180.0 / pi);
-                                      W = V1 * I0 * (cos(Phi * pi / 180));
-                                      V2 = (1 / 2) * V1;
-                                      // Toggle light when tapped.
+                                      I0=(Vsc/Zsc);
+                                      W=pow(I0,2)*Rsc;
                                     });
                                   },
                                   child: switchOn
@@ -269,15 +263,15 @@ class _SCTestScreenState extends State<SCTestScreen> {
                               Padding(
                                   padding: EdgeInsets.only(
                                       top: size.height * 0.065,
-                                      left: size.width * 0.085),
+                                      left: size.width * 0.098),
                                   child: switchOn
-                                      ? Text("${V1}")
+                                      ? Text("${Vsc}")
                                       : Text("0.0")),
                               Padding(
                                   padding: EdgeInsets.only(
                                       top: size.height * 0.065,
                                       left: size.width * 0.025),
-                                  child: Text("V1=")),
+                                  child: Text("Vsc=")),
                               switchOn
                                   ? Padding(
                                 padding: EdgeInsets.only(
@@ -377,12 +371,12 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                         fontSizeM: 12,
                                         showLabels: false,
                                         fontSize: 0,
-                                        meterName: "V1",
+                                        meterName: "Vsc",
                                         value: switchOn
-                                            ? roundDouble(V1, 1)
+                                            ? roundDouble(Vsc, 1)
                                             : 0.0,
                                         range1: 0,
-                                        range2: 300)),
+                                        range2: 25)),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
@@ -408,9 +402,9 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                         showLabels: true,
                                         fontSizeM: size.width * 0.04,
                                         fontSize: size.width * 0.04,
-                                        meterName: "V1",
+                                        meterName: "Vsc",
                                         value: switchOn
-                                            ? roundDouble(V1, 1)
+                                            ? roundDouble(Vsc, 1)
                                             : 0.0,
                                         range1: 0,
                                         range2: 300)),
@@ -562,12 +556,12 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                         fontSizeM: size.width * 0.015,
                                         showLabels: false,
                                         fontSize: 0,
-                                        meterName: "V1",
+                                        meterName: "Vsc",
                                         value: switchOn
-                                            ? roundDouble(V1, 1)
+                                            ? roundDouble(Vsc, 1)
                                             : 0.0,
                                         range1: 0,
-                                        range2: 300)),
+                                        range2: 25)),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
@@ -601,13 +595,13 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                       top: size.height * 0.052,
                                       left: size.width * 0.063),
                                   child: switchOn
-                                      ? Text("${V1}")
+                                      ? Text("${Vsc}")
                                       : Text("0.0")),
                               Padding(
                                   padding: EdgeInsets.only(
                                       top: size.height * 0.052,
                                       left: size.width * 0.03),
-                                  child: Text("V1=")),
+                                  child: Text("Vsc=")),
                             ],
                           ),
                           Column(
@@ -621,7 +615,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                       onTap: () {
                                         setState(() {
                                           switchOn = !switchOn;
-                                          switchOn ? V1 = 230.0 : null;
+                                          switchOn ? Vsc = 230.0 : null;
                                           switchOn ? I0 : I0 = 0;
                                           switchOn ? W : W = 0;
                                           switchOn ? V2 : V2 = 0;
@@ -629,17 +623,8 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                           print(fieldOne.length == 0
                                               ? "True"
                                               : "False");
-                                          Im = V1 / X0;
-                                          Iw = V1 / R0;
-                                          I0 = sqrt(
-                                              pow(Im, 2) + pow(Iw, 2));
-                                          Phi = acos(Iw / I0) *
-                                              (180.0 / pi);
-                                          W = V1 *
-                                              I0 *
-                                              (cos(Phi * pi / 180));
-                                          V2 = (1 / 2) * V1;
-                                          // Toggle light when tapped.
+                                          I0=(Vsc/Zsc);
+                                          W=pow(I0,2)*Rsc;
                                         });
                                       },
                                       child: switchOn
