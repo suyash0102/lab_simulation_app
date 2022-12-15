@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab_simulation_app/constants.dart';
-import 'package:lab_simulation_app/ui/about_us.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/oc_test.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/sc_test.dart';
-import 'package:lab_simulation_app/ui/labsScreen/labs_screen.dart';
 
 class LabsScreen extends StatefulWidget {
   const LabsScreen({Key? key}) : super(key: key);

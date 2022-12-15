@@ -6,6 +6,7 @@ import 'package:lab_simulation_app/constants.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:intl/intl.dart' show NumberFormat;
+import 'package:toggle_switch/toggle_switch.dart';
 
 class OCTestScreen extends StatefulWidget {
   const OCTestScreen({Key? key}) : super(key: key);
@@ -52,6 +53,9 @@ class _OCTestScreenState extends State<OCTestScreen> {
   double I0 = 0.0;
   double W = 0.0;
   double V2 = 0.0;
+  List<String> getTab(){
+    return ["Aim", "Procedure", "Theory"];
+  }
   List<String> str = [
     "Set the input voltage at 230V and 50Hz frequency to the autotransformer input.\n"
         "",
@@ -146,29 +150,48 @@ class _OCTestScreenState extends State<OCTestScreen> {
                     child: Container(
                       padding: EdgeInsets.all(20),
                       child: Column(
-                        children: str.map((strone) {
-                          return Row(children: [
-                            Text(
-                              "\u2022",
-                              style: TextStyle(
-                                  fontSize: size.width * 0.07,
-                                  fontFamily: 'Poppins'),
-                            ),
-                            //bullet text
-                            SizedBox(
-                              width: 10,
-                            ),
-                            //space between bullet and text
-                            Expanded(
-                              child: Text(
-                                strone,
-                                style: TextStyle(
-                                    fontSize: size.width * 0.04,
-                                    fontFamily: 'Poppins'),
-                              ), //text
-                            )
-                          ]);
-                        }).toList(),
+                        children: [
+                          ToggleSwitch(
+                            minWidth: 90.0,
+                            cornerRadius: 20.0,
+                            activeBgColors: [[Colors.green[800]!], [Colors.red[800]!]],
+                            activeFgColor: Colors.white,
+                            inactiveBgColor: Colors.grey,
+                            inactiveFgColor: Colors.white,
+                            initialLabelIndex: 3,
+                            totalSwitches: getTab().length,
+                            labels:  getTab(),
+                            radiusStyle: true,
+                            onToggle: (index) {
+                              print('switched to: $index');
+                            },
+                          ),
+                          Column(
+                            children: str.map((strone) {
+                              return Row(children: [
+                                Text(
+                                  "\u2022",
+                                  style: TextStyle(
+                                      fontSize: size.width * 0.07,
+                                      fontFamily: 'Poppins'),
+                                ),
+                                //bullet text
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                //space between bullet and text
+                                Expanded(
+                                  child: Text(
+                                    strone,
+                                    style: TextStyle(
+                                        fontSize: size.width * 0.04,
+                                        fontFamily: 'Poppins'),
+                                  ), //text
+                                )
+                              ]);
+                            }).toList(),
+                          ),
+                        ],
                       ),
                     ),
                   ),
