@@ -40,9 +40,9 @@ class _SCTestScreenState extends State<SCTestScreen> {
 
   bool switchOn = false;
   double V1 = 0.0;
-  double Vsc = 0.0;
-  double Rsc = 1.75;
-  double Zsc = 5.01;
+  double Vsc = 10.0;
+  double Rsc = 4.41;
+  double Zsc = 4.6;
   double Im = 0.0;
   double R0 = 623.711;
   double X0 = 96.688;

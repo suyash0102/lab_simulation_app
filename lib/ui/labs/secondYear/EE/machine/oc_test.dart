@@ -21,7 +21,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
         data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
         child: SfSlider.vertical(
           min: 1.0,
-          max: 300.0,
+          max: 120.0,
           // onChanged: null,
           onChanged: switchOn
               ? (dynamic values) {
@@ -33,7 +33,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                     I0 = sqrt(pow(Im, 2) + pow(Iw, 2));
                     Phi = acos(Iw / I0) * (180.0 / pi);
                     W = V1 * I0 * (cos(Phi * pi / 180));
-                    V2 = (1 / 2) * V1;
+                    V2 = 2 * V1;
                   });
                 }
               : null,
@@ -46,16 +46,18 @@ class _OCTestScreenState extends State<OCTestScreen> {
   bool switchOn = false;
   double V1 = 0.0;
   double Im = 0.0;
-  double R0 = 623.711;
-  double X0 = 96.688;
+  double R0 = 696.125;
+  double X0 = 166.90;
   double Iw = 0.0;
   double Phi = 0.0;
   double I0 = 0.0;
   double W = 0.0;
   double V2 = 0.0;
-  List<String> getTab(){
+
+  List<String> getTab() {
     return ["Aim", "Procedure", "Theory"];
   }
+
   List<String> str = [
     "Set the input voltage at 230V and 50Hz frequency to the autotransformer input.\n"
         "",
@@ -154,13 +156,13 @@ class _OCTestScreenState extends State<OCTestScreen> {
                           ToggleSwitch(
                             minWidth: 90.0,
                             cornerRadius: 20.0,
-                            activeBgColors: [[Colors.green[800]!], [Colors.red[800]!]],
+                            activeBgColor: [Colors.green],
                             activeFgColor: Colors.white,
                             inactiveBgColor: Colors.grey,
                             inactiveFgColor: Colors.white,
-                            initialLabelIndex: 3,
+                            initialLabelIndex: 0,
                             totalSwitches: getTab().length,
-                            labels:  getTab(),
+                            labels: getTab(),
                             radiusStyle: true,
                             onToggle: (index) {
                               print('switched to: $index');
@@ -210,7 +212,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                         onTap: () {
                                           setState(() {
                                             switchOn = !switchOn;
-                                            switchOn ? V1 = 230 : null;
+                                            switchOn ? V1 = 115 : null;
                                             switchOn ? I0 : I0 = 0;
                                             switchOn ? W : W = 0;
                                             switchOn ? V2 : V2 = 0;
@@ -223,7 +225,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                             I0 = sqrt(pow(Im, 2) + pow(Iw, 2));
                                             Phi = acos(Iw / I0) * (180.0 / pi);
                                             W = V1 * I0 * (cos(Phi * pi / 180));
-                                            V2 = (1 / 2) * V1;
+                                            V2 = 2 * V1;
                                             // Toggle light when tapped.
                                           });
                                         },
@@ -244,7 +246,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                       child: GestureDetector(
                                         onTap: () {
                                           setState(() {
-                                            switchOn ? V1 = 230 : null;
+                                            switchOn ? V1 = 115 : null;
                                             switchOn ? I0 : I0 = 0;
                                             switchOn ? W : W = 0;
                                             switchOn ? V2 : V2 = 0;
@@ -405,7 +407,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                   ? roundDouble(V1, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 300)),
+                                              range2: 115)),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
@@ -436,7 +438,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                   ? roundDouble(V1, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 300)),
+                                              range2: 115)),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
@@ -590,7 +592,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                   ? roundDouble(V1, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 300)),
+                                              range2: 115)),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
@@ -644,7 +646,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                             onTap: () {
                                               setState(() {
                                                 switchOn = !switchOn;
-                                                switchOn ? V1 = 230.0 : null;
+                                                switchOn ? V1 = 115.0 : null;
                                                 switchOn ? I0 : I0 = 0;
                                                 switchOn ? W : W = 0;
                                                 switchOn ? V2 : V2 = 0;
@@ -661,7 +663,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                 W = V1 *
                                                     I0 *
                                                     (cos(Phi * pi / 180));
-                                                V2 = (1 / 2) * V1;
+                                                V2 = 2 * V1;
                                                 // Toggle light when tapped.
                                               });
                                             },
@@ -759,7 +761,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                       ? roundDouble(V1, 1)
                                                       : 0.0,
                                                   range1: 0,
-                                                  range2: 300)),
+                                                  range2: 115)),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
@@ -928,22 +930,22 @@ class _OCTestScreenState extends State<OCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('2nd')]),
                                 Column(children: [
-                                  fieldOne.length<=1
+                                  fieldOne.length <= 1
                                       ? Text("")
                                       : Text("${fieldOne[1]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length<=1
+                                  fieldTwo.length <= 1
                                       ? Text("")
                                       : Text("${roundDouble(fieldTwo[1], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length<=1
+                                  fieldThree.length <= 1
                                       ? Text("")
                                       : Text("${roundDouble(fieldThree[1], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length<=1
+                                  fieldFour.length <= 1
                                       ? Text("")
                                       : Text("${fieldFour[1]}")
                                 ]),
@@ -951,22 +953,22 @@ class _OCTestScreenState extends State<OCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('3rd')]),
                                 Column(children: [
-                                  fieldOne.length<=2
+                                  fieldOne.length <= 2
                                       ? Text("")
                                       : Text("${fieldOne[2]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length<=2
+                                  fieldTwo.length <= 2
                                       ? Text("")
                                       : Text("${roundDouble(fieldTwo[2], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length<=2
+                                  fieldThree.length <= 2
                                       ? Text("")
                                       : Text("${roundDouble(fieldThree[2], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length<=2
+                                  fieldFour.length <= 2
                                       ? Text("")
                                       : Text("${fieldFour[2]}")
                                 ]),
@@ -974,22 +976,22 @@ class _OCTestScreenState extends State<OCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('4th')]),
                                 Column(children: [
-                                  fieldOne.length<=3
+                                  fieldOne.length <= 3
                                       ? Text("")
                                       : Text("${fieldOne[3]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length<=3
+                                  fieldTwo.length <= 3
                                       ? Text("")
                                       : Text("${roundDouble(fieldTwo[3], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length<=3
+                                  fieldThree.length <= 3
                                       ? Text("")
                                       : Text("${roundDouble(fieldThree[3], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length<=3
+                                  fieldFour.length <= 3
                                       ? Text("")
                                       : Text("${fieldFour[3]}")
                                 ]),
@@ -997,22 +999,22 @@ class _OCTestScreenState extends State<OCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('5th')]),
                                 Column(children: [
-                                  fieldOne.length<=4
+                                  fieldOne.length <= 4
                                       ? Text("")
                                       : Text("${fieldOne[4]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length<=4
+                                  fieldTwo.length <= 4
                                       ? Text("")
                                       : Text("${roundDouble(fieldTwo[4], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length<=4
+                                  fieldThree.length <= 4
                                       ? Text("")
                                       : Text("${roundDouble(fieldThree[4], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length<=4
+                                  fieldFour.length <= 4
                                       ? Text("")
                                       : Text("${fieldFour[4]}")
                                 ]),
