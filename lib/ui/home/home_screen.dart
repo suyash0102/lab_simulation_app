@@ -73,6 +73,7 @@ class _HomeState extends State<HomeScreen> {
                           'Mechanical Engineering',
                           textAlign: TextAlign.center,
                           style: TextStyle(
+                            fontSize: size.width*0.031,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700),
                         ),
@@ -80,6 +81,7 @@ class _HomeState extends State<HomeScreen> {
                       Text(
                         'Number of Labs: xx',
                         style: TextStyle(
+                            fontSize: size.width*0.03,
                             fontFamily: 'Poppins', fontWeight: FontWeight.w200),
                       ),
                       SizedBox(
@@ -106,6 +108,7 @@ class _HomeState extends State<HomeScreen> {
                             child: Text(
                               'Learn More',
                               style: TextStyle(
+                                  fontSize: size.width*0.035,
                                   fontFamily: 'Poppins', color: Colors.white),
                             ),
                           ),
@@ -138,6 +141,7 @@ class _HomeState extends State<HomeScreen> {
                           'Electrical Engineering',
                           textAlign: TextAlign.center,
                           style: TextStyle(
+                              fontSize: size.width*0.031,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700),
                         ),
@@ -145,6 +149,7 @@ class _HomeState extends State<HomeScreen> {
                       Text(
                         'Number of Labs: xx',
                         style: TextStyle(
+                            fontSize: size.width*0.03,
                             fontFamily: 'Poppins', fontWeight: FontWeight.w200),
                       ),
                       SizedBox(
@@ -171,6 +176,7 @@ class _HomeState extends State<HomeScreen> {
                             child: Text(
                               'Learn More',
                               style: TextStyle(
+                                  fontSize: size.width*0.035,
                                   fontFamily: 'Poppins', color: Colors.white),
                             ),
                           ),
@@ -184,6 +190,9 @@ class _HomeState extends State<HomeScreen> {
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: size.height * 0.01,
           ),
           Row(
             children: [
@@ -207,6 +216,7 @@ class _HomeState extends State<HomeScreen> {
                           'Civil Engineering',
                           textAlign: TextAlign.center,
                           style: TextStyle(
+                              fontSize: size.width*0.031,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700),
                         ),
@@ -214,6 +224,7 @@ class _HomeState extends State<HomeScreen> {
                       Text(
                         'Number of Labs: xx',
                         style: TextStyle(
+                            fontSize: size.width*0.03,
                             fontFamily: 'Poppins', fontWeight: FontWeight.w200),
                       ),
                       SizedBox(
@@ -240,6 +251,7 @@ class _HomeState extends State<HomeScreen> {
                             child: Text(
                               'Learn More',
                               style: TextStyle(
+                                  fontSize: size.width*0.035,
                                   fontFamily: 'Poppins', color: Colors.white),
                             ),
                           ),
@@ -272,6 +284,7 @@ class _HomeState extends State<HomeScreen> {
                           'Computer Science',
                           textAlign: TextAlign.center,
                           style: TextStyle(
+                              fontSize: size.width*0.031,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700),
                         ),
@@ -279,6 +292,7 @@ class _HomeState extends State<HomeScreen> {
                       Text(
                         'Number of Labs: xx',
                         style: TextStyle(
+                            fontSize: size.width*0.03,
                             fontFamily: 'Poppins', fontWeight: FontWeight.w200),
                       ),
                       SizedBox(
@@ -305,6 +319,7 @@ class _HomeState extends State<HomeScreen> {
                             child: Text(
                               'Learn More',
                               style: TextStyle(
+                                  fontSize: size.width*0.035,
                                   fontFamily: 'Poppins', color: Colors.white),
                             ),
                           ),
@@ -350,10 +365,10 @@ class _HomeState extends State<HomeScreen> {
         ],
       ),
       Text(
-        'Index 1: ---',
+        user.email,
         style: optionStyle,
       ),
-      ProfileScreen()
+      ProfileScreen(user: widget.user,)
     ];
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
@@ -381,8 +396,8 @@ class _HomeState extends State<HomeScreen> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.wallet),
-              label: '---',
+              icon: Icon(Icons.dashboard),
+              label: 'Dashboard',
             ),
             BottomNavigationBarItem(
               activeIcon: Icon(Icons.account_circle),

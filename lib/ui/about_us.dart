@@ -105,7 +105,7 @@ class _AboutUsState extends State<AboutUs> {
                                   color: kPrimaryColor),
                             ),
                             Text(
-                              'Description',
+                              'Project Lead',
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w300,
@@ -155,7 +155,7 @@ class _AboutUsState extends State<AboutUs> {
                                   color: kPrimaryColor),
                             ),
                             Text(
-                              'Description',
+                              'UI/UX Designer',
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w300,
@@ -205,7 +205,7 @@ class _AboutUsState extends State<AboutUs> {
                                   color: kPrimaryColor),
                             ),
                             Text(
-                              'Description',
+                              'Developer',
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w300,
@@ -255,7 +255,7 @@ class _AboutUsState extends State<AboutUs> {
                                   color: kPrimaryColor),
                             ),
                             Text(
-                              'Description',
+                              'Tester',
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w300,
@@ -305,7 +305,7 @@ class _AboutUsState extends State<AboutUs> {
                                   color: kPrimaryColor),
                             ),
                             Text(
-                              'Description',
+                              'App Dev',
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w300,

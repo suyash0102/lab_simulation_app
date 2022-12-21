@@ -5,60 +5,52 @@ import 'package:lab_simulation_app/services/helper.dart';
 
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key, }) : super(key: key);
+  const ProfileScreen({Key? key, required this.user, }) : super(key: key);
+  final User user;
+
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-late User user;
-  @override
-  void initState() {
-    super.initState();
-    // print("Name : ${user.fullName}");
-  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Center(
-      child: Container(
-        child: Column(children: [
-          SizedBox(height: size.height*0.03,),
-          Image.asset('assets/images/profile.png'),
-          Padding(
-            padding: EdgeInsets.only(
-              right: size.width * 0.54,
-            ),
-            child: Text(
-              "Enter Name:",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.purple,
-                fontFamily: "Poppins",
-              ),
+    return Padding(
+      padding:  EdgeInsets.only(left: size.width*0.05,right: size.width*0.05),
+      child: Column(children: [
+        SizedBox(height: size.height*0.03,),
+        Image.asset('assets/images/profile.png'),
+        const Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            "Name:",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.purple,
+              fontFamily: "Poppins",
             ),
           ),
-          SizedBox(
-            height: size.height * 0.001,
-          ),
-          Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.01),
-              child: CustomizedTextFormField(
-                validator: validateName,
-                onSaved: (String? val) {
-                  // fullName = val;
-                },
-                hintText: "user.fullName",
-                obscureText: false,
-              )),
-          Text(
-            'Index 2: Profile',
-          ),
-        ],),
-      ),
+        ),
+        SizedBox(
+          height: size.height * 0.001,
+        ),
+        CustomizedTextFormField(
+          readOnly: true,
+          validator: validateName,
+          onSaved: (String? val) {
+            // fullName = val;
+          },
+          hintText: widget.user.fullName,
+          obscureText: false,
+        ),
+        Text(
+          'Index 2: Profile',
+        ),
+      ],),
     );
   }
 }

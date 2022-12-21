@@ -139,6 +139,7 @@ class _LoginScreen extends State<LoginScreen> {
                                         padding: EdgeInsets.symmetric(
                                             vertical: size.height * 0.01),
                                         child: CustomizedTextFormField(
+                                          readOnly: false,
                                           validator: validateEmail,
                                           onSaved: (String? val) {
                                             email = val;
@@ -185,6 +186,7 @@ class _LoginScreen extends State<LoginScreen> {
                                         padding: EdgeInsets.symmetric(
                                             vertical: size.height * 0.01),
                                         child: CustomizedTextFormField(
+                                          readOnly: false,
                                           hintText: "XXXXXXXX",
                                           obscureText: true,
                                           validator: validatePassword,

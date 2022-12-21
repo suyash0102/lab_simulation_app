@@ -20,7 +20,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
         data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
         child: SfSlider.vertical(
           min: 1.0,
-          max: 25.0,
+          max: 20.0,
           // onChanged: null,
           onChanged: switchOn
               ? (dynamic values) {
@@ -280,7 +280,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                 child: Container(
                                   height: size.height * 0.207,
                                   child: Image.asset(
-                                      "assets/images/open_circuit_1.png"),
+                                      "assets/images/short_circuit_1.png"),
                                 ),
                               )
                                   : Padding(
@@ -290,7 +290,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                 child: Container(
                                   height: size.height * 0.207,
                                   child: Image.asset(
-                                      "assets/images/open_circuit_0.png"),
+                                      "assets/images/short_circuit_0.png"),
                                 ),
                               ),
                               Padding(
@@ -332,30 +332,30 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                             ? roundDouble(W, 1)
                                             : 0.0,
                                         range1: 0,
-                                        range2: 300)),
+                                        range2: 30)),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.16,
-                                    right: size.width * 0.02,
-                                    left: size.width * 0.91),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.055,
-                                    width: size.width * 0.11,
-                                    // width: 50,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: 12,
-                                        showLabels: false,
-                                        fontSize: 0,
-                                        meterName: "V2",
-                                        value: switchOn
-                                            ? roundDouble(V2, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 300)),
-                              ),
+                              // Padding(
+                              //   padding: EdgeInsets.only(
+                              //       top: size.height * 0.16,
+                              //       right: size.width * 0.02,
+                              //       left: size.width * 0.91),
+                              //   child: Container(
+                              //       color: Colors.white,
+                              //       height: size.height * 0.055,
+                              //       width: size.width * 0.11,
+                              //       // width: 50,
+                              //       child: CircularMeter(
+                              //           showFirstLabel: true,
+                              //           fontSizeM: 12,
+                              //           showLabels: false,
+                              //           fontSize: 0,
+                              //           meterName: "V2",
+                              //           value: switchOn
+                              //               ? roundDouble(V2, 1)
+                              //               : 0.0,
+                              //           range1: 0,
+                              //           range2: 300)),
+                              // ),
                               Padding(
                                 padding: EdgeInsets.only(
                                     top: size.height * 0.16,
@@ -407,7 +407,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                             ? roundDouble(Vsc, 1)
                                             : 0.0,
                                         range1: 0,
-                                        range2: 300)),
+                                        range2: 30)),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
@@ -435,7 +435,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(
-                                    right: size.width * 0.4),
+                                    right: size.width * 0.0),
                                 child: Container(
                                     color: Colors.white,
                                     height: size.height * 0.195,
@@ -451,29 +451,30 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                             ? roundDouble(W, 1)
                                             : 0.0,
                                         range1: 0,
-                                        range2: 300)),
+                                        range2: 30)),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: size.width * 0.45),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.195,
-                                    width: size.width * 0.4,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: size.width * 0.04,
-                                        showLabels: true,
-                                        fontSize: size.width * 0.04,
-                                        meterName: "V2",
-                                        value: switchOn
-                                            ? roundDouble(V2, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 300)),
-                              ),
+                              // Padding(
+                              //   padding: EdgeInsets.only(
+                              //       left: size.width * 0.45),
+                              //   child: Container(
+                              //       color: Colors.white,
+                              //       height: size.height * 0.195,
+                              //       width: size.width * 0.4,
+                              //       child: CircularMeter(
+                              //           showFirstLabel: true,
+                              //           fontSizeM: size.width * 0.04,
+                              //           showLabels: true,
+                              //           fontSize: size.width * 0.04,
+                              //           meterName: "V2",
+                              //           value: switchOn
+                              //               ? roundDouble(V2, 1)
+                              //               : 0.0,
+                              //           range1: 0,
+                              //           range2: 300)),
+                              // ),
                             ],
                           ),
+                          Text("Transformer Rating: 500kVA 115/230"),
                         ],
                       )
                           : Row(
@@ -498,7 +499,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                             ? roundDouble(W, 1)
                                             : 0.0,
                                         range1: 0,
-                                        range2: 300)),
+                                        range2: 30)),
                               ),
                               switchOn
                                   ? Padding(
@@ -509,7 +510,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                   height: size.height * 0.65,
                                   width: size.width * 0.72,
                                   child: Image.asset(
-                                      "assets/images/open_circuit_1.png"),
+                                      "assets/images/short_circuit_1.png"),
                                 ),
                               )
                                   : Padding(
@@ -520,7 +521,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                   height: size.height * 0.65,
                                   width: size.width * 0.72,
                                   child: Image.asset(
-                                      "assets/images/open_circuit_0.png"),
+                                      "assets/images/short_circuit_0.png"),
                                 ),
                               ),
                               Padding(
@@ -563,26 +564,26 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                         range1: 0,
                                         range2: 25)),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.37,
-                                    left: size.width * 0.672),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.15,
-                                    width: size.width * 0.05,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: size.width * 0.015,
-                                        showLabels: false,
-                                        fontSize: 0,
-                                        meterName: "V2",
-                                        value: switchOn
-                                            ? roundDouble(V2, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 300)),
-                              ),
+                              // Padding(
+                              //   padding: EdgeInsets.only(
+                              //       top: size.height * 0.37,
+                              //       left: size.width * 0.672),
+                              //   child: Container(
+                              //       color: Colors.white,
+                              //       height: size.height * 0.15,
+                              //       width: size.width * 0.05,
+                              //       child: CircularMeter(
+                              //           showFirstLabel: true,
+                              //           fontSizeM: size.width * 0.015,
+                              //           showLabels: false,
+                              //           fontSize: 0,
+                              //           meterName: "V2",
+                              //           value: switchOn
+                              //               ? roundDouble(V2, 1)
+                              //               : 0.0,
+                              //           range1: 0,
+                              //           range2: 300)),
+                              // ),
                               Padding(
                                 padding: EdgeInsets.only(
                                   left: size.width * 0.02,
@@ -716,12 +717,12 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                             showLabels: true,
                                             fontSizeM: size.width * 0.02,
                                             fontSize: size.width * 0.017,
-                                            meterName: "V1",
+                                            meterName: "Vsc",
                                             value: switchOn
-                                                ? roundDouble(V1, 1)
+                                                ? roundDouble(Vsc, 1)
                                                 : 0.0,
                                             range1: 0,
-                                            range2: 300)),
+                                            range2: 30)),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(
@@ -764,27 +765,27 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                                 ? roundDouble(W, 1)
                                                 : 0.0,
                                             range1: 0,
-                                            range2: 300)),
+                                            range2: 30)),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: size.width * 0.15),
-                                    child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.3,
-                                        width: size.width * 0.12,
-                                        child: CircularMeter(
-                                            showFirstLabel: true,
-                                            fontSizeM: size.width * 0.02,
-                                            fontSize: size.width * 0.017,
-                                            showLabels: true,
-                                            meterName: "V2",
-                                            value: switchOn
-                                                ? roundDouble(V2, 1)
-                                                : 0.0,
-                                            range1: 0,
-                                            range2: 300)),
-                                  ),
+                                  // Padding(
+                                  //   padding: EdgeInsets.only(
+                                  //       left: size.width * 0.15),
+                                  //   child: Container(
+                                  //       color: Colors.white,
+                                  //       height: size.height * 0.3,
+                                  //       width: size.width * 0.12,
+                                  //       child: CircularMeter(
+                                  //           showFirstLabel: true,
+                                  //           fontSizeM: size.width * 0.02,
+                                  //           fontSize: size.width * 0.017,
+                                  //           showLabels: true,
+                                  //           meterName: "V2",
+                                  //           value: switchOn
+                                  //               ? roundDouble(V2, 1)
+                                  //               : 0.0,
+                                  //           range1: 0,
+                                  //           range2: 300)),
+                                  // ),
                                 ],
                               ),
                             ],

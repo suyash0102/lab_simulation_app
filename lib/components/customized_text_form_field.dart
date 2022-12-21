@@ -8,9 +8,10 @@ class CustomizedTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final Function(String?)? onSaved;
   final Function(String)? onFieldSubmitted;
+  final bool readOnly;
 
 
-  const CustomizedTextFormField({Key? key, required this.hintText, required this.obscureText, required this.validator, this.onSaved, this.onFieldSubmitted, this.controller}) : super(key: key);
+  const CustomizedTextFormField({Key? key, required this.hintText, required this.obscureText, required this.validator, this.onSaved, this.onFieldSubmitted, this.controller, required this.readOnly}) : super(key: key);
 
   @override
   _CustomizedTextFormFieldState createState() => _CustomizedTextFormFieldState();
@@ -20,6 +21,7 @@ class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget.readOnly,
       controller: widget.controller,
       onFieldSubmitted: widget.onFieldSubmitted,
       onSaved: widget.onSaved,

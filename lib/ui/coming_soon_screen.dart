@@ -13,6 +13,7 @@ class ComingSoonScreen extends StatefulWidget {
 class _ComingSoonScreenState extends State<ComingSoonScreen> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -27,12 +28,19 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Text(
-              'Coming Soon...',
+          children: [
+            Container(
+              height: size.height * 0.37,
+              // width: size.width * 0.85,
+              child: Image.asset(
+                  "assets/images/under_construction.png"),
+            ),
+            SizedBox(height: size.height*0.07,),
+            const Text(
+              'Under \nConstruction',
               textAlign: TextAlign.center,
               style:
-                  TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w700,color: kPrimaryColor,fontSize: 40),
+                  TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w500,color: Colors.black54,fontSize: 40),
             ),
           ],
         ),

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lab_simulation_app/constants.dart';
+import 'package:lab_simulation_app/ui/coming_soon_screen.dart';
+import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/field_control.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/oc_test.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/sc_test.dart';
+
+import '../labs/secondYear/EE/machine/rotate.dart';
 
 class LabsScreen extends StatefulWidget {
   const LabsScreen({Key? key}) : super(key: key);
@@ -45,8 +49,8 @@ class Choice {
 const List<Choice> choices = <Choice>[
   Choice(expName: 'To perform Open Circuit test on Single Phase Transformer.',expNo: 1,simulationScreen: OCTestScreen()),
   Choice(expName: 'To perform Short Circuit test on Single Phase Transformer.',expNo: 2,simulationScreen: SCTestScreen()),
-  Choice(expName: 'To Control the Speed of DC Shunt motor by using Field Control Method.',expNo: 3,simulationScreen: OCTestScreen()),
-  Choice(expName: 'To Control the Speed of DC Shunt motor by using Armature Control Method.',expNo: 4,simulationScreen: OCTestScreen()),
+  Choice(expName: 'To Control the Speed of DC Shunt motor by using Field Control Method.',expNo: 3,simulationScreen: FieldControlScreen()),
+  Choice(expName: 'To Control the Speed of DC Shunt motor by using Armature Control Method.',expNo: 4,simulationScreen: LogoRotate()),
 ];
 
 class SelectCard extends StatelessWidget {

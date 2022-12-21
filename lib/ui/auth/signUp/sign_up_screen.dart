@@ -172,6 +172,7 @@ class _SignUpState extends State<SignUpScreen> {
                                           padding: EdgeInsets.symmetric(
                                               vertical: size.height * 0.01),
                                           child: CustomizedTextFormField(
+                                            readOnly: false,
                                             validator: validateName,
                                             onSaved: (String? val) {
                                               fullName = val;
@@ -199,6 +200,7 @@ class _SignUpState extends State<SignUpScreen> {
                                           padding: EdgeInsets.symmetric(
                                               vertical: size.height * 0.01),
                                           child: CustomizedTextFormField(
+                                            readOnly: false,
                                             validator: validateEmail,
                                             onSaved: (String? val) {
                                               email = val;
@@ -310,6 +312,7 @@ class _SignUpState extends State<SignUpScreen> {
                                           padding: EdgeInsets.symmetric(
                                               vertical: size.height * 0.01),
                                           child: CustomizedTextFormField(
+                                            readOnly: false,
                                             controller: _passwordController,
                                             validator: validatePassword,
                                             onSaved: (String? val) {
@@ -338,6 +341,7 @@ class _SignUpState extends State<SignUpScreen> {
                                           padding: EdgeInsets.symmetric(
                                               vertical: size.height * 0.01),
                                           child: CustomizedTextFormField(
+                                            readOnly: false,
                                             onFieldSubmitted: (_) => context
                                                 .read<SignUpBloc>()
                                                 .add(

@@ -1,66 +1,95 @@
 import 'dart:math';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lab_simulation_app/components/circular_meter.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:intl/intl.dart' show NumberFormat;
-import 'package:toggle_switch/toggle_switch.dart';
-import 'package:flutter/services.dart';
 
-class OCTestScreen extends StatefulWidget {
-  const OCTestScreen({Key? key}) : super(key: key);
+class FieldControlScreen extends StatefulWidget {
+  const FieldControlScreen({Key? key}) : super(key: key);
 
   @override
-  _OCTestScreenState createState() => _OCTestScreenState();
+  _FieldControlScreenState createState() => _FieldControlScreenState();
 }
 
-class _OCTestScreenState extends State<OCTestScreen> {
-  SfSliderTheme _activeSlider() {
+class _FieldControlScreenState extends State<FieldControlScreen>
+    with SingleTickerProviderStateMixin {
+  SfSliderTheme _voltageSlider() {
     return SfSliderTheme(
         data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
         child: SfSlider.vertical(
           min: 1.0,
-          max: 120.0,
+          max: 20.0,
           // onChanged: null,
           onChanged: switchOn
               ? (dynamic values) {
                   setState(() {
-                    V1 = values;
-                    V1 = roundDouble(V1, 1);
-                    Im = V1 / X0;
-                    Iw = V1 / R0;
-                    I0 = sqrt(pow(Im, 2) + pow(Iw, 2));
-                    Phi = acos(Iw / I0) * (180.0 / pi);
-                    W = V1 * I0 * (cos(Phi * pi / 180));
-                    V2 = 2 * V1;
+                    V = values;
+                    V = roundDouble(V, 1);
+                    I0 = (V / Zsc);
+                    W = pow(I0, 2) * Rsc;
                   });
                 }
               : null,
-          value: switchOn ? V1 : 0,
+          value: switchOn ? V : 0,
           // enableTooltip: true,
           numberFormat: NumberFormat('#'),
         ));
   }
 
+  SfSliderTheme _rheostatSlider() {
+    return SfSliderTheme(
+        data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
+        child: SfSlider.vertical(
+          min: 0.1,
+          max: 500.0,
+          // onChanged: null,
+          onChanged: switchOn
+              ? (dynamic values) {
+                  setState(() {
+                    rotationSpeed = 0;
+                    rotationSpeed = values / 2;
+                    _changeRotation();
+                    R = values;
+                    R = roundDouble(R, 1);
+                    I0 = (Vsc / Zsc);
+                    W = pow(I0, 2) * Rsc;
+                  });
+                }
+              : null,
+          value: switchOn ? R : 0,
+          // enableTooltip: true,
+          numberFormat: NumberFormat('#'),
+        ));
+  }
+
+  double rotationSpeed = 1.0;
+  double turns = 0.0;
+
+  void _changeRotation() {
+    setState(() => turns += rotationSpeed);
+  }
+
   bool switchOn = false;
+  double R = 0.0;
+  double Vsc = 0.0;
   double V1 = 0.0;
+  double V = 0.0;
+  double Rsc = 4.41;
+  double Zsc = 4.6;
   double Im = 0.0;
-  double R0 = 696.125;
-  double X0 = 166.90;
+  double R0 = 623.711;
+  double X0 = 96.688;
   double Iw = 0.0;
+  double voltageSupply=230.0;
+  double shuntRes = 300.0;
+  double fieldCurrent = 0.0;
+  double speed = 0.0;
   double Phi = 0.0;
   double I0 = 0.0;
   double W = 0.0;
   double V2 = 0.0;
-  int theoryIndex = 0;
-
-  List<String> getTab() {
-    return ["Aim", "Procedure", "Theory"];
-  }
-
   List<String> str = [
     "Set the input voltage at 230V and 50Hz frequency to the autotransformer input.\n"
         "",
@@ -78,10 +107,6 @@ class _OCTestScreenState extends State<OCTestScreen> {
   List<double> fieldTwo = [];
   List<double> fieldThree = [];
   List<double> fieldFour = [];
-  var isSelected1 = [false, false, true];
-  var isSelected2 = [false, false, true];
-  var isSelected3 = [false, false, true];
-  final player = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +121,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                   backgroundColor: kPrimaryColor,
                   centerTitle: true,
                   title: const Text(
-                    'Open Circuit Test',
+                    'Field Control Method',
                     style:
                         TextStyle(fontFamily: 'Poppins', color: Colors.white),
                   ),
@@ -159,58 +184,29 @@ class _OCTestScreenState extends State<OCTestScreen> {
                     child: Container(
                       padding: EdgeInsets.all(20),
                       child: Column(
-                        children: [
-                          // Here, default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
-                          ToggleSwitch(
-                            customTextStyles: [
-                              TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.white,
-                              ),
-                              TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.white,
-                              )
-                            ],
-                            initialLabelIndex: theoryIndex,
-                            totalSwitches: 2,
-                            minWidth: size.width * 0.22,
-                            labels: const ['Procedure', 'Theory'],
-                            onToggle: (index) {
-                              setState(() {
-                                theoryIndex = index!;
-                              });
-                              print('switched to: $index');
-                            },
-                          ),
-                          theoryIndex == 0
-                              ? Column(
-                                  children: str.map((strone) {
-                                    return Row(children: [
-                                      Text(
-                                        "\u2022",
-                                        style: TextStyle(
-                                            fontSize: size.width * 0.07,
-                                            fontFamily: 'Poppins'),
-                                      ),
-                                      //bullet text
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      //space between bullet and text
-                                      Expanded(
-                                        child: Text(
-                                          strone,
-                                          style: TextStyle(
-                                              fontSize: size.width * 0.04,
-                                              fontFamily: 'Poppins'),
-                                        ), //text
-                                      )
-                                    ]);
-                                  }).toList(),
-                                )
-                              : Text("Wait"),
-                        ],
+                        children: str.map((strone) {
+                          return Row(children: [
+                            Text(
+                              "\u2022",
+                              style: TextStyle(
+                                  fontSize: size.width * 0.07,
+                                  fontFamily: 'Poppins'),
+                            ),
+                            //bullet text
+                            SizedBox(
+                              width: 10,
+                            ),
+                            //space between bullet and text
+                            Expanded(
+                              child: Text(
+                                strone,
+                                style: TextStyle(
+                                    fontSize: size.width * 0.04,
+                                    fontFamily: 'Poppins'),
+                              ), //text
+                            )
+                          ]);
+                        }).toList(),
                       ),
                     ),
                   ),
@@ -228,10 +224,8 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                       child: GestureDetector(
                                         onTap: () {
                                           setState(() {
-                                            player.play(AssetSource(
-                                                'audio/slide-click.wav'));
                                             switchOn = !switchOn;
-                                            switchOn ? V1 = 115 : null;
+                                            switchOn ? V1 = 20 : null;
                                             switchOn ? I0 : I0 = 0;
                                             switchOn ? W : W = 0;
                                             switchOn ? V2 : V2 = 0;
@@ -239,13 +233,8 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                             print(fieldOne.length == 0
                                                 ? "True"
                                                 : "False");
-                                            Im = V1 / X0;
-                                            Iw = V1 / R0;
-                                            I0 = sqrt(pow(Im, 2) + pow(Iw, 2));
-                                            Phi = acos(Iw / I0) * (180.0 / pi);
-                                            W = V1 * I0 * (cos(Phi * pi / 180));
-                                            V2 = 2 * V1;
-                                            // Toggle light when tapped.
+                                            I0 = (Vsc / Zsc);
+                                            W = pow(I0, 2) * Rsc;
                                           });
                                         },
                                         child: switchOn
@@ -265,7 +254,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                       child: GestureDetector(
                                         onTap: () {
                                           setState(() {
-                                            switchOn ? V1 = 115 : null;
+                                            switchOn ? V1 = 230 : null;
                                             switchOn ? I0 : I0 = 0;
                                             switchOn ? W : W = 0;
                                             switchOn ? V2 : V2 = 0;
@@ -310,43 +299,59 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                 ),
                                 Stack(
                                   children: [
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            top: size.height * 0.065,
-                                            left: size.width * 0.085),
-                                        child: switchOn
-                                            ? Text("${V1}")
-                                            : Text("0.0")),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            top: size.height * 0.065,
-                                            left: size.width * 0.025),
-                                        child: Text("V1=")),
                                     switchOn
                                         ? Padding(
                                             padding: EdgeInsets.only(
-                                                top: size.height * 0.067,
-                                                right: size.width * 0.025),
+                                                top: size.height * 0.0012,
+                                                left: size.width * 0.075,
+                                                right: size.width * 0.027),
                                             child: Container(
-                                              height: size.height * 0.207,
+                                              height: size.height * 0.30,
+                                              width: size.width * 0.85,
                                               child: Image.asset(
-                                                  "assets/images/open_circuit_1.png"),
+                                                  "assets/images/field_control1.jpg"),
                                             ),
                                           )
                                         : Padding(
                                             padding: EdgeInsets.only(
-                                                top: size.height * 0.067,
+                                                // top: size.height * 0.065,
+                                                left: size.width * 0.075,
                                                 right: size.width * 0.027),
                                             child: Container(
-                                              height: size.height * 0.207,
+                                              height: size.height * 0.30,
+                                              width: size.width * 0.85,
                                               child: Image.asset(
-                                                  "assets/images/open_circuit_0.png"),
+                                                  "assets/images/field_control0.jpg"),
                                             ),
                                           ),
                                     Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.height * 0.065,
+                                            left: size.width * 0.05),
+                                        child: switchOn
+                                            ? Text("${R}")
+                                            : Text("0.0")),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.height * 0.065,
+                                            left: size.width * 0.015),
+                                        child: Text("R=")),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.height * 0.065,
+                                            left: size.width * 0.9),
+                                        child: switchOn
+                                            ? Text("${Vsc}")
+                                            : Text("0.0")),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.height * 0.065,
+                                            left: size.width * 0.86),
+                                        child: Text("V=")),
+                                    Padding(
                                       padding: EdgeInsets.only(
-                                          top: size.height * 0.02,
-                                          left: size.width * 0.41),
+                                          top: size.height * 0.058,
+                                          left: size.width * 0.113),
                                       child: Container(
                                           color: Colors.white,
                                           height: size.height * 0.055,
@@ -365,7 +370,52 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
-                                          top: size.height * 0.016,
+                                        top: size.height * 0.139,
+                                        left: size.width * 0.0185,
+                                      ),
+                                      child: Container(
+                                        height: size.height * 0.060,
+                                        width: size.width * 0.85,
+                                        child: Image.asset(
+                                            "assets/images/rotor_part_1.png"),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        top: size.height * 0.153,
+                                        left: size.width * 0.0185,
+                                      ),
+                                      child: AnimatedRotation(
+                                        // filterQuality: ,
+                                        curve: Curves.linear,
+                                        turns: turns,
+                                        duration: Duration(
+                                            seconds:
+                                                rotationSpeed == 0 ? 0 : 11),
+                                        child: Container(
+                                          height: size.height * 0.032,
+                                          width: size.width * 0.85,
+                                          child: Image.asset(
+                                              "assets/images/rotor_part_2.png"),
+                                        ),
+                                      ),
+                                    ),
+                                    // Transform.rotate(
+                                    //   angle: rotationSpeed * 1000,
+                                    //   child: Container(
+                                    //     height: size.height * 0.032,
+                                    //     width: size.width * 0.85,
+                                    //     child: Image.asset(
+                                    //         "assets/images/rotor_part_2.png"),
+                                    //   ),
+                                    // ),
+                                    // DigitalLcdNumber(
+                                    //   number: 9,
+                                    //   color: Colors.red,
+                                    // ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: size.height * 0.11,
                                           left: size.width * 0.52),
                                       child: Container(
                                           color: Colors.white,
@@ -377,18 +427,17 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                               fontSizeM: 12,
                                               showLabels: false,
                                               fontSize: 0,
-                                              meterName: "W",
+                                              meterName: "Speed",
                                               value: switchOn
                                                   ? roundDouble(W, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 300)),
+                                              range2: 30)),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
-                                          top: size.height * 0.16,
-                                          right: size.width * 0.02,
-                                          left: size.width * 0.91),
+                                          top: size.height * 0.13,
+                                          left: size.width * 0.656),
                                       child: Container(
                                           color: Colors.white,
                                           height: size.height * 0.055,
@@ -399,41 +448,26 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                               fontSizeM: 12,
                                               showLabels: false,
                                               fontSize: 0,
-                                              meterName: "V2",
+                                              meterName: "V",
                                               value: switchOn
-                                                  ? roundDouble(V2, 1)
+                                                  ? roundDouble(Vsc, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 300)),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: size.height * 0.16,
-                                          right: size.width * 0.11,
-                                          left: size.width * 0.69),
-                                      child: Container(
-                                          color: Colors.white,
-                                          height: size.height * 0.055,
-                                          width: size.width * 0.11,
-                                          // width: 50,
-                                          child: CircularMeter(
-                                              showFirstLabel: true,
-                                              fontSizeM: 12,
-                                              showLabels: false,
-                                              fontSize: 0,
-                                              meterName: "V1",
-                                              value: switchOn
-                                                  ? roundDouble(V1, 1)
-                                                  : 0.0,
-                                              range1: 0,
-                                              range2: 115)),
+                                              range2: 25)),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                         right: size.width * 0.87,
                                         top: size.height * 0.061,
                                       ),
-                                      child: _activeSlider(),
+                                      child: _rheostatSlider(),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        left: size.width * 0.82,
+                                        top: size.height * 0.061,
+                                      ),
+                                      child: _voltageSlider(),
                                     ),
                                   ],
                                 ),
@@ -452,12 +486,12 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                               showLabels: true,
                                               fontSizeM: size.width * 0.04,
                                               fontSize: size.width * 0.04,
-                                              meterName: "V1",
+                                              meterName: "V",
                                               value: switchOn
-                                                  ? roundDouble(V1, 1)
+                                                  ? roundDouble(Vsc, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 115)),
+                                              range2: 30)),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
@@ -485,7 +519,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.only(
-                                          right: size.width * 0.4),
+                                          right: size.width * 0.0),
                                       child: Container(
                                           color: Colors.white,
                                           height: size.height * 0.195,
@@ -496,35 +530,38 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                               fontSizeM: size.width * 0.04,
                                               showLabels: true,
                                               fontSize: size.width * 0.04,
-                                              meterName: "W",
+                                              meterName: "Speed",
                                               value: switchOn
                                                   ? roundDouble(W, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 300)),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: size.width * 0.45),
-                                      child: Container(
-                                          color: Colors.white,
-                                          height: size.height * 0.195,
-                                          width: size.width * 0.4,
-                                          child: CircularMeter(
-                                              showFirstLabel: true,
-                                              fontSizeM: size.width * 0.04,
-                                              showLabels: true,
-                                              fontSize: size.width * 0.04,
-                                              meterName: "V2",
-                                              value: switchOn
-                                                  ? roundDouble(V2, 1)
-                                                  : 0.0,
-                                              range1: 0,
-                                              range2: 300)),
+                                              range2: 30)),
                                     ),
                                   ],
                                 ),
-                                Text("Transformer Rating: 500kVA 115/230"),
+                                // Stack(
+                                //   children: [
+                                //     Container(
+                                //       height: size.height * 0.3,
+                                //       width: size.width * 0.85,
+                                //       child: Image.asset(
+                                //           "assets/images/tachometer.jpg"),
+                                //     ),
+                                //     Padding(
+                                //       padding: EdgeInsets.only(
+                                //           left: size.width * 0.385,
+                                //           top: size.height * 0.11),
+                                //       child: SevenSegmentDisplay(
+                                //         segmentStyle: HexSegmentStyle(),
+                                //         size: 2,
+                                //         value: "$R",
+                                //         // characterCount: 3,
+                                //         characterSpacing: 1.0,
+                                //         backgroundColor: Colors.cyan[900],
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
                               ],
                             )
                           : Row(
@@ -549,7 +586,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                   ? roundDouble(W, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 300)),
+                                              range2: 30)),
                                     ),
                                     switchOn
                                         ? Padding(
@@ -560,7 +597,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                               height: size.height * 0.65,
                                               width: size.width * 0.72,
                                               child: Image.asset(
-                                                  "assets/images/open_circuit_1.png"),
+                                                  "assets/images/short_circuit_1.png"),
                                             ),
                                           )
                                         : Padding(
@@ -571,7 +608,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                               height: size.height * 0.65,
                                               width: size.width * 0.72,
                                               child: Image.asset(
-                                                  "assets/images/open_circuit_0.png"),
+                                                  "assets/images/short_circuit_0.png"),
                                             ),
                                           ),
                                     Padding(
@@ -607,52 +644,52 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                               fontSizeM: size.width * 0.015,
                                               showLabels: false,
                                               fontSize: 0,
-                                              meterName: "V1",
+                                              meterName: "Vsc",
                                               value: switchOn
-                                                  ? roundDouble(V1, 1)
+                                                  ? roundDouble(Vsc, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 115)),
+                                              range2: 25)),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: size.height * 0.37,
-                                          left: size.width * 0.672),
-                                      child: Container(
-                                          color: Colors.white,
-                                          height: size.height * 0.15,
-                                          width: size.width * 0.05,
-                                          child: CircularMeter(
-                                              showFirstLabel: true,
-                                              fontSizeM: size.width * 0.015,
-                                              showLabels: false,
-                                              fontSize: 0,
-                                              meterName: "V2",
-                                              value: switchOn
-                                                  ? roundDouble(V2, 1)
-                                                  : 0.0,
-                                              range1: 0,
-                                              range2: 300)),
-                                    ),
+                                    // Padding(
+                                    //   padding: EdgeInsets.only(
+                                    //       top: size.height * 0.37,
+                                    //       left: size.width * 0.672),
+                                    //   child: Container(
+                                    //       color: Colors.white,
+                                    //       height: size.height * 0.15,
+                                    //       width: size.width * 0.05,
+                                    //       child: CircularMeter(
+                                    //           showFirstLabel: true,
+                                    //           fontSizeM: size.width * 0.015,
+                                    //           showLabels: false,
+                                    //           fontSize: 0,
+                                    //           meterName: "V2",
+                                    //           value: switchOn
+                                    //               ? roundDouble(V2, 1)
+                                    //               : 0.0,
+                                    //           range1: 0,
+                                    //           range2: 300)),
+                                    // ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                         left: size.width * 0.02,
                                         top: size.height * 0.15,
                                       ),
-                                      child: _activeSlider(),
+                                      child: _rheostatSlider(),
                                     ),
                                     Padding(
                                         padding: EdgeInsets.only(
                                             top: size.height * 0.052,
                                             left: size.width * 0.063),
                                         child: switchOn
-                                            ? Text("${V1}")
+                                            ? Text("${Vsc}")
                                             : Text("0.0")),
                                     Padding(
                                         padding: EdgeInsets.only(
                                             top: size.height * 0.052,
                                             left: size.width * 0.03),
-                                        child: Text("V1=")),
+                                        child: Text("V=")),
                                   ],
                                 ),
                                 Column(
@@ -666,7 +703,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                             onTap: () {
                                               setState(() {
                                                 switchOn = !switchOn;
-                                                switchOn ? V1 = 115.0 : null;
+                                                switchOn ? Vsc = 230.0 : null;
                                                 switchOn ? I0 : I0 = 0;
                                                 switchOn ? W : W = 0;
                                                 switchOn ? V2 : V2 = 0;
@@ -674,17 +711,8 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                 print(fieldOne.length == 0
                                                     ? "True"
                                                     : "False");
-                                                Im = V1 / X0;
-                                                Iw = V1 / R0;
-                                                I0 = sqrt(
-                                                    pow(Im, 2) + pow(Iw, 2));
-                                                Phi = acos(Iw / I0) *
-                                                    (180.0 / pi);
-                                                W = V1 *
-                                                    I0 *
-                                                    (cos(Phi * pi / 180));
-                                                V2 = 2 * V1;
-                                                // Toggle light when tapped.
+                                                I0 = (Vsc / Zsc);
+                                                W = pow(I0, 2) * Rsc;
                                               });
                                             },
                                             child: switchOn
@@ -776,12 +804,12 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                   showLabels: true,
                                                   fontSizeM: size.width * 0.02,
                                                   fontSize: size.width * 0.017,
-                                                  meterName: "V1",
+                                                  meterName: "Vsc",
                                                   value: switchOn
-                                                      ? roundDouble(V1, 1)
+                                                      ? roundDouble(Vsc, 1)
                                                       : 0.0,
                                                   range1: 0,
-                                                  range2: 115)),
+                                                  range2: 30)),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
@@ -824,27 +852,27 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                       ? roundDouble(W, 1)
                                                       : 0.0,
                                                   range1: 0,
-                                                  range2: 300)),
+                                                  range2: 30)),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: size.width * 0.15),
-                                          child: Container(
-                                              color: Colors.white,
-                                              height: size.height * 0.3,
-                                              width: size.width * 0.12,
-                                              child: CircularMeter(
-                                                  showFirstLabel: true,
-                                                  fontSizeM: size.width * 0.02,
-                                                  fontSize: size.width * 0.017,
-                                                  showLabels: true,
-                                                  meterName: "V2",
-                                                  value: switchOn
-                                                      ? roundDouble(V2, 1)
-                                                      : 0.0,
-                                                  range1: 0,
-                                                  range2: 300)),
-                                        ),
+                                        // Padding(
+                                        //   padding: EdgeInsets.only(
+                                        //       left: size.width * 0.15),
+                                        //   child: Container(
+                                        //       color: Colors.white,
+                                        //       height: size.height * 0.3,
+                                        //       width: size.width * 0.12,
+                                        //       child: CircularMeter(
+                                        //           showFirstLabel: true,
+                                        //           fontSizeM: size.width * 0.02,
+                                        //           fontSize: size.width * 0.017,
+                                        //           showLabels: true,
+                                        //           meterName: "V2",
+                                        //           value: switchOn
+                                        //               ? roundDouble(V2, 1)
+                                        //               : 0.0,
+                                        //           range1: 0,
+                                        //           range2: 300)),
+                                        // ),
                                       ],
                                     ),
                                   ],

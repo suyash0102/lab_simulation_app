@@ -62,6 +62,9 @@ dependencies:
   syncfusion_flutter_sliders: ^20.3.57
   math_expressions:
   syncfusion_flutter_gauges: 20.1.56
+  segment_display: ^0.5.0
+  digital_lcd_number: ^0.1.1
+  audioplayers: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +90,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/audio/slide-click.wav
 
   fonts:
     - family: Poppins
