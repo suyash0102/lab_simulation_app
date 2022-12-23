@@ -674,6 +674,13 @@
             </list>
           </value>
         </entry>
+        <entry key="shrink_sidemenu">
+          <value>
+            <list>
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/shrink_sidemenu-2.0.0+2-null-safety/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="sky_engine">
           <value>
             <list>
@@ -966,6 +973,7 @@
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_platform_interface-2.1.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.4/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.1.1/lib" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/shrink_sidemenu-2.0.0+2-null-safety/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/smooth_page_indicator-1.0.0+2/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.9.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.2.2/lib" />

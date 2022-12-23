@@ -7,11 +7,13 @@ class CustomizedTextFormField extends StatefulWidget {
   final bool obscureText;
   final String? Function(String?)? validator;
   final Function(String?)? onSaved;
+  final Function(String?)? onChanged;
   final Function(String)? onFieldSubmitted;
   final bool readOnly;
+ final dynamic keyboardType;
 
 
-  const CustomizedTextFormField({Key? key, required this.hintText, required this.obscureText, required this.validator, this.onSaved, this.onFieldSubmitted, this.controller, required this.readOnly}) : super(key: key);
+  const CustomizedTextFormField({Key? key, required this.hintText, required this.obscureText, required this.validator, this.onSaved, this.onFieldSubmitted, this.controller, required this.readOnly, this.keyboardType, this.onChanged}) : super(key: key);
 
   @override
   _CustomizedTextFormFieldState createState() => _CustomizedTextFormFieldState();
@@ -21,6 +23,7 @@ class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       readOnly: widget.readOnly,
       controller: widget.controller,
       onFieldSubmitted: widget.onFieldSubmitted,
@@ -30,7 +33,7 @@ class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
       textInputAction: TextInputAction.next,
       validator: widget.validator,
       // style: const TextStyle(fontSize: 18.0),
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: widget.keyboardType,
       obscureText: widget.obscureText,
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(

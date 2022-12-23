@@ -31,6 +31,16 @@ class FireStoreUtils {
     });
   }
 
+  static updateUserData(User user) async {
+    return await firestore
+        .collection(usersCollection)
+        .doc(user.userID)
+        .update({'fullName':'Suyaashdas'})
+        .then((document) {
+      return user;
+    });
+  }
+
   static Future<String> uploadUserImageToServer(
       Uint8List imageData, String userID) async {
     Reference upload = storage.child("images/$userID.png");

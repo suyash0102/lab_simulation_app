@@ -18,6 +18,16 @@ class OCTestScreen extends StatefulWidget {
 }
 
 class _OCTestScreenState extends State<OCTestScreen> {
+
+  void _onResistanceChanged(String value) {
+    setState(() => coreLossResistanceByUser = double.parse(value) );
+  }
+  void _onPhiChanged(String value) {
+    setState(() => phiByUser = double.parse(value) );
+  }
+  void _onReactanceChanged(String value) {
+    setState(() => coreLossReactanceByUser = double.parse(value) );
+  }
   SfSliderTheme _activeSlider() {
     return SfSliderTheme(
         data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
@@ -44,10 +54,15 @@ class _OCTestScreenState extends State<OCTestScreen> {
           numberFormat: NumberFormat('#'),
         ));
   }
-
+  bool clReactance=false;
+  bool clResistance=false;
+  bool clPhi=false;
   bool switchOn = false;
   double V1 = 0.0;
   double Im = 0.0;
+  double coreLossResistanceByUser = 0.0;
+  double coreLossReactanceByUser = 0.0;
+  double phiByUser = 0.0;
   double R0 = 696.125;
   double X0 = 166.90;
   double Iw = 0.0;
@@ -183,6 +198,57 @@ class _OCTestScreenState extends State<OCTestScreen> {
                               print('switched to: $index');
                             },
                           ),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
+                          Container(
+                            width: size.width * 0.9,
+                            height: size.height * 0.1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black),
+                            ),
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(size.width * 0.03),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Aim:',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.05),
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.04,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          'To perform Open Circuit test on Single Phase Transformer.',
+                                          style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: size.width * 0.04,
+                                              color: kPrimaryColor),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: size.height * 0.005,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
                           theoryIndex == 0
                               ? Column(
                                   children: str.map((strone) {
@@ -209,7 +275,16 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                     ]);
                                   }).toList(),
                                 )
-                              : Text("Wait"),
+                              : Row(children: [
+                                  Expanded(
+                                    child: Text(
+                                      "The physical basis of the transformer is mutual induction between two circuits linked by a common magnetic field . \n\nTransformer is required to pass electrical energy from one circuit to another, via the medium of the pulsating magnetic field, as efficiently and economically as possible. This could be achieved using either iron or steel which serves as a good permeable path for the mutual magnetic flux. \n\nThe shunt parameters can be determined by performing the test. Since the core loss and magnetizing current depend on applying voltage, this test is performed by applying rated voltage at one winding and other winding keeping open (basically H.V.Side winding is kept open and rated voltage applying at L.V.Side winding ). Under no-load condition the power input to the transformer is equal to the sum of losses in the primary winding resistance R1R1 is neglected and core loss. Since, no load current is very small, the loss in winding resistance is neglected. If IoIo and PiPi are the current and input power drawn by the transformer at rated voltage V1V1 respectively.",
+                                      style: TextStyle(
+                                          fontSize: size.width * 0.04,
+                                          fontFamily: 'Poppins'),
+                                    ), //text
+                                  )
+                                ])
                         ],
                       ),
                     ),
@@ -281,7 +356,6 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                     fieldTwo.add(I0);
                                                     fieldThree.add(W);
                                                     fieldFour.add(V2);
-
                                                     print(fieldOne[0]);
                                                   });
                                                 },
@@ -917,7 +991,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                     padding: EdgeInsets.only(
                                         top: size.height * 0.0075),
                                     child: Text(
-                                        'Secondary Volatge V2 (H.V.Side)\n',
+                                        'Secondary Voltage V2 (H.V.Side)\n',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: size.width * 0.023)),
@@ -928,8 +1002,8 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                 Column(children: [Text('1st')]),
                                 Column(children: [
                                   fieldOne.length == 0
-                                      ? Text("0.0")
-                                      : Text("${fieldOne[0]}")
+                                      ? Text("0.0\n")
+                                      : Text("${fieldOne[0]}\n")
                                 ]),
                                 Column(children: [
                                   fieldTwo.length == 0
@@ -947,99 +1021,148 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                       : Text("${fieldFour[0]}")
                                 ]),
                               ]),
-                              TableRow(children: [
-                                Column(children: [Text('2nd')]),
-                                Column(children: [
-                                  fieldOne.length <= 1
-                                      ? Text("")
-                                      : Text("${fieldOne[1]}")
-                                ]),
-                                Column(children: [
-                                  fieldTwo.length <= 1
-                                      ? Text("")
-                                      : Text("${roundDouble(fieldTwo[1], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldThree.length <= 1
-                                      ? Text("")
-                                      : Text("${roundDouble(fieldThree[1], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldFour.length <= 1
-                                      ? Text("")
-                                      : Text("${fieldFour[1]}")
-                                ]),
-                              ]),
-                              TableRow(children: [
-                                Column(children: [Text('3rd')]),
-                                Column(children: [
-                                  fieldOne.length <= 2
-                                      ? Text("")
-                                      : Text("${fieldOne[2]}")
-                                ]),
-                                Column(children: [
-                                  fieldTwo.length <= 2
-                                      ? Text("")
-                                      : Text("${roundDouble(fieldTwo[2], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldThree.length <= 2
-                                      ? Text("")
-                                      : Text("${roundDouble(fieldThree[2], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldFour.length <= 2
-                                      ? Text("")
-                                      : Text("${fieldFour[2]}")
-                                ]),
-                              ]),
-                              TableRow(children: [
-                                Column(children: [Text('4th')]),
-                                Column(children: [
-                                  fieldOne.length <= 3
-                                      ? Text("")
-                                      : Text("${fieldOne[3]}")
-                                ]),
-                                Column(children: [
-                                  fieldTwo.length <= 3
-                                      ? Text("")
-                                      : Text("${roundDouble(fieldTwo[3], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldThree.length <= 3
-                                      ? Text("")
-                                      : Text("${roundDouble(fieldThree[3], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldFour.length <= 3
-                                      ? Text("")
-                                      : Text("${fieldFour[3]}")
-                                ]),
-                              ]),
-                              TableRow(children: [
-                                Column(children: [Text('5th')]),
-                                Column(children: [
-                                  fieldOne.length <= 4
-                                      ? Text("")
-                                      : Text("${fieldOne[4]}")
-                                ]),
-                                Column(children: [
-                                  fieldTwo.length <= 4
-                                      ? Text("")
-                                      : Text("${roundDouble(fieldTwo[4], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldThree.length <= 4
-                                      ? Text("")
-                                      : Text("${roundDouble(fieldThree[4], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldFour.length <= 4
-                                      ? Text("")
-                                      : Text("${fieldFour[4]}")
-                                ]),
-                              ]),
                             ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(size.width * 0.05),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Phase Angle",
+                                  style: TextStyle(
+                                      fontFamily: "Poppins", fontSize: 21),
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                TextField(
+                                  keyboardType: TextInputType.number,
+                                  onChanged: _onPhiChanged,
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                const Text(
+                                  "Core Loss Resistance R0",
+                                  style: TextStyle(
+                                      fontFamily: "Poppins", fontSize: 21),
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                TextField(
+
+                                  keyboardType: TextInputType.number,
+                                  onChanged: _onResistanceChanged,
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                Text(
+                                  "Core Loss Reactance X0",
+                                  style: TextStyle(
+                                      fontFamily: "Poppins", fontSize: 21),
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                TextField(
+                                  keyboardType: TextInputType.number,
+                                  onChanged: _onReactanceChanged,
+                                ),
+                                // CustomizedTextFormField(
+                                //   keyboardType: TextInputType.number,
+                                //   readOnly: false,
+                                //   validator: null,
+                                //   onChanged: _onChanged,
+                                //   hintText: "0.0",
+                                //   obscureText: false,
+                                // ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    if (coreLossReactanceByUser<=170.00 && coreLossReactanceByUser>=162.0){
+                                      clReactance=true;
+                                    } if (coreLossResistanceByUser<=700.00 && coreLossResistanceByUser>=690.00){
+                                      clResistance=true;
+                                    }
+                                    if (phiByUser<=77.50 && phiByUser>=75.50){
+                                      clPhi=true;
+                                    }
+                                    setState(() {
+
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: kPrimaryColor,
+                                      elevation: 0),
+                                  child: Text(
+                                    "submit".toUpperCase(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins",
+                                        fontSize: 21),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                phiByUser==0.0||coreLossResistanceByUser==0.0||coreLossReactanceByUser==0.0?const Text(""):Column(children: [
+                                  Text("$phiByUser"),
+                                  Text("$coreLossResistanceByUser"),
+                                  Text("$coreLossReactanceByUser"),
+                                ],),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      fieldOne.clear();
+                                      fieldTwo.clear();
+                                      fieldThree.clear();
+                                      fieldFour.clear();
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: kPrimaryColor,
+                                      elevation: 0),
+                                  child: Text(
+                                    "Reset".toUpperCase(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins",
+                                        fontSize: 21),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) {
+                                    //       return const QuizScreenOCTest();
+                                    //     },
+                                    //   ),
+                                    // );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: kPrimaryColor,
+                                      elevation: 0),
+                                  child: Text(
+                                    "Quiz".toUpperCase(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins",
+                                        fontSize: 21),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

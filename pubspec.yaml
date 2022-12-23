@@ -65,6 +65,7 @@ dependencies:
   segment_display: ^0.5.0
   digital_lcd_number: ^0.1.1
   audioplayers: ^1.1.1
+  shrink_sidemenu: ^2.0.0+2-null-safety
 
 dev_dependencies:
   flutter_test:

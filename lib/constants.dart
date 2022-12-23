@@ -10,3 +10,11 @@ const kPrimaryColor = Color(0xFF9C27B0);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
 
 const double defaultPadding = 16.0;
+
+const primaryColor = Color.fromRGBO(17, 159, 250, 1);
+const secondaryColor = Colors.white;
+const bgColor = Color.fromRGBO(247, 251, 254, 1);
+const textColor = Colors.black;
+const lightTextColor = Colors.black26;
+const transparent = Colors.transparent;
+const appPadding = 10.0;
