@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab_simulation_app/constants.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class CircularMeter extends StatefulWidget {
@@ -38,7 +39,7 @@ class _CircularMeterState extends State<CircularMeter> {
                 // rangeOffset: 1,
                 // label: "High",
                 // labelStyle: s,
-                color: Colors.green,
+                color: kGreenColor,
                 startWidth: 5,
                 endWidth: 5),
             GaugeRange(
@@ -50,7 +51,7 @@ class _CircularMeterState extends State<CircularMeter> {
             GaugeRange(
                 startValue: 200,
                 endValue: 300,
-                color: Colors.red,
+                color: kRedColor,
                 startWidth: 5,
                 endWidth: 5)
           ], pointers:  <GaugePointer>[

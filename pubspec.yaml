@@ -66,6 +66,9 @@ dependencies:
   digital_lcd_number: ^0.1.1
   audioplayers: ^1.1.1
   shrink_sidemenu: ^2.0.0+2-null-safety
+  percent_indicator: ^4.2.2
+  provider: ^6.0.4
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

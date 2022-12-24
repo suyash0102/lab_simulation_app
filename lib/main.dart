@@ -9,6 +9,9 @@ import 'package:lab_simulation_app/firebase_options.dart';
 import 'package:lab_simulation_app/ui/auth/authentication_bloc.dart';
 import 'package:lab_simulation_app/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:lab_simulation_app/ui/loading_cubit.dart';
+import 'package:lab_simulation_app/ui/quiz_module/controller/index_controller.dart';
+import 'package:lab_simulation_app/ui/quiz_module/screens/start_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   if (kIsWeb || defaultTargetPlatform == TargetPlatform.macOS) {
@@ -19,8 +22,12 @@ void main() async {
       version: "v15.0",
     );
   }
-  runApp(MultiRepositoryProvider(
+  runApp(MultiProvider(
     providers: [
+      ChangeNotifierProvider<IndexController>(
+        create: (context) => IndexController(),
+        // child:  QuizScreen(title: "", optionOne: [], optionTwo: [], optionThree: [], optionFour: [], questionsList: [], experimentScreen: (),),
+      ),
       RepositoryProvider(create: (_) => AuthenticationBloc()),
       RepositoryProvider(create: (_) => LoadingCubit()),
     ],

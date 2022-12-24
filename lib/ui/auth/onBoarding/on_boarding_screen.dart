@@ -33,10 +33,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (context) => OnBoardingCubit(),
       child: Scaffold(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Colors.white,
         body: BlocBuilder<OnBoardingCubit, OnBoardingInitial>(
           builder: (context, state) {
             return Stack(
@@ -76,14 +77,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .add(FinishedOnBoardingEvent());
                           },
                           style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: Colors.white),
+                              side: const BorderSide(color: kPrimaryColor),
                               shape: const StadiumBorder()),
-                          child: const Text(
-                            'Continue',
+                          child: Text(
+                            'Get Started',
                             style: TextStyle(
-                                fontSize: 14.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                              fontFamily: "Poppins",
+                                fontSize: size.width*0.04,
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
@@ -91,17 +93,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 50.0),
+                  padding: EdgeInsets.only(bottom:size.height*0.12 ),
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: SmoothPageIndicator(
                       controller: pageController,
                       count: widget.titles.length,
                       effect: ScrollingDotsEffect(
-                          activeDotColor: Colors.white,
+                          activeDotColor: kPrimaryColor,
                           dotColor: Colors.grey.shade400,
-                          dotWidth: 8,
-                          dotHeight: 8,
+                          dotWidth: 10,
+                          dotHeight: 10,
                           fixedCenter: true),
                     ),
                   ),
@@ -130,34 +132,28 @@ class OnBoardingPage extends StatefulWidget {
 class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        widget.image is String
-            ? Image.asset(
+      Image.asset(
           widget.image,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        )
-            : Icon(
-          widget.image as IconData,
-          color: Colors.white,
-          size: 150,
+          width:size.width*0.8,
+          height: size.height*0.4,
+          // fit: BoxFit.cover,
         ),
-        const SizedBox(height: 40),
+        SizedBox(height: size.height*0.01),
         Text(
           widget.title.toUpperCase(),
-          style: const TextStyle(
-              color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: size.width*0.1,color: Colors.black,fontFamily: "Hubballi",fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(size.width*0.03),
           child: Text(
             widget.subtitle,
-            style: const TextStyle(color: Colors.white, fontSize: 14.0),
+            style: TextStyle(color: Colors.black, fontSize: size.width*0.04,fontWeight: FontWeight.w400,fontFamily: "Poppins"),
             textAlign: TextAlign.center,
           ),
         ),

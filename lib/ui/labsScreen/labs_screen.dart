@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/coming_soon_screen.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/field_control.dart';
-import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/oc_test.dart';
+import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/oc_test.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/sc_test.dart';
 
 import '../labs/secondYear/EE/machine/rotate.dart';
