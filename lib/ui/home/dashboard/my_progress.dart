@@ -24,10 +24,11 @@ class MyProgressArea extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontFamily: "Poppins",
-                          fontSize: size.width*0.05
-                      ),
+                          fontSize: size.width * 0.05),
                     ),
-                    SizedBox(height: size.height*0.02,),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
                     Row(
                       children: [
                         Text(
@@ -36,21 +37,23 @@ class MyProgressArea extends StatelessWidget {
                               color: textColor.withOpacity(0.5),
                               fontWeight: FontWeight.w700,
                               fontFamily: "Poppins",
-                              fontSize: size.width*0.03
-                          ),
+                              fontSize: size.width * 0.03),
                         ),
                         SizedBox(
-                          width: size.width*0.02,
+                          width: size.width * 0.02,
                         ),
                         Icon(
                           Icons.circle,
                           color: kPrimaryColor,
-                          size: size.height*0.02,
+                          size: size.height * 0.02,
                         ),
                       ],
                     ),
-                ],),
-                SizedBox(width: size.width*0.24,),
+                  ],
+                ),
+                SizedBox(
+                  width: size.width * 0.24,
+                ),
                 Container(
                   height: 230,
                   child: CustomPaint(
@@ -58,7 +61,7 @@ class MyProgressArea extends StatelessWidget {
                       bgColor: textColor.withOpacity(0.1),
                       lineColor: kPrimaryColor,
                       percent: 0.33,
-                      width: size.width*0.06,
+                      width: size.width * 0.06,
                     ),
                     child: Center(
                       child: Text(
@@ -72,7 +75,9 @@ class MyProgressArea extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: size.width*0.19,),
+                SizedBox(
+                  width: size.width * 0.19,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -81,19 +86,20 @@ class MyProgressArea extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontFamily: "Poppins",
-                          fontSize: size.width*0.05
-                      ),
+                          fontSize: size.width * 0.05),
                     ),
-                    SizedBox(height: size.height*0.02,),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
                     Row(
                       children: [
                         Icon(
                           Icons.circle,
                           color: textColor.withOpacity(0.2),
-                          size: size.height*0.02,
+                          size: size.height * 0.02,
                         ),
                         SizedBox(
-                          width: size.width*0.02,
+                          width: size.width * 0.02,
                         ),
                         Text(
                           'Not Done',
@@ -101,12 +107,12 @@ class MyProgressArea extends StatelessWidget {
                               color: textColor.withOpacity(0.5),
                               fontWeight: FontWeight.w700,
                               fontFamily: "Poppins",
-                              fontSize: size.width*0.03
-                          ),
+                              fontSize: size.width * 0.03),
                         ),
                       ],
                     ),
-                  ],),
+                  ],
+                ),
               ],
             ),
           ],

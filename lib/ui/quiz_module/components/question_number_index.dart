@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lab_simulation_app/constants.dart';
-import 'package:lab_simulation_app/ui/quiz_module/utilities/list_of_answers.dart';
 
 class QuestionNumberIndex extends StatelessWidget {
   int questionNumber;
+  final int noOfQuestions;
 
-  QuestionNumberIndex({Key? key, required this.questionNumber})
+  QuestionNumberIndex(
+      {Key? key, required this.questionNumber, required this.noOfQuestions})
       : super(key: key);
 
   // int questionNumber;

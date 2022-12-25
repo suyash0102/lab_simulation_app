@@ -23,13 +23,13 @@ class _SCTestScreenState extends State<SCTestScreen> {
           // onChanged: null,
           onChanged: switchOn
               ? (dynamic values) {
-            setState(() {
-              Vsc=values;
-              Vsc = roundDouble(Vsc, 1);
-              I0=(Vsc/Zsc);
-              W=pow(I0,2)*Rsc;
-            });
-          }
+                  setState(() {
+                    Vsc = values;
+                    Vsc = roundDouble(Vsc, 1);
+                    I0 = (Vsc / Zsc);
+                    W = pow(I0, 2) * Rsc;
+                  });
+                }
               : null,
           value: switchOn ? Vsc : 0,
           // enableTooltip: true,
@@ -83,7 +83,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                   title: const Text(
                     'Short Circuit Test',
                     style:
-                    TextStyle(fontFamily: 'Poppins', color: Colors.white),
+                        TextStyle(fontFamily: 'Poppins', color: Colors.white),
                   ),
                   bottom: TabBar(
                       labelColor: Colors.white,
@@ -174,610 +174,609 @@ class _SCTestScreenState extends State<SCTestScreen> {
                     child: Container(
                       child: orientation == Orientation.portrait
                           ? Column(
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: size.width * 0.04,
-                                    top: size.height * 0.01),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      switchOn = !switchOn;
-                                      switchOn ? V1 = 20 : null;
-                                      switchOn ? I0 : I0 = 0;
-                                      switchOn ? W : W = 0;
-                                      switchOn ? V2 : V2 = 0;
-                                      I0=(Vsc/Zsc);
-                                      W=pow(I0,2)*Rsc;
-                                    });
-                                  },
-                                  child: switchOn
-                                      ? Container(
-                                      height: size.height * 0.055,
-                                      child: Image.asset(
-                                          "assets/images/s1.png"))
-                                      : Container(
-                                      height: size.height * 0.055,
-                                      child: Image.asset(
-                                          "assets/images/s0.png")),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: size.width * 0.30),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      switchOn ? V1 = 230 : null;
-                                      switchOn ? I0 : I0 = 0;
-                                      switchOn ? W : W = 0;
-                                      switchOn ? V2 : V2 = 0;
-                                    });
-                                  },
-                                  child: switchOn
-                                      ? GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        fieldOne.add(V1);
-                                        fieldTwo.add(I0);
-                                        fieldThree.add(W);
-                                        fieldFour.add(V2);
-
-                                        print(fieldOne[0]);
-                                      });
-                                    },
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey,
-                                          border: Border.all(
-                                            width: 2,
-                                          ),
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                              12),
-                                        ),
-                                        height: size.height * 0.04,
-                                        width: size.width * 0.4,
-                                        child: Center(
-                                            child: Text(
-                                                "Add to Observation Table"))),
-                                  )
-                                      : Container(
-                                    height: size.height * 0.030,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Stack(
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      top: size.height * 0.065,
-                                      left: size.width * 0.098),
-                                  child: switchOn
-                                      ? Text("$Vsc")
-                                      : Text("0.0")),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      top: size.height * 0.065,
-                                      left: size.width * 0.025),
-                                  child: Text("Vsc=")),
-                              switchOn
-                                  ? Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.067,
-                                    right: size.width * 0.025),
-                                child: Container(
-                                  height: size.height * 0.207,
-                                  child: Image.asset(
-                                      "assets/images/short_circuit_1.png"),
-                                ),
-                              )
-                                  : Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.067,
-                                    right: size.width * 0.027),
-                                child: Container(
-                                  height: size.height * 0.207,
-                                  child: Image.asset(
-                                      "assets/images/short_circuit_0.png"),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.02,
-                                    left: size.width * 0.41),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.055,
-                                    width: size.width * 0.11,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: 12,
-                                        showLabels: false,
-                                        fontSize: 0,
-                                        meterName: "A",
-                                        value: switchOn
-                                            ? roundDouble(I0, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 10)),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.016,
-                                    left: size.width * 0.52),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.055,
-                                    width: size.width * 0.11,
-                                    // width: 50,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: 12,
-                                        showLabels: false,
-                                        fontSize: 0,
-                                        meterName: "W",
-                                        value: switchOn
-                                            ? roundDouble(W, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 30)),
-                              ),
-                              // Padding(
-                              //   padding: EdgeInsets.only(
-                              //       top: size.height * 0.16,
-                              //       right: size.width * 0.02,
-                              //       left: size.width * 0.91),
-                              //   child: Container(
-                              //       color: Colors.white,
-                              //       height: size.height * 0.055,
-                              //       width: size.width * 0.11,
-                              //       // width: 50,
-                              //       child: CircularMeter(
-                              //           showFirstLabel: true,
-                              //           fontSizeM: 12,
-                              //           showLabels: false,
-                              //           fontSize: 0,
-                              //           meterName: "V2",
-                              //           value: switchOn
-                              //               ? roundDouble(V2, 1)
-                              //               : 0.0,
-                              //           range1: 0,
-                              //           range2: 300)),
-                              // ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.16,
-                                    right: size.width * 0.11,
-                                    left: size.width * 0.69),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.055,
-                                    width: size.width * 0.11,
-                                    // width: 50,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: 12,
-                                        showLabels: false,
-                                        fontSize: 0,
-                                        meterName: "Vsc",
-                                        value: switchOn
-                                            ? roundDouble(Vsc, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 25)),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  right: size.width * 0.87,
-                                  top: size.height * 0.061,
-                                ),
-                                child: _activeSlider(),
-                              ),
-                            ],
-                          ),
-                          Stack(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: size.width * 0.4),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.195,
-                                    width: size.width * 0.4,
-                                    // width: 50,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        showLabels: true,
-                                        fontSizeM: size.width * 0.04,
-                                        fontSize: size.width * 0.04,
-                                        meterName: "Vsc",
-                                        value: switchOn
-                                            ? roundDouble(Vsc, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 30)),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: size.width * 0.45),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.195,
-                                    width: size.width * 0.4,
-                                    // width: 50,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: size.width * 0.04,
-                                        showLabels: true,
-                                        fontSize: size.width * 0.04,
-                                        meterName: "A",
-                                        value: switchOn
-                                            ? roundDouble(I0, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 10)),
-                              ),
-                            ],
-                          ),
-                          Stack(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: size.width * 0.0),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.195,
-                                    width: size.width * 0.4,
-                                    // width: 50,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: size.width * 0.04,
-                                        showLabels: true,
-                                        fontSize: size.width * 0.04,
-                                        meterName: "W",
-                                        value: switchOn
-                                            ? roundDouble(W, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 30)),
-                              ),
-                              // Padding(
-                              //   padding: EdgeInsets.only(
-                              //       left: size.width * 0.45),
-                              //   child: Container(
-                              //       color: Colors.white,
-                              //       height: size.height * 0.195,
-                              //       width: size.width * 0.4,
-                              //       child: CircularMeter(
-                              //           showFirstLabel: true,
-                              //           fontSizeM: size.width * 0.04,
-                              //           showLabels: true,
-                              //           fontSize: size.width * 0.04,
-                              //           meterName: "V2",
-                              //           value: switchOn
-                              //               ? roundDouble(V2, 1)
-                              //               : 0.0,
-                              //           range1: 0,
-                              //           range2: 300)),
-                              // ),
-                            ],
-                          ),
-                          Text("Transformer Rating: 500kVA 115/230"),
-                        ],
-                      )
-                          : Row(
-                        children: [
-                          Stack(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: size.width * 0.455),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.11,
-                                    width: size.width * 0.039,
-                                    // width: 50,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: size.width * 0.01,
-                                        showLabels: false,
-                                        fontSize: 0,
-                                        meterName: "W",
-                                        value: switchOn
-                                            ? roundDouble(W, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 30)),
-                              ),
-                              switchOn
-                                  ? Padding(
-                                padding: EdgeInsets.only(
-                                  top: size.height * 0.06,
-                                ),
-                                child: Container(
-                                  height: size.height * 0.65,
-                                  width: size.width * 0.72,
-                                  child: Image.asset(
-                                      "assets/images/short_circuit_1.png"),
-                                ),
-                              )
-                                  : Padding(
-                                padding: EdgeInsets.only(
-                                  top: size.height * 0.06,
-                                ),
-                                child: Container(
-                                  height: size.height * 0.65,
-                                  width: size.width * 0.72,
-                                  child: Image.asset(
-                                      "assets/images/short_circuit_0.png"),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.02,
-                                    left: size.width * 0.32),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.15,
-                                    width: size.width * 0.05,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: size.width * 0.015,
-                                        showLabels: false,
-                                        fontSize: 0,
-                                        meterName: "A",
-                                        value: switchOn
-                                            ? roundDouble(I0, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 10)),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: size.height * 0.37,
-                                    left: size.width * 0.53),
-                                child: Container(
-                                    color: Colors.white,
-                                    height: size.height * 0.15,
-                                    width: size.width * 0.05,
-                                    child: CircularMeter(
-                                        showFirstLabel: true,
-                                        fontSizeM: size.width * 0.015,
-                                        showLabels: false,
-                                        fontSize: 0,
-                                        meterName: "Vsc",
-                                        value: switchOn
-                                            ? roundDouble(Vsc, 1)
-                                            : 0.0,
-                                        range1: 0,
-                                        range2: 25)),
-                              ),
-                              // Padding(
-                              //   padding: EdgeInsets.only(
-                              //       top: size.height * 0.37,
-                              //       left: size.width * 0.672),
-                              //   child: Container(
-                              //       color: Colors.white,
-                              //       height: size.height * 0.15,
-                              //       width: size.width * 0.05,
-                              //       child: CircularMeter(
-                              //           showFirstLabel: true,
-                              //           fontSizeM: size.width * 0.015,
-                              //           showLabels: false,
-                              //           fontSize: 0,
-                              //           meterName: "V2",
-                              //           value: switchOn
-                              //               ? roundDouble(V2, 1)
-                              //               : 0.0,
-                              //           range1: 0,
-                              //           range2: 300)),
-                              // ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: size.width * 0.02,
-                                  top: size.height * 0.15,
-                                ),
-                                child: _activeSlider(),
-                              ),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      top: size.height * 0.052,
-                                      left: size.width * 0.063),
-                                  child: switchOn
-                                      ? Text("$Vsc")
-                                      : Text("0.0")),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      top: size.height * 0.052,
-                                      left: size.width * 0.03),
-                                  child: Text("Vsc=")),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        top: size.height * 0.02),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          switchOn = !switchOn;
-                                          switchOn ? Vsc = 230.0 : null;
-                                          switchOn ? I0 : I0 = 0;
-                                          switchOn ? W : W = 0;
-                                          switchOn ? V2 : V2 = 0;
-                                          I0=(Vsc/Zsc);
-                                          W=pow(I0,2)*Rsc;
-                                        });
-                                      },
-                                      child: switchOn
-                                          ? Container(
-                                          height: size.height * 0.09,
-                                          child: Image.asset(
-                                              "assets/images/s1.png"))
-                                          : Padding(
-                                        padding: EdgeInsets.only(
-                                            right:
-                                            size.width * 0.14),
-                                        child: Container(
-                                            height:
-                                            size.height * 0.09,
-                                            child: Image.asset(
-                                                "assets/images/s0.png")),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: size.width * 0.035,
-                                        top: size.height * 0.02),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          switchOn ? V1 : V1 = 0;
-                                          switchOn ? I0 : I0 = 0;
-                                          switchOn ? W : W = 0;
-                                          switchOn ? V2 : V2 = 0;
-                                          // Toggle light when tapped.
-                                        });
-                                      },
-                                      child: switchOn
-                                          ? GestureDetector(
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: size.width * 0.04,
+                                          top: size.height * 0.01),
+                                      child: GestureDetector(
                                         onTap: () {
                                           setState(() {
-                                            fieldOne.add(V1);
-                                            fieldTwo.add(I0);
-                                            fieldThree.add(W);
-                                            fieldFour.add(V2);
-
+                                            switchOn = !switchOn;
+                                            switchOn ? V1 = 20 : null;
+                                            switchOn ? I0 : I0 = 0;
+                                            switchOn ? W : W = 0;
+                                            switchOn ? V2 : V2 = 0;
+                                            I0 = (Vsc / Zsc);
+                                            W = pow(I0, 2) * Rsc;
                                           });
                                         },
-                                        child: Container(
-                                            decoration:
-                                            BoxDecoration(
-                                              color: Colors.grey,
-                                              border: Border.all(
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(12),
-                                            ),
-                                            height:
-                                            size.height * 0.09,
-                                            width:
-                                            size.width * 0.14,
-                                            child: Center(
-                                                child: Text(
-                                                  "Add to Observation Table",
-                                                  textAlign:
-                                                  TextAlign.center,
-                                                ))),
-                                      )
-                                          : Container(
-                                        height: size.height * 0.020,
+                                        child: switchOn
+                                            ? Container(
+                                                height: size.height * 0.055,
+                                                child: Image.asset(
+                                                    "assets/images/s1.png"))
+                                            : Container(
+                                                height: size.height * 0.055,
+                                                child: Image.asset(
+                                                    "assets/images/s0.png")),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Stack(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: size.width * 0.30),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            switchOn ? V1 = 230 : null;
+                                            switchOn ? I0 : I0 = 0;
+                                            switchOn ? W : W = 0;
+                                            switchOn ? V2 : V2 = 0;
+                                          });
+                                        },
+                                        child: switchOn
+                                            ? GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    fieldOne.add(V1);
+                                                    fieldTwo.add(I0);
+                                                    fieldThree.add(W);
+                                                    fieldFour.add(V2);
+
+                                                    print(fieldOne[0]);
+                                                  });
+                                                },
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey,
+                                                      border: Border.all(
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                                    height: size.height * 0.04,
+                                                    width: size.width * 0.4,
+                                                    child: Center(
+                                                        child: Text(
+                                                            "Add to Observation Table"))),
+                                              )
+                                            : Container(
+                                                height: size.height * 0.030,
+                                              ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Stack(
+                                  children: [
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.height * 0.065,
+                                            left: size.width * 0.098),
+                                        child: switchOn
+                                            ? Text("$Vsc")
+                                            : Text("0.0")),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.height * 0.065,
+                                            left: size.width * 0.025),
+                                        child: Text("Vsc=")),
+                                    switchOn
+                                        ? Padding(
+                                            padding: EdgeInsets.only(
+                                                top: size.height * 0.067,
+                                                right: size.width * 0.025),
+                                            child: Container(
+                                              height: size.height * 0.207,
+                                              child: Image.asset(
+                                                  "assets/images/short_circuit_1.png"),
+                                            ),
+                                          )
+                                        : Padding(
+                                            padding: EdgeInsets.only(
+                                                top: size.height * 0.067,
+                                                right: size.width * 0.027),
+                                            child: Container(
+                                              height: size.height * 0.207,
+                                              child: Image.asset(
+                                                  "assets/images/short_circuit_0.png"),
+                                            ),
+                                          ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: size.height * 0.02,
+                                          left: size.width * 0.41),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.055,
+                                          width: size.width * 0.11,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              fontSizeM: 12,
+                                              showLabels: false,
+                                              fontSize: 0,
+                                              meterName: "A",
+                                              value: switchOn
+                                                  ? roundDouble(I0, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 10)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: size.height * 0.016,
+                                          left: size.width * 0.52),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.055,
+                                          width: size.width * 0.11,
+                                          // width: 50,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              fontSizeM: 12,
+                                              showLabels: false,
+                                              fontSize: 0,
+                                              meterName: "W",
+                                              value: switchOn
+                                                  ? roundDouble(W, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 30)),
+                                    ),
+                                    // Padding(
+                                    //   padding: EdgeInsets.only(
+                                    //       top: size.height * 0.16,
+                                    //       right: size.width * 0.02,
+                                    //       left: size.width * 0.91),
+                                    //   child: Container(
+                                    //       color: Colors.white,
+                                    //       height: size.height * 0.055,
+                                    //       width: size.width * 0.11,
+                                    //       // width: 50,
+                                    //       child: CircularMeter(
+                                    //           showFirstLabel: true,
+                                    //           fontSizeM: 12,
+                                    //           showLabels: false,
+                                    //           fontSize: 0,
+                                    //           meterName: "V2",
+                                    //           value: switchOn
+                                    //               ? roundDouble(V2, 1)
+                                    //               : 0.0,
+                                    //           range1: 0,
+                                    //           range2: 300)),
+                                    // ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: size.height * 0.16,
+                                          right: size.width * 0.11,
+                                          left: size.width * 0.69),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.055,
+                                          width: size.width * 0.11,
+                                          // width: 50,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              fontSizeM: 12,
+                                              showLabels: false,
+                                              fontSize: 0,
+                                              meterName: "Vsc",
+                                              value: switchOn
+                                                  ? roundDouble(Vsc, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 25)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        right: size.width * 0.87,
+                                        top: size.height * 0.061,
+                                      ),
+                                      child: _activeSlider(),
+                                    ),
+                                  ],
+                                ),
+                                Stack(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          right: size.width * 0.4),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.195,
+                                          width: size.width * 0.4,
+                                          // width: 50,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              showLabels: true,
+                                              fontSizeM: size.width * 0.04,
+                                              fontSize: size.width * 0.04,
+                                              meterName: "Vsc",
+                                              value: switchOn
+                                                  ? roundDouble(Vsc, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 30)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: size.width * 0.45),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.195,
+                                          width: size.width * 0.4,
+                                          // width: 50,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              fontSizeM: size.width * 0.04,
+                                              showLabels: true,
+                                              fontSize: size.width * 0.04,
+                                              meterName: "A",
+                                              value: switchOn
+                                                  ? roundDouble(I0, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 10)),
+                                    ),
+                                  ],
+                                ),
+                                Stack(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          right: size.width * 0.0),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.195,
+                                          width: size.width * 0.4,
+                                          // width: 50,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              fontSizeM: size.width * 0.04,
+                                              showLabels: true,
+                                              fontSize: size.width * 0.04,
+                                              meterName: "W",
+                                              value: switchOn
+                                                  ? roundDouble(W, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 30)),
+                                    ),
+                                    // Padding(
+                                    //   padding: EdgeInsets.only(
+                                    //       left: size.width * 0.45),
+                                    //   child: Container(
+                                    //       color: Colors.white,
+                                    //       height: size.height * 0.195,
+                                    //       width: size.width * 0.4,
+                                    //       child: CircularMeter(
+                                    //           showFirstLabel: true,
+                                    //           fontSizeM: size.width * 0.04,
+                                    //           showLabels: true,
+                                    //           fontSize: size.width * 0.04,
+                                    //           meterName: "V2",
+                                    //           value: switchOn
+                                    //               ? roundDouble(V2, 1)
+                                    //               : 0.0,
+                                    //           range1: 0,
+                                    //           range2: 300)),
+                                    // ),
+                                  ],
+                                ),
+                                Text("Transformer Rating: 500kVA 115/230"),
+                              ],
+                            )
+                          : Row(
+                              children: [
+                                Stack(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: size.width * 0.455),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.11,
+                                          width: size.width * 0.039,
+                                          // width: 50,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              fontSizeM: size.width * 0.01,
+                                              showLabels: false,
+                                              fontSize: 0,
+                                              meterName: "W",
+                                              value: switchOn
+                                                  ? roundDouble(W, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 30)),
+                                    ),
+                                    switchOn
+                                        ? Padding(
+                                            padding: EdgeInsets.only(
+                                              top: size.height * 0.06,
+                                            ),
+                                            child: Container(
+                                              height: size.height * 0.65,
+                                              width: size.width * 0.72,
+                                              child: Image.asset(
+                                                  "assets/images/short_circuit_1.png"),
+                                            ),
+                                          )
+                                        : Padding(
+                                            padding: EdgeInsets.only(
+                                              top: size.height * 0.06,
+                                            ),
+                                            child: Container(
+                                              height: size.height * 0.65,
+                                              width: size.width * 0.72,
+                                              child: Image.asset(
+                                                  "assets/images/short_circuit_0.png"),
+                                            ),
+                                          ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: size.height * 0.02,
+                                          left: size.width * 0.32),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.15,
+                                          width: size.width * 0.05,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              fontSizeM: size.width * 0.015,
+                                              showLabels: false,
+                                              fontSize: 0,
+                                              meterName: "A",
+                                              value: switchOn
+                                                  ? roundDouble(I0, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 10)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: size.height * 0.37,
+                                          left: size.width * 0.53),
+                                      child: Container(
+                                          color: Colors.white,
+                                          height: size.height * 0.15,
+                                          width: size.width * 0.05,
+                                          child: CircularMeter(
+                                              showFirstLabel: true,
+                                              fontSizeM: size.width * 0.015,
+                                              showLabels: false,
+                                              fontSize: 0,
+                                              meterName: "Vsc",
+                                              value: switchOn
+                                                  ? roundDouble(Vsc, 1)
+                                                  : 0.0,
+                                              range1: 0,
+                                              range2: 25)),
+                                    ),
+                                    // Padding(
+                                    //   padding: EdgeInsets.only(
+                                    //       top: size.height * 0.37,
+                                    //       left: size.width * 0.672),
+                                    //   child: Container(
+                                    //       color: Colors.white,
+                                    //       height: size.height * 0.15,
+                                    //       width: size.width * 0.05,
+                                    //       child: CircularMeter(
+                                    //           showFirstLabel: true,
+                                    //           fontSizeM: size.width * 0.015,
+                                    //           showLabels: false,
+                                    //           fontSize: 0,
+                                    //           meterName: "V2",
+                                    //           value: switchOn
+                                    //               ? roundDouble(V2, 1)
+                                    //               : 0.0,
+                                    //           range1: 0,
+                                    //           range2: 300)),
+                                    // ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
                                         left: size.width * 0.02,
-                                        right: size.width * 0.04),
-                                    child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.3,
-                                        width: size.width * 0.12,
-                                        child: CircularMeter(
-                                            showFirstLabel: false,
-                                            showLabels: true,
-                                            fontSizeM: size.width * 0.02,
-                                            fontSize: size.width * 0.017,
-                                            meterName: "Vsc",
-                                            value: switchOn
-                                                ? roundDouble(Vsc, 1)
-                                                : 0.0,
-                                            range1: 0,
-                                            range2: 30)),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: size.width * 0.15),
-                                    child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.3,
-                                        width: size.width * 0.12,
-                                        child: CircularMeter(
-                                            showFirstLabel: true,
-                                            fontSizeM: size.width * 0.02,
-                                            fontSize: size.width * 0.017,
-                                            showLabels: true,
-                                            meterName: "A",
-                                            value: switchOn
-                                                ? roundDouble(I0, 1)
-                                                : 0.0,
-                                            range1: 0,
-                                            range2: 10)),
-                                  ),
-                                ],
-                              ),
-                              Stack(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: size.width * 0.02,
-                                        right: size.width * 0.04),
-                                    child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.3,
-                                        width: size.width * 0.12,
-                                        child: CircularMeter(
-                                            showFirstLabel: false,
-                                            showLabels: true,
-                                            fontSizeM: size.width * 0.02,
-                                            fontSize: size.width * 0.017,
-                                            meterName: "W",
-                                            value: switchOn
-                                                ? roundDouble(W, 1)
-                                                : 0.0,
-                                            range1: 0,
-                                            range2: 30)),
-                                  ),
-                                  // Padding(
-                                  //   padding: EdgeInsets.only(
-                                  //       left: size.width * 0.15),
-                                  //   child: Container(
-                                  //       color: Colors.white,
-                                  //       height: size.height * 0.3,
-                                  //       width: size.width * 0.12,
-                                  //       child: CircularMeter(
-                                  //           showFirstLabel: true,
-                                  //           fontSizeM: size.width * 0.02,
-                                  //           fontSize: size.width * 0.017,
-                                  //           showLabels: true,
-                                  //           meterName: "V2",
-                                  //           value: switchOn
-                                  //               ? roundDouble(V2, 1)
-                                  //               : 0.0,
-                                  //           range1: 0,
-                                  //           range2: 300)),
-                                  // ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                                        top: size.height * 0.15,
+                                      ),
+                                      child: _activeSlider(),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.height * 0.052,
+                                            left: size.width * 0.063),
+                                        child: switchOn
+                                            ? Text("$Vsc")
+                                            : Text("0.0")),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.height * 0.052,
+                                            left: size.width * 0.03),
+                                        child: Text("Vsc=")),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              top: size.height * 0.02),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                switchOn = !switchOn;
+                                                switchOn ? Vsc = 230.0 : null;
+                                                switchOn ? I0 : I0 = 0;
+                                                switchOn ? W : W = 0;
+                                                switchOn ? V2 : V2 = 0;
+                                                I0 = (Vsc / Zsc);
+                                                W = pow(I0, 2) * Rsc;
+                                              });
+                                            },
+                                            child: switchOn
+                                                ? Container(
+                                                    height: size.height * 0.09,
+                                                    child: Image.asset(
+                                                        "assets/images/s1.png"))
+                                                : Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right:
+                                                            size.width * 0.14),
+                                                    child: Container(
+                                                        height:
+                                                            size.height * 0.09,
+                                                        child: Image.asset(
+                                                            "assets/images/s0.png")),
+                                                  ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: size.width * 0.035,
+                                              top: size.height * 0.02),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                switchOn ? V1 : V1 = 0;
+                                                switchOn ? I0 : I0 = 0;
+                                                switchOn ? W : W = 0;
+                                                switchOn ? V2 : V2 = 0;
+                                                // Toggle light when tapped.
+                                              });
+                                            },
+                                            child: switchOn
+                                                ? GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        fieldOne.add(V1);
+                                                        fieldTwo.add(I0);
+                                                        fieldThree.add(W);
+                                                        fieldFour.add(V2);
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.grey,
+                                                          border: Border.all(
+                                                            width: 2,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        height:
+                                                            size.height * 0.09,
+                                                        width:
+                                                            size.width * 0.14,
+                                                        child: Center(
+                                                            child: Text(
+                                                          "Add to Observation Table",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ))),
+                                                  )
+                                                : Container(
+                                                    height: size.height * 0.020,
+                                                  ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Stack(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: size.width * 0.02,
+                                              right: size.width * 0.04),
+                                          child: Container(
+                                              color: Colors.white,
+                                              height: size.height * 0.3,
+                                              width: size.width * 0.12,
+                                              child: CircularMeter(
+                                                  showFirstLabel: false,
+                                                  showLabels: true,
+                                                  fontSizeM: size.width * 0.02,
+                                                  fontSize: size.width * 0.017,
+                                                  meterName: "Vsc",
+                                                  value: switchOn
+                                                      ? roundDouble(Vsc, 1)
+                                                      : 0.0,
+                                                  range1: 0,
+                                                  range2: 30)),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: size.width * 0.15),
+                                          child: Container(
+                                              color: Colors.white,
+                                              height: size.height * 0.3,
+                                              width: size.width * 0.12,
+                                              child: CircularMeter(
+                                                  showFirstLabel: true,
+                                                  fontSizeM: size.width * 0.02,
+                                                  fontSize: size.width * 0.017,
+                                                  showLabels: true,
+                                                  meterName: "A",
+                                                  value: switchOn
+                                                      ? roundDouble(I0, 1)
+                                                      : 0.0,
+                                                  range1: 0,
+                                                  range2: 10)),
+                                        ),
+                                      ],
+                                    ),
+                                    Stack(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: size.width * 0.02,
+                                              right: size.width * 0.04),
+                                          child: Container(
+                                              color: Colors.white,
+                                              height: size.height * 0.3,
+                                              width: size.width * 0.12,
+                                              child: CircularMeter(
+                                                  showFirstLabel: false,
+                                                  showLabels: true,
+                                                  fontSizeM: size.width * 0.02,
+                                                  fontSize: size.width * 0.017,
+                                                  meterName: "W",
+                                                  value: switchOn
+                                                      ? roundDouble(W, 1)
+                                                      : 0.0,
+                                                  range1: 0,
+                                                  range2: 30)),
+                                        ),
+                                        // Padding(
+                                        //   padding: EdgeInsets.only(
+                                        //       left: size.width * 0.15),
+                                        //   child: Container(
+                                        //       color: Colors.white,
+                                        //       height: size.height * 0.3,
+                                        //       width: size.width * 0.12,
+                                        //       child: CircularMeter(
+                                        //           showFirstLabel: true,
+                                        //           fontSizeM: size.width * 0.02,
+                                        //           fontSize: size.width * 0.017,
+                                        //           showLabels: true,
+                                        //           meterName: "V2",
+                                        //           value: switchOn
+                                        //               ? roundDouble(V2, 1)
+                                        //               : 0.0,
+                                        //           range1: 0,
+                                        //           range2: 300)),
+                                        // ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                     ),
                   ),
                   SingleChildScrollView(
@@ -789,7 +788,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                           ),
                           Table(
                             defaultColumnWidth:
-                            FixedColumnWidth(size.width * 0.19),
+                                FixedColumnWidth(size.width * 0.19),
                             border: TableBorder.all(
                                 color: Colors.black,
                                 style: BorderStyle.solid,
@@ -877,22 +876,22 @@ class _SCTestScreenState extends State<SCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('2nd')]),
                                 Column(children: [
-                                  fieldOne.length<=1
+                                  fieldOne.length <= 1
                                       ? Text("")
                                       : Text("${fieldOne[1]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length<=1
+                                  fieldTwo.length <= 1
                                       ? Text("")
                                       : Text("${roundDouble(fieldTwo[1], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length<=1
+                                  fieldThree.length <= 1
                                       ? Text("")
                                       : Text("${roundDouble(fieldThree[1], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length<=1
+                                  fieldFour.length <= 1
                                       ? Text("")
                                       : Text("${fieldFour[1]}")
                                 ]),
@@ -900,22 +899,22 @@ class _SCTestScreenState extends State<SCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('3rd')]),
                                 Column(children: [
-                                  fieldOne.length<=2
+                                  fieldOne.length <= 2
                                       ? Text("")
                                       : Text("${fieldOne[2]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length<=2
+                                  fieldTwo.length <= 2
                                       ? Text("")
                                       : Text("${roundDouble(fieldTwo[2], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length<=2
+                                  fieldThree.length <= 2
                                       ? Text("")
                                       : Text("${roundDouble(fieldThree[2], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length<=2
+                                  fieldFour.length <= 2
                                       ? Text("")
                                       : Text("${fieldFour[2]}")
                                 ]),
@@ -923,22 +922,22 @@ class _SCTestScreenState extends State<SCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('4th')]),
                                 Column(children: [
-                                  fieldOne.length<=3
+                                  fieldOne.length <= 3
                                       ? Text("")
                                       : Text("${fieldOne[3]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length<=3
+                                  fieldTwo.length <= 3
                                       ? Text("")
                                       : Text("${roundDouble(fieldTwo[3], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length<=3
+                                  fieldThree.length <= 3
                                       ? Text("")
                                       : Text("${roundDouble(fieldThree[3], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length<=3
+                                  fieldFour.length <= 3
                                       ? Text("")
                                       : Text("${fieldFour[3]}")
                                 ]),
@@ -946,22 +945,22 @@ class _SCTestScreenState extends State<SCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('5th')]),
                                 Column(children: [
-                                  fieldOne.length<=4
+                                  fieldOne.length <= 4
                                       ? Text("")
                                       : Text("${fieldOne[4]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length<=4
+                                  fieldTwo.length <= 4
                                       ? Text("")
                                       : Text("${roundDouble(fieldTwo[4], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length<=4
+                                  fieldThree.length <= 4
                                       ? Text("")
                                       : Text("${roundDouble(fieldThree[4], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length<=4
+                                  fieldFour.length <= 4
                                       ? Text("")
                                       : Text("${fieldFour[4]}")
                                 ]),

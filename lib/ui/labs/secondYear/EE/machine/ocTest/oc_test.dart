@@ -1228,22 +1228,23 @@ class _OCTestScreenState extends State<OCTestScreen> {
                           SizedBox(
                             height: size.height * 0.02,
                           ),
-                          addedToObservation == true?
-                          Text(
-                            "From the Observation Table Given Above:",
-                            style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontSize: size.width * 0.04,
-                                fontWeight: FontWeight.bold),
-                          ): Text(
-                            "Add to Observation from Simulation Screen to check Calculations",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: "Poppins",
-                                color: kRedColor,
-                                fontSize: size.width * 0.04,
-                                fontWeight: FontWeight.bold),
-                          ),
+                          addedToObservation == true
+                              ? Text(
+                                  "From the Observation Table Given Above:",
+                                  style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontSize: size.width * 0.04,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              : Text(
+                                  "Add to Observation from Simulation Screen to check Calculations",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      color: kRedColor,
+                                      fontSize: size.width * 0.04,
+                                      fontWeight: FontWeight.bold),
+                                ),
                           SizedBox(
                             height: size.height * 0.01,
                           ),
@@ -1402,81 +1403,86 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
-                                addedToObservation == true?
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Im =        ",
-                                      style: TextStyle(
-                                        fontFamily: "Poppins",
-                                        fontSize: size.width * 0.04,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.02,
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.3,
-                                      height: size.height * 0.04,
-                                      child: TextField(
-                                        textAlign: TextAlign.center,
-                                        decoration: InputDecoration(
-                                          enabledBorder:
-                                              const OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero,
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                          contentPadding: EdgeInsets.symmetric(
-                                            horizontal: size.width * 0.02,
-                                          ),
-                                          fillColor:
-                                              magnetizingComponentValueEntered
-                                                  ? correctMagnetizingComponentValueEntered
-                                                      ? kGreenColor
-                                                      : kRedColor
-                                                  : kGreyColor,
-                                          border: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(
-                                                  color: Colors.white)),
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero,
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                          focusColor: Colors.black,
-                                          hintText:
-                                              magnetizingComponentValueEntered
-                                                  ? "$magnetizingComponentByUser"
-                                                  : '0.0',
-                                          hintStyle: TextStyle(
+                                addedToObservation == true
+                                    ? Row(
+                                        children: [
+                                          Text(
+                                            "Im =        ",
+                                            style: TextStyle(
                                               fontFamily: "Poppins",
                                               fontSize: size.width * 0.04,
-                                              color:
-                                                  magnetizingComponentValueEntered
-                                                      ? kWhiteColor
-                                                      : kBlackColor),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        onChanged:
-                                            _onMagnetizingComponentChanged,
-                                        style: TextStyle(
-                                            fontFamily: "Poppins",
-                                            fontSize: size.width * 0.04,
-                                            color:
-                                                magnetizingComponentValueEntered
-                                                    ? kWhiteColor
-                                                    : kBlackColor),
-                                        readOnly:
-                                            magnetizingComponentValueEntered,
-                                      ),
-                                    ),
-                                  ],
-                                )
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.02,
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.3,
+                                            height: size.height * 0.04,
+                                            child: TextField(
+                                              textAlign: TextAlign.center,
+                                              decoration: InputDecoration(
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                  horizontal: size.width * 0.02,
+                                                ),
+                                                fillColor:
+                                                    magnetizingComponentValueEntered
+                                                        ? correctMagnetizingComponentValueEntered
+                                                            ? kGreenColor
+                                                            : kRedColor
+                                                        : kGreyColor,
+                                                border:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                                focusedBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                focusColor: Colors.black,
+                                                hintText:
+                                                    magnetizingComponentValueEntered
+                                                        ? "$magnetizingComponentByUser"
+                                                        : '0.0',
+                                                hintStyle: TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: size.width * 0.04,
+                                                    color:
+                                                        magnetizingComponentValueEntered
+                                                            ? kWhiteColor
+                                                            : kBlackColor),
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onChanged:
+                                                  _onMagnetizingComponentChanged,
+                                              style: TextStyle(
+                                                  fontFamily: "Poppins",
+                                                  fontSize: size.width * 0.04,
+                                                  color:
+                                                      magnetizingComponentValueEntered
+                                                          ? kWhiteColor
+                                                          : kBlackColor),
+                                              readOnly:
+                                                  magnetizingComponentValueEntered,
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                     : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
@@ -1495,102 +1501,114 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
-                                addedToObservation == true?
-                                const CommonDivider(): const Zero(),
-                                addedToObservation == true?
-                                Text(
-                                  "3. Calculate the Core loss component of no load current:",
-                                  style: TextStyle(
-                                      letterSpacing: -0.6,
-                                      fontFamily: "Poppins",
-                                      fontSize: size.width * 0.035),
-                                ): const Zero(),
-                                SizedBox(
-                                  height: size.height * 0.02,
-                                ),
-                                addedToObservation == true?
-                                Text(
-                                  "Core loss component of no load current, Ic = Io cos Φo",
-                                  style: TextStyle(
-                                      letterSpacing: -0.6,
-                                      fontFamily: "Poppins",
-                                      fontSize: size.width * 0.035),
-                                )
+                                addedToObservation == true
+                                    ? const CommonDivider()
+                                    : const Zero(),
+                                addedToObservation == true
+                                    ? Text(
+                                        "3. Calculate the Core loss component of no load current:",
+                                        style: TextStyle(
+                                            letterSpacing: -0.6,
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.035),
+                                      )
                                     : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
-                                addedToObservation == true?
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Ic =         ",
-                                      style: TextStyle(
-                                        fontFamily: "Poppins",
-                                        fontSize: size.width * 0.04,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.02,
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.3,
-                                      height: size.height * 0.04,
-                                      child: TextField(
-                                        textAlign: TextAlign.center,
-                                        decoration: InputDecoration(
-                                          enabledBorder:
-                                              const OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero,
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                          contentPadding: EdgeInsets.symmetric(
-                                            horizontal: size.width * 0.02,
-                                          ),
-                                          fillColor: coreLossComponentValueEntered
-                                              ? correctCoreLossComponentValueEntered
-                                                  ? kGreenColor
-                                                  : kRedColor
-                                              : kGreyColor,
-                                          border: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(
-                                                  color: Colors.white)),
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero,
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                          focusColor: Colors.black,
-                                          hintText:
-                                              coreLossComponentValueEntered
-                                                  ? "$coreLossComponentByUser"
-                                                  : '0.0',
-                                          hintStyle: TextStyle(
+                                addedToObservation == true
+                                    ? Text(
+                                        "Core loss component of no load current, Ic = Io cos Φo",
+                                        style: TextStyle(
+                                            letterSpacing: -0.6,
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : const Zero(),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                ),
+                                addedToObservation == true
+                                    ? Row(
+                                        children: [
+                                          Text(
+                                            "Ic =         ",
+                                            style: TextStyle(
                                               fontFamily: "Poppins",
                                               fontSize: size.width * 0.04,
-                                              color:
-                                                  coreLossComponentValueEntered
-                                                      ? kWhiteColor
-                                                      : kBlackColor),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        onChanged: _onCoreLossComponentChanged,
-                                        style: TextStyle(
-                                            fontFamily: "Poppins",
-                                            fontSize: size.width * 0.04,
-                                            color: coreLossComponentValueEntered
-                                                ? kWhiteColor
-                                                : kBlackColor),
-                                        readOnly: coreLossComponentValueEntered,
-                                      ),
-                                    ),
-                                  ],
-                                ): const Zero(),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.02,
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.3,
+                                            height: size.height * 0.04,
+                                            child: TextField(
+                                              textAlign: TextAlign.center,
+                                              decoration: InputDecoration(
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                  horizontal: size.width * 0.02,
+                                                ),
+                                                fillColor:
+                                                    coreLossComponentValueEntered
+                                                        ? correctCoreLossComponentValueEntered
+                                                            ? kGreenColor
+                                                            : kRedColor
+                                                        : kGreyColor,
+                                                border:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                                focusedBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                focusColor: Colors.black,
+                                                hintText:
+                                                    coreLossComponentValueEntered
+                                                        ? "$coreLossComponentByUser"
+                                                        : '0.0',
+                                                hintStyle: TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: size.width * 0.04,
+                                                    color:
+                                                        coreLossComponentValueEntered
+                                                            ? kWhiteColor
+                                                            : kBlackColor),
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onChanged:
+                                                  _onCoreLossComponentChanged,
+                                              style: TextStyle(
+                                                  fontFamily: "Poppins",
+                                                  fontSize: size.width * 0.04,
+                                                  color:
+                                                      coreLossComponentValueEntered
+                                                          ? kWhiteColor
+                                                          : kBlackColor),
+                                              readOnly:
+                                                  coreLossComponentValueEntered,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
@@ -1605,100 +1623,109 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                     : SizedBox(
                                         width: size.width * 0.02,
                                       ),
-                                addedToObservation == true?
-                                const CommonDivider(): const Zero(),
-                                addedToObservation == true?
-                                Text(
-                                  "4. Calculate the Resistance representing core loss:",
-                                  style: TextStyle(
-                                      letterSpacing: -0.6,
-                                      fontFamily: "Poppins",
-                                      fontSize: size.width * 0.035),
-                                ): const Zero(),
-                                SizedBox(
-                                  height: size.height * 0.02,
-                                ),
-                                addedToObservation == true?
-                                Text(
-                                  "Resistance representing core loss, Ro = V1 / Ic",
-                                  style: TextStyle(
-                                      letterSpacing: -0.6,
-                                      fontFamily: "Poppins",
-                                      fontSize: size.width * 0.035),
-                                )
+                                addedToObservation == true
+                                    ? const CommonDivider()
+                                    : const Zero(),
+                                addedToObservation == true
+                                    ? Text(
+                                        "4. Calculate the Resistance representing core loss:",
+                                        style: TextStyle(
+                                            letterSpacing: -0.6,
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.035),
+                                      )
                                     : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
-                                addedToObservation == true?
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Ro =        ",
-                                      style: TextStyle(
-                                        fontFamily: "Poppins",
-                                        fontSize: size.width * 0.04,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.02,
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.3,
-                                      height: size.height * 0.04,
-                                      child: TextField(
-                                        textAlign: TextAlign.center,
-                                        decoration: InputDecoration(
-                                          enabledBorder:
-                                              const OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero,
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                          contentPadding: EdgeInsets.symmetric(
-                                            horizontal: size.width * 0.02,
-                                          ),
-                                          fillColor: resistanceValueEntered
-                                              ? correctResistanceValueEntered
-                                                  ? kGreenColor
-                                                  : kRedColor
-                                              : kGreyColor,
-                                          border: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(
-                                                  color: Colors.white)),
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero,
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                          focusColor: Colors.black,
-                                          hintText: resistanceValueEntered
-                                              ? "$resistanceByUser"
-                                              : '0.0',
-                                          hintStyle: TextStyle(
+                                addedToObservation == true
+                                    ? Text(
+                                        "Resistance representing core loss, Ro = V1 / Ic",
+                                        style: TextStyle(
+                                            letterSpacing: -0.6,
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : const Zero(),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                ),
+                                addedToObservation == true
+                                    ? Row(
+                                        children: [
+                                          Text(
+                                            "Ro =        ",
+                                            style: TextStyle(
                                               fontFamily: "Poppins",
                                               fontSize: size.width * 0.04,
-                                              color: resistanceValueEntered
-                                                  ? kWhiteColor
-                                                  : kBlackColor),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        onChanged: _onResistanceChanged,
-                                        style: TextStyle(
-                                            fontFamily: "Poppins",
-                                            fontSize: size.width * 0.04,
-                                            color: resistanceValueEntered
-                                                ? kWhiteColor
-                                                : kBlackColor),
-                                        readOnly: resistanceValueEntered,
-                                      ),
-                                    ),
-                                  ],
-                                ): const Zero(),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.02,
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.3,
+                                            height: size.height * 0.04,
+                                            child: TextField(
+                                              textAlign: TextAlign.center,
+                                              decoration: InputDecoration(
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                  horizontal: size.width * 0.02,
+                                                ),
+                                                fillColor: resistanceValueEntered
+                                                    ? correctResistanceValueEntered
+                                                        ? kGreenColor
+                                                        : kRedColor
+                                                    : kGreyColor,
+                                                border:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                                focusedBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                focusColor: Colors.black,
+                                                hintText: resistanceValueEntered
+                                                    ? "$resistanceByUser"
+                                                    : '0.0',
+                                                hintStyle: TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: size.width * 0.04,
+                                                    color:
+                                                        resistanceValueEntered
+                                                            ? kWhiteColor
+                                                            : kBlackColor),
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onChanged: _onResistanceChanged,
+                                              style: TextStyle(
+                                                  fontFamily: "Poppins",
+                                                  fontSize: size.width * 0.04,
+                                                  color: resistanceValueEntered
+                                                      ? kWhiteColor
+                                                      : kBlackColor),
+                                              readOnly: resistanceValueEntered,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
@@ -1713,105 +1740,114 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                     : SizedBox(
                                         width: size.width * 0.02,
                                       ),
-                                addedToObservation == true?
-                                const CommonDivider(): const Zero(),
-                                addedToObservation == true?
-                                Text(
-                                  "5. Calculate the Magnetizing branch reactance:",
-                                  style: TextStyle(
-                                      letterSpacing: -0.6,
-                                      fontFamily: "Poppins",
-                                      fontSize: size.width * 0.035),
-                                ): const Zero(),
+                                addedToObservation == true
+                                    ? const CommonDivider()
+                                    : const Zero(),
+                                addedToObservation == true
+                                    ? Text(
+                                        "5. Calculate the Magnetizing branch reactance:",
+                                        style: TextStyle(
+                                            letterSpacing: -0.6,
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
-                                addedToObservation == true?
-                                Text(
-                                  "Magnetizing branch reactance, Xo= V1 / Im",
-                                  style: TextStyle(
-                                      letterSpacing: -0.6,
-                                      fontFamily: "Poppins",
-                                      fontSize: size.width * 0.035),
-                                ): const Zero(),
+                                addedToObservation == true
+                                    ? Text(
+                                        "Magnetizing branch reactance, Xo= V1 / Im",
+                                        style: TextStyle(
+                                            letterSpacing: -0.6,
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
-                                addedToObservation == true?
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Xo =        ",
-                                      style: TextStyle(
-                                        fontFamily: "Poppins",
-                                        fontSize: size.width * 0.04,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.02,
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.3,
-                                      height: size.height * 0.04,
-                                      child: TextField(
-                                        textAlign: TextAlign.center,
-                                        decoration: InputDecoration(
-                                          enabledBorder:
-                                              const OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero,
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                          contentPadding: EdgeInsets.symmetric(
-                                            horizontal: size.width * 0.02,
-                                          ),
-                                          fillColor:
-                                              magnetizingBranchReactanceValueEntered
-                                                  ? correctMagnetizingBranchReactanceValueEntered
-                                                      ? kGreenColor
-                                                      : kRedColor
-                                                  : kGreyColor,
-                                          border: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(
-                                                  color: Colors.white)),
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero,
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                          focusColor: Colors.black,
-                                          hintText:
-                                              magnetizingBranchReactanceValueEntered
-                                                  ? "$magnetizingBranchReactanceByUser"
-                                                  : '0.0',
-                                          hintStyle: TextStyle(
+                                addedToObservation == true
+                                    ? Row(
+                                        children: [
+                                          Text(
+                                            "Xo =        ",
+                                            style: TextStyle(
                                               fontFamily: "Poppins",
                                               fontSize: size.width * 0.04,
-                                              color:
-                                                  magnetizingBranchReactanceValueEntered
-                                                      ? kWhiteColor
-                                                      : kBlackColor),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        onChanged:
-                                            _onMagnetizingBranchReactanceChanged,
-                                        style: TextStyle(
-                                            fontFamily: "Poppins",
-                                            fontSize: size.width * 0.04,
-                                            color:
-                                                magnetizingBranchReactanceValueEntered
-                                                    ? kWhiteColor
-                                                    : kBlackColor),
-                                        readOnly:
-                                            magnetizingBranchReactanceValueEntered,
-                                      ),
-                                    ),
-                                  ],
-                                ): const Zero(),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.02,
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.3,
+                                            height: size.height * 0.04,
+                                            child: TextField(
+                                              textAlign: TextAlign.center,
+                                              decoration: InputDecoration(
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                  horizontal: size.width * 0.02,
+                                                ),
+                                                fillColor:
+                                                    magnetizingBranchReactanceValueEntered
+                                                        ? correctMagnetizingBranchReactanceValueEntered
+                                                            ? kGreenColor
+                                                            : kRedColor
+                                                        : kGreyColor,
+                                                border:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                                focusedBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                focusColor: Colors.black,
+                                                hintText:
+                                                    magnetizingBranchReactanceValueEntered
+                                                        ? "$magnetizingBranchReactanceByUser"
+                                                        : '0.0',
+                                                hintStyle: TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: size.width * 0.04,
+                                                    color:
+                                                        magnetizingBranchReactanceValueEntered
+                                                            ? kWhiteColor
+                                                            : kBlackColor),
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onChanged:
+                                                  _onMagnetizingBranchReactanceChanged,
+                                              style: TextStyle(
+                                                  fontFamily: "Poppins",
+                                                  fontSize: size.width * 0.04,
+                                                  color:
+                                                      magnetizingBranchReactanceValueEntered
+                                                          ? kWhiteColor
+                                                          : kBlackColor),
+                                              readOnly:
+                                                  magnetizingBranchReactanceValueEntered,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
@@ -1826,167 +1862,179 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                     : SizedBox(
                                         width: size.width * 0.02,
                                       ),
-                                addedToObservation == true?
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: size.width * 0.25,
-                                      vertical: size.height * 0.025),
-                                  child: SizedBox(
-                                    height: size.height * 0.05,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          noLoadPowerFactorByUser = 0.0;
-                                          magnetizingComponentByUser = 0.0;
-                                          coreLossComponentByUser = 0.0;
-                                          resistanceByUser = 0.0;
-                                          magnetizingBranchReactanceByUser =
-                                              0.0;
-                                          print(noLoadPowerFactorByUser);
-                                          noLoadPowerFactorValueEntered = false;
-                                          magnetizingComponentValueEntered =
-                                              false;
-                                          coreLossComponentValueEntered = false;
-                                          resistanceValueEntered = false;
-                                          magnetizingBranchReactanceValueEntered =
-                                              false;
-                                          correctMagnetizingComponentValueEntered =
-                                              false;
-                                          correctResistanceValueEntered = false;
-                                          correctNoLoadPowerFactorValueEntered =
-                                              false;
-                                          correctMagnetizingBranchReactanceValueEntered =
-                                              false;
-                                          correctCoreLossComponentValueEntered =
-                                              false;
+                                addedToObservation == true
+                                    ? Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.25,
+                                            vertical: size.height * 0.025),
+                                        child: SizedBox(
+                                          height: size.height * 0.05,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                noLoadPowerFactorByUser = 0.0;
+                                                magnetizingComponentByUser =
+                                                    0.0;
+                                                coreLossComponentByUser = 0.0;
+                                                resistanceByUser = 0.0;
+                                                magnetizingBranchReactanceByUser =
+                                                    0.0;
+                                                print(noLoadPowerFactorByUser);
+                                                noLoadPowerFactorValueEntered =
+                                                    false;
+                                                magnetizingComponentValueEntered =
+                                                    false;
+                                                coreLossComponentValueEntered =
+                                                    false;
+                                                resistanceValueEntered = false;
+                                                magnetizingBranchReactanceValueEntered =
+                                                    false;
+                                                correctMagnetizingComponentValueEntered =
+                                                    false;
+                                                correctResistanceValueEntered =
+                                                    false;
+                                                correctNoLoadPowerFactorValueEntered =
+                                                    false;
+                                                correctMagnetizingBranchReactanceValueEntered =
+                                                    false;
+                                                correctCoreLossComponentValueEntered =
+                                                    false;
 
-                                          noLoadPowerFactorAnswer = 0.0;
-                                          magnetizingComponentAnswer = 0.0;
-                                          coreLossComponentAnswer = 0.0;
-                                          resistanceAnswer = 0.0;
-                                          magnetizingBranchReactanceAnswer =
-                                              0.0;
-                                          v1o = 0;
-                                          i0o = 0;
-                                          wo = 0;
-                                          v2o = 0;
+                                                noLoadPowerFactorAnswer = 0.0;
+                                                magnetizingComponentAnswer =
+                                                    0.0;
+                                                coreLossComponentAnswer = 0.0;
+                                                resistanceAnswer = 0.0;
+                                                magnetizingBranchReactanceAnswer =
+                                                    0.0;
+                                                v1o = 0;
+                                                i0o = 0;
+                                                wo = 0;
+                                                v2o = 0;
 
-                                          addedToObservation = false;
+                                                addedToObservation = false;
 
-                                          fieldOne.clear();
-                                          fieldTwo.clear();
-                                          fieldThree.clear();
-                                          fieldFour.clear();
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: kPrimaryLightColor,
-                                          elevation: 0),
-                                      child: const Text(
-                                        "Reset",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: "Poppins",
-                                            fontSize: 21),
-                                      ),
-                                    ),
-                                  ),
-                                ): const Zero(),
-                                addedToObservation == true?
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: size.width * 0.25),
-                                  child: SizedBox(
-                                    height: size.height * 0.05,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          if (noLoadPowerFactorValueEntered ==
-                                              false) {
-                                            noLoadPowerFactorValueEntered =
-                                                true;
-                                            if (noLoadPowerFactorByUser <=
-                                                    noLoadPowerFactorAnswer +
-                                                        0.1 &&
-                                                noLoadPowerFactorByUser >=
-                                                    noLoadPowerFactorAnswer -
-                                                        0.1) {
-                                              correctNoLoadPowerFactorValueEntered =
-                                                  true;
-                                            }
-                                          }
-                                          if (magnetizingComponentValueEntered ==
-                                              false) {
-                                            magnetizingComponentValueEntered =
-                                                true;
-                                            if (magnetizingComponentByUser <=
-                                                    magnetizingComponentAnswer +
-                                                        0.1 &&
-                                                magnetizingComponentByUser >=
-                                                    magnetizingComponentAnswer -
-                                                        0.1) {
-                                              correctMagnetizingComponentValueEntered =
-                                                  true;
-                                            }
-                                          }
-                                          if (coreLossComponentValueEntered ==
-                                              false) {
-                                            coreLossComponentValueEntered =
-                                                true;
-                                            if (coreLossComponentByUser <=
-                                                    coreLossComponentAnswer +
-                                                        0.1 &&
-                                                coreLossComponentByUser >=
-                                                    coreLossComponentAnswer -
-                                                        0.1) {
-                                              correctCoreLossComponentValueEntered =
-                                                  true;
-                                            }
-                                          }
-                                          if (resistanceValueEntered == false) {
-                                            resistanceValueEntered = true;
-                                            if (resistanceByUser <=
-                                                    resistanceAnswer + 5 &&
-                                                resistanceByUser >=
-                                                    resistanceAnswer - 5) {
-                                              correctResistanceValueEntered =
-                                                  true;
-                                            }
-                                          }
-                                          if (magnetizingBranchReactanceValueEntered ==
-                                              false) {
-                                            magnetizingBranchReactanceValueEntered =
-                                                true;
-                                            if (magnetizingBranchReactanceByUser <=
-                                                    magnetizingBranchReactanceAnswer +
-                                                        4 &&
-                                                magnetizingBranchReactanceByUser >=
-                                                    magnetizingBranchReactanceAnswer -
-                                                        4) {
-                                              correctMagnetizingBranchReactanceValueEntered =
-                                                  true;
-                                            }
-                                          }
-                                          print(
-                                              magnetizingComponentValueEntered);
-                                          print(magnetizingComponentByUser);
-                                          print(
-                                              correctMagnetizingComponentValueEntered);
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: kPrimaryColor,
-                                          elevation: 0),
-                                      child: const Text(
-                                        "Submit",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 21),
-                                      ),
-                                    ),
-                                  ),
-                                ): const Zero(),
+                                                fieldOne.clear();
+                                                fieldTwo.clear();
+                                                fieldThree.clear();
+                                                fieldFour.clear();
+                                              });
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    kPrimaryLightColor,
+                                                elevation: 0),
+                                            child: const Text(
+                                              "Reset",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 21),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : const Zero(),
+                                addedToObservation == true
+                                    ? Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.25),
+                                        child: SizedBox(
+                                          height: size.height * 0.05,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                if (noLoadPowerFactorValueEntered ==
+                                                    false) {
+                                                  noLoadPowerFactorValueEntered =
+                                                      true;
+                                                  if (noLoadPowerFactorByUser <=
+                                                          noLoadPowerFactorAnswer +
+                                                              0.1 &&
+                                                      noLoadPowerFactorByUser >=
+                                                          noLoadPowerFactorAnswer -
+                                                              0.1) {
+                                                    correctNoLoadPowerFactorValueEntered =
+                                                        true;
+                                                  }
+                                                }
+                                                if (magnetizingComponentValueEntered ==
+                                                    false) {
+                                                  magnetizingComponentValueEntered =
+                                                      true;
+                                                  if (magnetizingComponentByUser <=
+                                                          magnetizingComponentAnswer +
+                                                              0.1 &&
+                                                      magnetizingComponentByUser >=
+                                                          magnetizingComponentAnswer -
+                                                              0.1) {
+                                                    correctMagnetizingComponentValueEntered =
+                                                        true;
+                                                  }
+                                                }
+                                                if (coreLossComponentValueEntered ==
+                                                    false) {
+                                                  coreLossComponentValueEntered =
+                                                      true;
+                                                  if (coreLossComponentByUser <=
+                                                          coreLossComponentAnswer +
+                                                              0.1 &&
+                                                      coreLossComponentByUser >=
+                                                          coreLossComponentAnswer -
+                                                              0.1) {
+                                                    correctCoreLossComponentValueEntered =
+                                                        true;
+                                                  }
+                                                }
+                                                if (resistanceValueEntered ==
+                                                    false) {
+                                                  resistanceValueEntered = true;
+                                                  if (resistanceByUser <=
+                                                          resistanceAnswer +
+                                                              5 &&
+                                                      resistanceByUser >=
+                                                          resistanceAnswer -
+                                                              5) {
+                                                    correctResistanceValueEntered =
+                                                        true;
+                                                  }
+                                                }
+                                                if (magnetizingBranchReactanceValueEntered ==
+                                                    false) {
+                                                  magnetizingBranchReactanceValueEntered =
+                                                      true;
+                                                  if (magnetizingBranchReactanceByUser <=
+                                                          magnetizingBranchReactanceAnswer +
+                                                              4 &&
+                                                      magnetizingBranchReactanceByUser >=
+                                                          magnetizingBranchReactanceAnswer -
+                                                              4) {
+                                                    correctMagnetizingBranchReactanceValueEntered =
+                                                        true;
+                                                  }
+                                                }
+                                                print(
+                                                    magnetizingComponentValueEntered);
+                                                print(
+                                                    magnetizingComponentByUser);
+                                                print(
+                                                    correctMagnetizingComponentValueEntered);
+                                              });
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: kPrimaryColor,
+                                                elevation: 0),
+                                            child: const Text(
+                                              "Submit",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 21),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),

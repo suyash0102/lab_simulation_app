@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '200198356587',
     projectId: 'lsapp-68019',
     storageBucket: 'lsapp-68019.appspot.com',
-    iosClientId: '200198356587-t2bbqdte4uvegiuhmfkscp0l44lb4n47.apps.googleusercontent.com',
+    iosClientId:
+        '200198356587-t2bbqdte4uvegiuhmfkscp0l44lb4n47.apps.googleusercontent.com',
     iosBundleId: 'com.synchronizers.labSimulationApp',
   );
 }

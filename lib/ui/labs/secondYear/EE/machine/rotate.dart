@@ -11,7 +11,7 @@ class LogoRotateState extends State<LogoRotate> {
   double turns = 0.0;
 
   void _changeRotation() {
-    setState(() => turns += 1.0 );
+    setState(() => turns += 1.0);
   }
 
   @override

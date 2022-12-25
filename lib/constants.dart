@@ -8,13 +8,12 @@ const eula = 'https://www.instamobile.io/eula-instachatty/';
 
 const kPrimaryColor = Color(0xFF9C27B0);
 const kPrimaryLightColor = Color(0xFFF4C9F3);
-const kGreenColor=Color(0xFF31B565);
-const kRedColor=Color(0xFFF85C5A);
-const kBlueColor= Color(0xFF4DA7FF);
-const kGreyColor= Color(0xFFD9D9D9);
+const kGreenColor = Color(0xFF31B565);
+const kRedColor = Color(0xFFF85C5A);
+const kBlueColor = Color(0xFF4DA7FF);
+const kGreyColor = Color(0xFFD9D9D9);
 const kWhiteColor = Colors.white;
 const kBlackColor = Colors.black;
-
 
 const double defaultPadding = 16.0;
 

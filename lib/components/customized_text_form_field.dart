@@ -10,13 +10,24 @@ class CustomizedTextFormField extends StatefulWidget {
   final Function(String?)? onChanged;
   final Function(String)? onFieldSubmitted;
   final bool readOnly;
- final dynamic keyboardType;
+  final dynamic keyboardType;
 
-
-  const CustomizedTextFormField({Key? key, required this.hintText, required this.obscureText, required this.validator, this.onSaved, this.onFieldSubmitted, this.controller, required this.readOnly, this.keyboardType, this.onChanged}) : super(key: key);
+  const CustomizedTextFormField(
+      {Key? key,
+      required this.hintText,
+      required this.obscureText,
+      required this.validator,
+      this.onSaved,
+      this.onFieldSubmitted,
+      this.controller,
+      required this.readOnly,
+      this.keyboardType,
+      this.onChanged})
+      : super(key: key);
 
   @override
-  _CustomizedTextFormFieldState createState() => _CustomizedTextFormFieldState();
+  _CustomizedTextFormFieldState createState() =>
+      _CustomizedTextFormFieldState();
 }
 
 class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
@@ -37,29 +48,40 @@ class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
       obscureText: widget.obscureText,
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
-        errorStyle: const TextStyle(fontSize: 12,fontFamily: "Poppins",),
+        errorStyle: const TextStyle(
+          fontSize: 12,
+          fontFamily: "Poppins",
+        ),
         errorBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: kRedColor,
+          borderSide: BorderSide(
+            color: kRedColor,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: Colors.blue,
+          borderSide: BorderSide(
+            color: Colors.blue,
           ),
         ),
         fillColor: Colors.white,
         border: InputBorder.none,
         hintText: widget.hintText,
-        hintStyle: TextStyle(fontSize: 16,color: Color(0xFF555555),fontFamily: "Poppins",),
+        hintStyle: TextStyle(
+          fontSize: 16,
+          color: Color(0xFF555555),
+          fontFamily: "Poppins",
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: kPrimaryColor,
+          borderSide: BorderSide(
+            color: kPrimaryColor,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: kPrimaryColor,
+          borderSide: BorderSide(
+            color: kPrimaryColor,
           ),
         ),
       ),

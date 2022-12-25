@@ -72,25 +72,25 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     if (_error) {
       return MaterialApp(
           home: Scaffold(
-            body: Container(
-              color: Colors.white,
-              child: Center(
-                  child: Column(
-                    children: const [
-                      Icon(
-                        Icons.error_outline,
-                        color: Colors.red,
-                        size: 25,
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        'Failed to initialise firebase!',
-                        style: TextStyle(color: Colors.red, fontSize: 25),
-                      ),
-                    ],
-                  )),
-            ),
-          ));
+        body: Container(
+          color: Colors.white,
+          child: Center(
+              child: Column(
+            children: const [
+              Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 25,
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Failed to initialise firebase!',
+                style: TextStyle(color: Colors.red, fontSize: 25),
+              ),
+            ],
+          )),
+        ),
+      ));
     }
 
     // Show a loader until FlutterFire is initialized
@@ -109,7 +109,8 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
             scaffoldBackgroundColor: Colors.white,
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                elevation: 0, backgroundColor: kPrimaryColor,
+                elevation: 0,
+                backgroundColor: kPrimaryColor,
                 shape: const StadiumBorder(),
                 maximumSize: const Size(double.infinity, 56),
                 minimumSize: const Size(double.infinity, 56),

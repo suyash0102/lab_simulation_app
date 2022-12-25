@@ -145,7 +145,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return EditProfileDetails(user: widget.user,);
+                    return EditProfileDetails(
+                      user: widget.user,
+                    );
                   },
                 ),
               );

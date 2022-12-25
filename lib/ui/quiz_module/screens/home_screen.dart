@@ -27,7 +27,17 @@ class FirstPage extends StatelessWidget {
   int selectedOption = 0;
   int marksObtainedFromCorrectAnswer = 0;
 
-  FirstPage({super.key, required this.title, required this.optionOne, required this.optionTwo, required this.optionThree, required this.optionFour, required this.questionsList, required this.experimentScreen, required this.noOfQuestions, required this.correctAnswers});
+  FirstPage(
+      {super.key,
+      required this.title,
+      required this.optionOne,
+      required this.optionTwo,
+      required this.optionThree,
+      required this.optionFour,
+      required this.questionsList,
+      required this.experimentScreen,
+      required this.noOfQuestions,
+      required this.correctAnswers});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +64,9 @@ class FirstPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushAndRemoveUntil<void>(
                       context,
-                      MaterialPageRoute<void>(builder: (BuildContext context) => const LauncherScreen()),
+                      MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              const LauncherScreen()),
                       ModalRoute.withName('/'),
                     );
                   },
@@ -80,12 +92,14 @@ class FirstPage extends StatelessWidget {
         appBar: AppBar(
           // leading: GestureDetector(child: Icon(Icons.close)),
           // automaticallyImplyLeading: true,
-          toolbarHeight: size.height*0.07,
+          toolbarHeight: size.height * 0.07,
           backgroundColor: kPrimaryColor,
-          title: Text(
-            title,
-            style: TextStyle(fontSize: size.width*0.05,color: Colors.white,fontFamily: "Poppins",)
-          ),
+          title: Text(title,
+              style: TextStyle(
+                fontSize: size.width * 0.05,
+                color: Colors.white,
+                fontFamily: "Poppins",
+              )),
           centerTitle: true,
           elevation: 0,
         ),
@@ -97,7 +111,7 @@ class FirstPage extends StatelessWidget {
               style: GoogleFonts.mulish(
                 color: Colors.black,
                 fontWeight: FontWeight.w700,
-                fontSize: size.width*0.06,
+                fontSize: size.width * 0.06,
                 letterSpacing: -0.3,
               ),
             ),
@@ -105,6 +119,7 @@ class FirstPage extends StatelessWidget {
               indexForQuestionNumber = provider.currentQuestionIndex;
               selectedOption = provider.optionSelected;
               return QuestionNumberIndex(
+                noOfQuestions: noOfQuestions,
                 questionNumber: indexForQuestionNumber,
               );
             }),
@@ -151,90 +166,102 @@ class FirstPage extends StatelessWidget {
                   ),
                   Consumer<IndexController>(
                       builder: (context, provider, child) {
-                        indexForQuestionNumber = provider.currentQuestionIndex;
-                        selectedOption = provider.optionSelected;
+                    indexForQuestionNumber = provider.currentQuestionIndex;
+                    selectedOption = provider.optionSelected;
 
-                        return selectedOption > 0
-                            ? Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Container(
-                                    height: 45,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(10),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            offset: Offset(1, 5),
-                                            color:
-                                            Color.fromRGBO(0, 0, 0, 0.25),
-                                            blurRadius: 1.5,
-                                            spreadRadius: 1,
-                                          ),
-                                          BoxShadow(
-                                              offset: Offset(1, 2),
-                                              color: Colors.white,
-                                              blurRadius: 1,
-                                              spreadRadius: 1)
-                                        ]),
-                                    child: ListTile(
-                                      onTap: () {
-                                        marksForCorrectAnswers();
-                                        if (indexForQuestionNumber < 9) {
-                                          provider.updateIndexForQuestion();
-                                        } else {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ResultPage(
-                                                      optionOne: optionOne,
-                                                      optionTwo: optionTwo,
-                                                      optionThree: optionThree,
-                                                      optionFour: optionFour,
-                                                      questionsList: questionsList,
-                                                      marksEarnedFromQuiz:
-                                                      marksObtainedFromCorrectAnswer, title: title, experimentScreen: experimentScreen, noOfQuestions: noOfQuestions, correctAnswers: ocCorrectAnswers,
-                                                    ),
-                                              ));
-                                        }
-                                        provider.selectedOptionIndex(0);
-                                      },
-                                      shape: RoundedRectangleBorder(
+                    return selectedOption > 0
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Container(
+                                      height: 45,
+                                      width: 100,
+                                      decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(10)),
-                                      tileColor: Colors.white,
-                                      leading: Text(
-                                        'Next',
-                                        style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,fontWeight:FontWeight.w600,color: kPrimaryColor),
-                                      ),
-                                      title: const Padding(
-                                        padding: EdgeInsets.only(
-                                          right: 20,
-                                          bottom: 5,
+                                              BorderRadius.circular(10),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              offset: Offset(1, 5),
+                                              color:
+                                                  Color.fromRGBO(0, 0, 0, 0.25),
+                                              blurRadius: 1.5,
+                                              spreadRadius: 1,
+                                            ),
+                                            BoxShadow(
+                                                offset: Offset(1, 2),
+                                                color: Colors.white,
+                                                blurRadius: 1,
+                                                spreadRadius: 1)
+                                          ]),
+                                      child: ListTile(
+                                        onTap: () {
+                                          marksForCorrectAnswers();
+                                          if (indexForQuestionNumber < 9) {
+                                            provider.updateIndexForQuestion();
+                                          } else {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ResultPage(
+                                                    optionOne: optionOne,
+                                                    optionTwo: optionTwo,
+                                                    optionThree: optionThree,
+                                                    optionFour: optionFour,
+                                                    questionsList:
+                                                        questionsList,
+                                                    marksEarnedFromQuiz:
+                                                        marksObtainedFromCorrectAnswer,
+                                                    title: title,
+                                                    experimentScreen:
+                                                        experimentScreen,
+                                                    noOfQuestions:
+                                                        noOfQuestions,
+                                                    correctAnswers:
+                                                        ocCorrectAnswers,
+                                                  ),
+                                                ));
+                                          }
+                                          provider.selectedOptionIndex(0);
+                                        },
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        tileColor: Colors.white,
+                                        leading: Text(
+                                          'Next',
+                                          style: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: size.width * 0.04,
+                                              fontWeight: FontWeight.w600,
+                                              color: kPrimaryColor),
                                         ),
-                                        child: Icon(
-                                          Icons.arrow_forward,
-                                          color: kPrimaryColor,
+                                        title: const Padding(
+                                          padding: EdgeInsets.only(
+                                            right: 20,
+                                            bottom: 5,
+                                          ),
+                                          child: Icon(
+                                            Icons.arrow_forward,
+                                            color: kPrimaryColor,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                            : const SizedBox(
-                          height: 65,
-                        );
-                      })
+                                ],
+                              ),
+                            ],
+                          )
+                        : const SizedBox(
+                            height: 65,
+                          );
+                  })
                 ],
               );
             }),

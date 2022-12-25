@@ -440,17 +440,19 @@ class _SignUpState extends State<SignUpScreen> {
                                       ),
                                       const SizedBox(height: 24),
                                       ListTile(
-                                        trailing: BlocBuilder<SignUpBloc, SignUpState>(
+                                        trailing: BlocBuilder<SignUpBloc,
+                                            SignUpState>(
                                           buildWhen: (old, current) =>
-                                          current is EulaToggleState &&
+                                              current is EulaToggleState &&
                                               old != current,
                                           builder: (context, state) {
                                             if (state is EulaToggleState) {
                                               acceptEULA = state.eulaAccepted;
                                             }
                                             return Checkbox(
-                                              onChanged: (value) =>
-                                                  context.read<SignUpBloc>().add(
+                                              onChanged: (value) => context
+                                                  .read<SignUpBloc>()
+                                                  .add(
                                                     ToggleEulaCheckboxEvent(
                                                       eulaAccepted: value!,
                                                     ),
@@ -466,23 +468,25 @@ class _SignUpState extends State<SignUpScreen> {
                                             children: [
                                               const TextSpan(
                                                 text:
-                                                'By creating an account you agree to our ',
-                                                style: TextStyle(color: Colors.grey),
+                                                    'By creating an account you agree to our ',
+                                                style: TextStyle(
+                                                    color: Colors.grey),
                                               ),
                                               TextSpan(
                                                 style: const TextStyle(
                                                   color: Colors.blueAccent,
                                                 ),
                                                 text: 'Terms of Use',
-                                                recognizer: TapGestureRecognizer()
-                                                  ..onTap = () async {
-                                                    if (await canLaunchUrl(
-                                                        Uri.parse(eula))) {
-                                                      await launchUrl(
-                                                        Uri.parse(eula),
-                                                      );
-                                                    }
-                                                  },
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () async {
+                                                        if (await canLaunchUrl(
+                                                            Uri.parse(eula))) {
+                                                          await launchUrl(
+                                                            Uri.parse(eula),
+                                                          );
+                                                        }
+                                                      },
                                               ),
                                             ],
                                           ),
@@ -713,7 +717,6 @@ class _SignUpState extends State<SignUpScreen> {
                             //         ),
                             //   ),
                             // ),
-
                           ],
                         ),
                       );

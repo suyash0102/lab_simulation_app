@@ -482,24 +482,31 @@ class _HomeState extends State<HomeScreen> {
           ),
           orientation == Orientation.portrait
               ? Text(
-                  user.fullName,style: TextStyle(fontFamily: 'Poppins',),
+                  user.fullName,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                  ),
                 )
               : const Text(
                   '',
-                  style: TextStyle(fontSize: 0,),
+                  style: TextStyle(
+                    fontSize: 0,
+                  ),
                 ),
           orientation == Orientation.portrait
-              ? Text(
-                  user.email,style: TextStyle(fontFamily: 'Poppins',)
-                )
+              ? Text(user.email,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                  ))
               : const Text(
                   '',
                   style: TextStyle(fontSize: 0),
                 ),
           orientation == Orientation.portrait
-              ? Text(
-                  user.userID,style: TextStyle(fontFamily: 'Poppins',)
-                )
+              ? Text(user.userID,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                  ))
               : const Text(
                   '',
                   style: TextStyle(fontSize: 0),

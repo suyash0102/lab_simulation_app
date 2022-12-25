@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lab_simulation_app/constants.dart';
@@ -20,7 +19,6 @@ class QuizScreen extends StatelessWidget {
   final int noOfQuestions;
   final List correctAnswers;
 
-
   const QuizScreen(
       {super.key,
       required this.title,
@@ -30,7 +28,8 @@ class QuizScreen extends StatelessWidget {
       required this.optionFour,
       required this.questionsList,
       required this.experimentScreen,
-      required this.noOfQuestions, required this.correctAnswers});
+      required this.noOfQuestions,
+      required this.correctAnswers});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +103,8 @@ class QuizScreen extends StatelessWidget {
                                 optionThree: optionThree,
                                 optionTwo: optionTwo,
                                 questionsList: questionsList,
-                                noOfQuestions: noOfQuestions, correctAnswers: ocCorrectAnswers,
+                                noOfQuestions: noOfQuestions,
+                                correctAnswers: ocCorrectAnswers,
                               )));
                 },
                 child: Container(

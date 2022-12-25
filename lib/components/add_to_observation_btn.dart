@@ -7,7 +7,9 @@ class AddToObservationBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: size.width * 0.01,
@@ -38,7 +40,9 @@ class AddToObservationBtnH extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return SizedBox(
       width: size.width * 0.17,
       height: size.height * 0.085,
@@ -50,7 +54,7 @@ class AddToObservationBtnH extends StatelessWidget {
           "Add to Observation Table",
           textAlign: TextAlign.center,
           style: TextStyle(
-            wordSpacing: -0.6,
+              wordSpacing: -0.6,
               color: Colors.white,
               fontFamily: "Poppins",
               letterSpacing: -0.6,

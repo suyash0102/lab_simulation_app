@@ -39,21 +39,40 @@ class _LabsScreenState extends State<LabsScreen> {
 }
 
 class Choice {
-  const Choice( {required this.simulationScreen,required this.expName, required this.expNo});
+  const Choice(
+      {required this.simulationScreen,
+      required this.expName,
+      required this.expNo});
+
   final String expName;
   final int expNo;
   final simulationScreen;
 }
 
 const List<Choice> choices = <Choice>[
-  Choice(expName: 'To perform Open Circuit test on Single Phase Transformer.',expNo: 1,simulationScreen: OCTestScreen()),
-  Choice(expName: 'To perform Short Circuit test on Single Phase Transformer.',expNo: 2,simulationScreen: SCTestScreen()),
-  Choice(expName: 'To Control the Speed of DC Shunt motor by using Field Control Method.',expNo: 3,simulationScreen: FieldControlScreen()),
-  Choice(expName: 'To Control the Speed of DC Shunt motor by using Armature Control Method.',expNo: 4,simulationScreen: LogoRotate()),
+  Choice(
+      expName: 'To perform Open Circuit test on Single Phase Transformer.',
+      expNo: 1,
+      simulationScreen: OCTestScreen()),
+  Choice(
+      expName: 'To perform Short Circuit test on Single Phase Transformer.',
+      expNo: 2,
+      simulationScreen: SCTestScreen()),
+  Choice(
+      expName:
+          'To Control the Speed of DC Shunt motor by using Field Control Method.',
+      expNo: 3,
+      simulationScreen: FieldControlScreen()),
+  Choice(
+      expName:
+          'To Control the Speed of DC Shunt motor by using Armature Control Method.',
+      expNo: 4,
+      simulationScreen: LogoRotate()),
 ];
 
 class SelectCard extends StatelessWidget {
-  const SelectCard({ required this.choice}) ;
+  const SelectCard({required this.choice});
+
   final Choice choice;
 
   @override
@@ -61,7 +80,7 @@ class SelectCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     // final TextStyle textStyle = Theme.of(context).textTheme.display1;
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -74,10 +93,10 @@ class SelectCard extends StatelessWidget {
       child: Card(
         elevation: 8,
         child: Padding(
-          padding: EdgeInsets.all(size.width*0.025),
+          padding: EdgeInsets.all(size.width * 0.025),
           child: SizedBox(
-            width: size.width*0.38,
-            height: size.height*0.09,
+            width: size.width * 0.38,
+            height: size.height * 0.09,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

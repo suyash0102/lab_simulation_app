@@ -1,4 +1,3 @@
-
 ///list of strings containing onBoarding titles
 final List<String> titlesList = [
   'GET STARTED',
@@ -27,5 +26,3 @@ final List<dynamic> imageList = [
   'assets/images/oc4.png',
   'assets/images/oc5.png'
 ];
-
-

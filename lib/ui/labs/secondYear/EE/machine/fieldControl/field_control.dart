@@ -8,7 +8,8 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:intl/intl.dart' show NumberFormat;
 
-const file='audio/machine_audio.mp3';
+const file = 'audio/machine_audio.mp3';
+
 class FieldControlScreen extends StatefulWidget {
   const FieldControlScreen({Key? key}) : super(key: key);
 
@@ -26,8 +27,7 @@ class _FieldControlScreenState extends State<FieldControlScreen>
     super.initState();
   }
 
-  bool machineOn=true;
-
+  bool machineOn = true;
 
   SfSliderTheme _voltageSlider() {
     return SfSliderTheme(
@@ -69,7 +69,7 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                     R = roundDouble(R, 1);
                     I0 = (Vsc / Zsc);
                     W = pow(I0, 2) * Rsc;
-                    machineOn=true;
+                    machineOn = true;
                     // if(values>2){
                     //   player.play(AssetSource(
                     //       'audio/machine_audio.mp3'));
@@ -475,32 +475,34 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                         top: size.height * 0.061,
                                       ),
                                       child: SfSliderTheme(
-                                          data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
+                                          data: SfSliderThemeData(
+                                              tooltipBackgroundColor:
+                                                  Colors.red),
                                           child: SfSlider.vertical(
                                             min: 0.1,
                                             max: 500.0,
                                             // onChanged: null,
                                             onChanged: switchOn
                                                 ? (dynamic values) {
-                                              setState(() {
-                                                rotationSpeed = 0;
-                                                rotationSpeed = values / 2;
-                                                _changeRotation();
-                                                R = values;
-                                                R = roundDouble(R, 1);
-                                                I0 = (Vsc / Zsc);
-                                                W = pow(I0, 2) * Rsc;
-                                                machineOn=true;
-                                                if(values>2){
-                                                  player.play(AssetSource(
-                                                      'audio/machine_audio.mp3'));
-                                                }
-                                                if(values<2){
-                                                  player.stop();
-                                                }
-
-                                              });
-                                            }
+                                                    setState(() {
+                                                      rotationSpeed = 0;
+                                                      rotationSpeed =
+                                                          values / 2;
+                                                      _changeRotation();
+                                                      R = values;
+                                                      R = roundDouble(R, 1);
+                                                      I0 = (Vsc / Zsc);
+                                                      W = pow(I0, 2) * Rsc;
+                                                      machineOn = true;
+                                                      if (values > 2) {
+                                                        player.play(AssetSource(
+                                                            'audio/machine_audio.mp3'));
+                                                      }
+                                                      if (values < 2) {
+                                                        player.stop();
+                                                      }
+                                                    });
+                                                  }
                                                 : null,
                                             value: switchOn ? R : 0,
                                             // enableTooltip: true,

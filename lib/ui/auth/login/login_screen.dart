@@ -202,8 +202,8 @@ class _LoginScreen extends State<LoginScreen> {
                                       height: size.height * 0.01,
                                     ),
                                     GestureDetector(
-                                      onTap: () => push(context,
-                                          const ResetPasswordScreen()),
+                                      onTap: () => push(
+                                          context, const ResetPasswordScreen()),
                                       child: Text(
                                         "Forgot password?",
                                         style: const TextStyle(
@@ -219,17 +219,17 @@ class _LoginScreen extends State<LoginScreen> {
                                     Hero(
                                       tag: "login_btn",
                                       child: ElevatedButton(
-                                          // final form = _formkey.currentState;
-                                          // if (form != null && form.validate()) {
-                                          //   Navigator.push(
-                                          //     context,
-                                          //     MaterialPageRoute(
-                                          //       builder: (context) {
-                                          //         return const HomeScreen(user: state.user!,);
-                                          //       },
-                                          //     ),
-                                          //   );
-                                          // }
+                                        // final form = _formkey.currentState;
+                                        // if (form != null && form.validate()) {
+                                        //   Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //       builder: (context) {
+                                        //         return const HomeScreen(user: state.user!,);
+                                        //       },
+                                        //     ),
+                                        //   );
+                                        // }
                                         child: Text(
                                           "Login".toUpperCase(),
                                           style: TextStyle(
@@ -239,7 +239,7 @@ class _LoginScreen extends State<LoginScreen> {
                                         onPressed: () => context
                                             .read<LoginBloc>()
                                             .add(
-                                            ValidateLoginFieldsEvent(_key)),
+                                                ValidateLoginFieldsEvent(_key)),
                                       ),
                                     ),
                                     const SizedBox(height: defaultPadding),

@@ -67,7 +67,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
-          SizedBox(height: size.width*0.05,),
+          SizedBox(
+            height: size.width * 0.05,
+          ),
           Container(
             width: size.width * 0.95,
             height: size.height * 0.16,
@@ -96,42 +98,48 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Row(
                         children: [
                           Container(
-                            decoration:BoxDecoration(borderRadius: BorderRadiusDirectional.circular(size.width*0.02),color: kPrimaryColor),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadiusDirectional.circular(
+                                    size.width * 0.02),
+                                color: kPrimaryColor),
                             child: Icon(
                               Icons.done,
                               color: Colors.white,
-                              size: size.width*0.1,
+                              size: size.width * 0.1,
                             ),
                           ),
-                          SizedBox(width: size.width*0.04,),
+                          SizedBox(
+                            width: size.width * 0.04,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                            Text(
-                              'Date of Completion: 26-Dec-2022',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w300,
-                                fontSize: size.width * 0.03,
+                              Text(
+                                'Date of Completion: 26-Dec-2022',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: size.width * 0.03,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Subject: Electrical Machine - 1',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w300,
-                                fontSize: size.width * 0.03,
+                              Text(
+                                'Subject: Electrical Machine - 1',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: size.width * 0.03,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Status: Done',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w300,
-                                fontSize: size.width * 0.03,
+                              Text(
+                                'Status: Done',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: size.width * 0.03,
+                                ),
                               ),
-                            ),
-                          ],)
+                            ],
+                          )
                         ],
                       ),
                     ],
@@ -140,7 +148,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ],
             ),
           ),
-          SizedBox(height: size.height*0.1,),
+          SizedBox(
+            height: size.height * 0.1,
+          ),
           Text(
             'UI is under development',
             style: TextStyle(

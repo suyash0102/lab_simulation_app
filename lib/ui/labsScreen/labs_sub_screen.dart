@@ -36,7 +36,13 @@ class _LabsSubScreenState extends State<LabsSubScreen> {
 }
 
 class Choice {
-  const Choice( {required this.labsScreen,required this.sem, required this.year,required this.labSubName, required this.noExp});
+  const Choice(
+      {required this.labsScreen,
+      required this.sem,
+      required this.year,
+      required this.labSubName,
+      required this.noExp});
+
   final String labSubName;
   final int noExp;
   final int sem;
@@ -45,18 +51,59 @@ class Choice {
 }
 
 const List<Choice> choices = <Choice>[
-  Choice(labSubName: 'Electrical Machines - 1',noExp: 4,sem:3,year:2,labsScreen: LabsScreen()),
-  Choice(labSubName: 'Measurement & Instrumentation', noExp: 4,sem:3,year:2,labsScreen: ComingSoonScreen()),
-  Choice(labSubName: 'Power Electronics', noExp: 4,sem:5,year:3,labsScreen: ComingSoonScreen()),
-  Choice(labSubName: 'Power System', noExp: 4,sem:5,year:3,labsScreen: ComingSoonScreen()),
-  Choice(labSubName: 'Microprocessor & Microcontroller', noExp: 4,sem:5,year:3,labsScreen: ComingSoonScreen()),
-  Choice(labSubName: 'Power System Operation & Control', noExp: 4,sem:7,year:4,labsScreen: ComingSoonScreen()),
-  Choice(labSubName: 'High Voltage Engineering', noExp: 4,sem:7,year:4,labsScreen: ComingSoonScreen()),
-  Choice(labSubName: 'Electrical Drives',noExp: 4,sem:7,year:4,labsScreen: ComingSoonScreen()),
+  Choice(
+      labSubName: 'Electrical Machines - 1',
+      noExp: 4,
+      sem: 3,
+      year: 2,
+      labsScreen: LabsScreen()),
+  Choice(
+      labSubName: 'Measurement & Instrumentation',
+      noExp: 4,
+      sem: 3,
+      year: 2,
+      labsScreen: ComingSoonScreen()),
+  Choice(
+      labSubName: 'Power Electronics',
+      noExp: 4,
+      sem: 5,
+      year: 3,
+      labsScreen: ComingSoonScreen()),
+  Choice(
+      labSubName: 'Power System',
+      noExp: 4,
+      sem: 5,
+      year: 3,
+      labsScreen: ComingSoonScreen()),
+  Choice(
+      labSubName: 'Microprocessor & Microcontroller',
+      noExp: 4,
+      sem: 5,
+      year: 3,
+      labsScreen: ComingSoonScreen()),
+  Choice(
+      labSubName: 'Power System Operation & Control',
+      noExp: 4,
+      sem: 7,
+      year: 4,
+      labsScreen: ComingSoonScreen()),
+  Choice(
+      labSubName: 'High Voltage Engineering',
+      noExp: 4,
+      sem: 7,
+      year: 4,
+      labsScreen: ComingSoonScreen()),
+  Choice(
+      labSubName: 'Electrical Drives',
+      noExp: 4,
+      sem: 7,
+      year: 4,
+      labsScreen: ComingSoonScreen()),
 ];
 
 class SelectCard extends StatelessWidget {
-  const SelectCard({ required this.choice}) ;
+  const SelectCard({required this.choice});
+
   final Choice choice;
 
   @override
@@ -64,7 +111,7 @@ class SelectCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     // final TextStyle textStyle = Theme.of(context).textTheme.display1;
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -77,10 +124,10 @@ class SelectCard extends StatelessWidget {
       child: Card(
         elevation: 8,
         child: Padding(
-          padding: EdgeInsets.all(size.width*0.02),
+          padding: EdgeInsets.all(size.width * 0.02),
           child: SizedBox(
-            width: size.width*0.38,
-            height: size.height*0.11,
+            width: size.width * 0.38,
+            height: size.height * 0.11,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -124,9 +171,6 @@ class SelectCard extends StatelessWidget {
     );
   }
 }
-
-
-
 
 // GestureDetector(
 // onTap: (){},
@@ -229,7 +273,6 @@ class SelectCard extends StatelessWidget {
 // ),
 // ),
 // ),
-
 
 // GridView.count(
 // padding: EdgeInsets.all(size.width*0.025),

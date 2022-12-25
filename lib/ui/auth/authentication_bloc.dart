@@ -5,7 +5,9 @@ import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/model/user.dart';
 import 'package:lab_simulation_app/services/authenticate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 part 'authentication_event.dart';
+
 part 'authentication_state.dart';
 
 class AuthenticationBloc
@@ -74,13 +76,13 @@ class AuthenticationBloc
 
     on<LoginWithPhoneNumberEvent>((event, emit) async {
       dynamic result =
-      await FireStoreUtils.loginOrCreateUserWithPhoneNumberCredential(
-          credential: event.credential,
-          phoneNumber: event.phoneNumber,
-          fullName: event.fullName,
-          branch: event.branch,
-          year: event.year,
-          imageData: event.imageData);
+          await FireStoreUtils.loginOrCreateUserWithPhoneNumberCredential(
+              credential: event.credential,
+              phoneNumber: event.phoneNumber,
+              fullName: event.fullName,
+              branch: event.branch,
+              year: event.year,
+              imageData: event.imageData);
       if (result is User) {
         user = result;
         emit(AuthenticationState.authenticated(result));

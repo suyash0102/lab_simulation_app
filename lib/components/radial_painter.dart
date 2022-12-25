@@ -30,17 +30,20 @@ class RadialPainter extends CustomPainter {
       ..strokeWidth = width;
 
     Offset center = Offset(size.width / 2, size.height / 2);
-    double radius = min(size.width*1.5, size.height*1.5);
+    double radius = min(size.width * 1.5, size.height * 1.5);
     canvas.drawCircle(center, radius, bgLine);
     double sweepAngle = 2 * pi * percent;
     canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius), -pi /2, sweepAngle,
-      false, coloredLine,);
+      Rect.fromCircle(center: center, radius: radius),
+      -pi / 2,
+      sweepAngle,
+      false,
+      coloredLine,
+    );
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
   }
-
 }

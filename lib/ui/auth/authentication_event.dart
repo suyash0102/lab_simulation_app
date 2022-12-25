@@ -39,15 +39,14 @@ class SignupWithEmailAndPasswordEvent extends AuthenticationEvent {
   String? branch;
   String? year;
 
-
-  SignupWithEmailAndPasswordEvent(
-      {required this.emailAddress,
-        required this.password,
-        this.imageData,
-        this.fullName = 'Anonymous',
-        this.branch = 'Anonymous',
-        this.year = 'Anonymous',
-      });
+  SignupWithEmailAndPasswordEvent({
+    required this.emailAddress,
+    required this.password,
+    this.imageData,
+    this.fullName = 'Anonymous',
+    this.branch = 'Anonymous',
+    this.year = 'Anonymous',
+  });
 }
 
 class LogoutEvent extends AuthenticationEvent {

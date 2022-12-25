@@ -21,8 +21,7 @@ class OrDivider extends StatelessWidget {
                   color: kPrimaryColor,
                   fontWeight: FontWeight.w400,
                   fontSize: 15,
-                  fontFamily: "Poppins"
-              ),
+                  fontFamily: "Poppins"),
             ),
           ),
           buildDivider(),

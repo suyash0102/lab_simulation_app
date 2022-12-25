@@ -4,7 +4,6 @@ import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/quiz_module/controller/index_controller.dart';
 import 'package:provider/provider.dart';
 
-
 class OptionBox extends StatelessWidget {
   OptionBox({
     Key? key,
@@ -50,7 +49,7 @@ class OptionBox extends StatelessWidget {
             provider.selectedOptionIndex(providerIndexForOption);
           },
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           tileColor: changeColor(),
           leading: Text(
             optionIndex,

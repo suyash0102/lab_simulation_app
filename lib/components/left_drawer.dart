@@ -175,13 +175,13 @@ class LeftDrawer extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const AboutUs();
-                            },
-                          ),
-                        );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const AboutUs();
+                    },
+                  ),
+                );
               },
               child: Row(
                 children: [

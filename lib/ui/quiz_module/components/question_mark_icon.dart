@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class QuestionMarkIcon extends StatelessWidget {
   const QuestionMarkIcon({
     Key? key,
@@ -12,10 +13,11 @@ class QuestionMarkIcon extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(20)),
-
       ),
-      child: Image.asset('assets/icons/question_mark.png',
-        fit: BoxFit.cover,),
+      child: Image.asset(
+        'assets/icons/question_mark.png',
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

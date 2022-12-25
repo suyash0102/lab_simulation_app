@@ -31,15 +31,19 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
             Container(
               height: size.height * 0.37,
               // width: size.width * 0.85,
-              child: Image.asset(
-                  "assets/images/under_construction.png"),
+              child: Image.asset("assets/images/under_construction.png"),
             ),
-            SizedBox(height: size.height*0.07,),
+            SizedBox(
+              height: size.height * 0.07,
+            ),
             const Text(
               'Under \nConstruction',
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w500,color: Colors.black54,fontSize: 40),
+              style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black54,
+                  fontSize: 40),
             ),
           ],
         ),

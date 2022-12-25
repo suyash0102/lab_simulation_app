@@ -51,7 +51,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 }
               },
               buildWhen: (old, current) =>
-              current is ResetPasswordFailureState && old != current,
+                  current is ResetPasswordFailureState && old != current,
               builder: (context, state) {
                 if (state is ResetPasswordFailureState) {
                   _validate = AutovalidateMode.onUserInteraction;
@@ -86,9 +86,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 .read<ResetPasswordCubit>()
                                 .checkValidField(_key),
                             onSaved: (val) => _emailAddress = val!,
-                            style: const  TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 18),
+                            style: const TextStyle(
+                                fontFamily: "Poppins", fontSize: 18),
                             keyboardType: TextInputType.emailAddress,
                             cursorColor: kPrimaryColor,
                             decoration: getInputDecoration(
@@ -106,7 +105,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                   MediaQuery.of(context).size.width / 1.5),
                               backgroundColor: kPrimaryColor,
                               padding:
-                              const EdgeInsets.only(top: 12, bottom: 12),
+                                  const EdgeInsets.only(top: 12, bottom: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 side: const BorderSide(
@@ -117,8 +116,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             child: const Text(
                               'Send Email',
                               style: TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontSize: 21),
+                                  fontFamily: "Poppins", fontSize: 21),
                             ),
                             onPressed: () => context
                                 .read<ResetPasswordCubit>()

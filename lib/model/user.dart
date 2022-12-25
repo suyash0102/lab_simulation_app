@@ -17,15 +17,15 @@ class User {
 
   String appIdentifier;
 
-  User(
-      {this.email = '',
-        this.fullName = '',
-        this.branch = '',
-        this.year = '',
-        this.userID = '',
-        this.profilePictureURL = '', })
-      : appIdentifier =
-  'Flutter Login Screen ${kIsWeb ? 'Web' : Platform.operatingSystem}';
+  User({
+    this.email = '',
+    this.fullName = '',
+    this.branch = '',
+    this.year = '',
+    this.userID = '',
+    this.profilePictureURL = '',
+  }) : appIdentifier =
+            'Flutter Login Screen ${kIsWeb ? 'Web' : Platform.operatingSystem}';
 
   // String fullName() => '$fullName';
 

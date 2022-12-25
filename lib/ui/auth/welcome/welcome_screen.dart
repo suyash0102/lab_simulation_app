@@ -36,7 +36,11 @@ class WelcomeScreen extends StatelessWidget {
                 children: <Widget>[
                   const Text(
                     "Welcome to LSAPP",
-                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 36,fontFamily: "Hubballi",),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 36,
+                      fontFamily: "Hubballi",
+                    ),
                   ),
                   const SizedBox(height: defaultPadding * 2),
                   Row(
@@ -44,7 +48,8 @@ class WelcomeScreen extends StatelessWidget {
                       const Spacer(),
                       Expanded(
                         flex: 8,
-                        child: Image.asset("assets/images/welcome_screen_ills.png"),
+                        child: Image.asset(
+                            "assets/images/welcome_screen_ills.png"),
                       ),
                       const Spacer(),
                     ],

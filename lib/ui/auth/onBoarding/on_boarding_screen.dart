@@ -13,9 +13,9 @@ class OnBoardingScreen extends StatefulWidget {
 
   const OnBoardingScreen(
       {Key? key,
-        required this.images,
-        required this.titles,
-        required this.subtitles})
+      required this.images,
+      required this.titles,
+      required this.subtitles})
       : super(key: key);
 
   @override
@@ -63,7 +63,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           ? Alignment.bottomRight
                           : Alignment.bottomLeft,
                       child:
-                      BlocListener<AuthenticationBloc, AuthenticationState>(
+                          BlocListener<AuthenticationBloc, AuthenticationState>(
                         listener: (context, state) {
                           if (state.authState == AuthState.unauthenticated) {
                             pushAndRemoveUntil(
@@ -82,8 +82,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           child: Text(
                             'Get Started',
                             style: TextStyle(
-                              fontFamily: "Poppins",
-                                fontSize: size.width*0.04,
+                                fontFamily: "Poppins",
+                                fontSize: size.width * 0.04,
                                 color: kPrimaryColor,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -93,7 +93,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom:size.height*0.12 ),
+                  padding: EdgeInsets.only(bottom: size.height * 0.12),
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: SmoothPageIndicator(
@@ -137,23 +137,31 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-      Image.asset(
+        Image.asset(
           widget.image,
-          width:size.width*0.8,
-          height: size.height*0.4,
+          width: size.width * 0.8,
+          height: size.height * 0.4,
           // fit: BoxFit.cover,
         ),
-        SizedBox(height: size.height*0.01),
+        SizedBox(height: size.height * 0.01),
         Text(
           widget.title.toUpperCase(),
-          style: TextStyle(fontSize: size.width*0.1,color: Colors.black,fontFamily: "Hubballi",fontWeight: FontWeight.w500),
+          style: TextStyle(
+              fontSize: size.width * 0.1,
+              color: Colors.black,
+              fontFamily: "Hubballi",
+              fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),
         Padding(
-          padding: EdgeInsets.all(size.width*0.03),
+          padding: EdgeInsets.all(size.width * 0.03),
           child: Text(
             widget.subtitle,
-            style: TextStyle(color: Colors.black, fontSize: size.width*0.04,fontWeight: FontWeight.w400,fontFamily: "Poppins"),
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: size.width * 0.04,
+                fontWeight: FontWeight.w400,
+                fontFamily: "Poppins"),
             textAlign: TextAlign.center,
           ),
         ),

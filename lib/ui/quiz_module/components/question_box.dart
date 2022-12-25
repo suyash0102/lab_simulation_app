@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class QuestionBox extends StatelessWidget {
   String question;
+
   QuestionBox({Key? key, required this.question}) : super(key: key);
 
   @override

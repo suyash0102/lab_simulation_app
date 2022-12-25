@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/auth/welcome/welcome_bloc.dart';
 
-
-
 class LoginAndSignupBtn extends StatelessWidget {
   const LoginAndSignupBtn({
     Key? key,
@@ -21,7 +19,8 @@ class LoginAndSignupBtn extends StatelessWidget {
               context.read<WelcomeBloc>().add(LoginPressed());
             },
             child: Text(
-              "Login".toUpperCase(),style: TextStyle(fontFamily: "Poppins", fontSize: 21),
+              "Login".toUpperCase(),
+              style: TextStyle(fontFamily: "Poppins", fontSize: 21),
             ),
           ),
         ),
@@ -34,7 +33,8 @@ class LoginAndSignupBtn extends StatelessWidget {
               backgroundColor: kPrimaryLightColor, elevation: 0),
           child: Text(
             "Sign Up".toUpperCase(),
-            style: const TextStyle(color: Colors.black,fontFamily: "Poppins", fontSize: 21),
+            style: const TextStyle(
+                color: Colors.black, fontFamily: "Poppins", fontSize: 21),
           ),
         ),
       ],
