@@ -133,19 +133,6 @@ class _OCTestScreenState extends State<OCTestScreen> {
     return ["Aim", "Procedure", "Theory"];
   }
 
-  List<String> str = [
-    "Set the input voltage at 230V and 50Hz frequency to the autotransformer input.\n"
-        "",
-    "Switch on the supply, keeping output voltage at auto-transformer at zero (by setting turns ratio of autotransfomer at zero).\n"
-        "",
-    "Increase the voltage in set up (by increasing the turns ratio of the auto-transformer)upto rated primary voltage(i.e approximate 110 V) and observe the no load current, input power and the primary and secondary voltages corresponding to each value of the applied voltage.\n"
-        "",
-    "Now click on 'simulate' to get the value of the shunt parameters (Ro and Xm) of the transformer.\n"
-        "",
-    "Click on 'fill the Table' tab to tabulate the primary voltage(V1),no load current or primary current(I0), input power(Pi) and secondary voltage(V2)corresponding to each value of the applied voltage in Observation table.\n"
-        "",
-    "Then change the input voltage to take another observation.\n" ""
-  ];
   List<double> fieldOne = [];
   List<double> fieldTwo = [];
   List<double> fieldThree = [];
@@ -310,7 +297,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                               ? Column(
                                   children: [
                                     Column(
-                                      children: str.map((strone) {
+                                      children: ocProcedure.map((strone) {
                                         return Row(children: [
                                           Text(
                                             "\u2022",
@@ -1393,7 +1380,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                 ),
                                 addedToObservation == true
                                     ? Text(
-                                        "Magnetizing component of no load current, Im = Io    sin Φo",
+                                        "Magnetizing component of no load current, Im = Io sin Φo",
                                         style: TextStyle(
                                             letterSpacing: -0.6,
                                             fontFamily: "Poppins",

@@ -90,7 +90,7 @@ class ResultPage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: kPrimaryColor,
             toolbarHeight: size.height * 0.07,
-            leading: marksEarnedFromQuiz > 4
+            leading: marksEarnedFromQuiz > noOfQuestions/1.5
                 ? IconButton(
                     icon: const Icon(
                       Icons.arrow_back,
@@ -197,7 +197,7 @@ class ResultPage extends StatelessWidget {
                             letterSpacing: size.width * 0.005),
                       ),
                       progressColor:
-                          marksEarnedFromQuiz > 4 ? kGreenColor : kRedColor,
+                          marksEarnedFromQuiz > noOfQuestions/1.5 ? kGreenColor : kRedColor,
                     ),
                   ),
                 ],
@@ -207,7 +207,7 @@ class ResultPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      marksEarnedFromQuiz < 5
+                      marksEarnedFromQuiz < noOfQuestions/1.5
                           ? Container(
                               width: size.width * 0.33,
                               height: size.height * 0.045,
@@ -244,7 +244,7 @@ class ResultPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      marksEarnedFromQuiz < 5
+                      marksEarnedFromQuiz < noOfQuestions/1.5
                           ? Padding(
                               padding: const EdgeInsets.only(
                                 top: 23,

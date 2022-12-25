@@ -201,7 +201,7 @@ class FirstPage extends StatelessWidget {
                                       child: ListTile(
                                         onTap: () {
                                           marksForCorrectAnswers();
-                                          if (indexForQuestionNumber < 9) {
+                                          if (indexForQuestionNumber < noOfQuestions) {
                                             provider.updateIndexForQuestion();
                                           } else {
                                             Navigator.push(
