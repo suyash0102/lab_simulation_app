@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:lab_simulation_app/components/circular_meter.dart';
 import 'package:lab_simulation_app/constants.dart';
@@ -6,6 +8,7 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:intl/intl.dart' show NumberFormat;
 
+const file='audio/machine_audio.mp3';
 class FieldControlScreen extends StatefulWidget {
   const FieldControlScreen({Key? key}) : super(key: key);
 
@@ -13,8 +16,19 @@ class FieldControlScreen extends StatefulWidget {
   _FieldControlScreenState createState() => _FieldControlScreenState();
 }
 
+final player = AudioPlayer();
+
 class _FieldControlScreenState extends State<FieldControlScreen>
     with SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    const file = 'audio/machine_audio.mp3';
+    super.initState();
+  }
+
+  bool machineOn=true;
+
+
   SfSliderTheme _voltageSlider() {
     return SfSliderTheme(
         data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
@@ -55,6 +69,11 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                     R = roundDouble(R, 1);
                     I0 = (Vsc / Zsc);
                     W = pow(I0, 2) * Rsc;
+                    machineOn=true;
+                    // if(values>2){
+                    //   player.play(AssetSource(
+                    //       'audio/machine_audio.mp3'));
+                    // }
                   });
                 }
               : null,
@@ -82,7 +101,7 @@ class _FieldControlScreenState extends State<FieldControlScreen>
   double R0 = 623.711;
   double X0 = 96.688;
   double Iw = 0.0;
-  double voltageSupply=230.0;
+  double voltageSupply = 230.0;
   double shuntRes = 300.0;
   double fieldCurrent = 0.0;
   double speed = 0.0;
@@ -224,15 +243,13 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                       child: GestureDetector(
                                         onTap: () {
                                           setState(() {
+                                            player.play(AssetSource(
+                                                'audio/slide-click.wav'));
                                             switchOn = !switchOn;
                                             switchOn ? V1 = 20 : null;
                                             switchOn ? I0 : I0 = 0;
                                             switchOn ? W : W = 0;
                                             switchOn ? V2 : V2 = 0;
-                                            print("V=${fieldOne}");
-                                            print(fieldOne.length == 0
-                                                ? "True"
-                                                : "False");
                                             I0 = (Vsc / Zsc);
                                             W = pow(I0, 2) * Rsc;
                                           });
@@ -258,7 +275,6 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                             switchOn ? I0 : I0 = 0;
                                             switchOn ? W : W = 0;
                                             switchOn ? V2 : V2 = 0;
-                                            print("V=${fieldOne[0]}");
                                             // Toggle light when tapped.
                                           });
                                         },
@@ -270,8 +286,6 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                                     fieldTwo.add(I0);
                                                     fieldThree.add(W);
                                                     fieldFour.add(V2);
-
-                                                    print(fieldOne[0]);
                                                   });
                                                 },
                                                 child: Container(
@@ -329,8 +343,8 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                             top: size.height * 0.065,
                                             left: size.width * 0.05),
                                         child: switchOn
-                                            ? Text("${R}")
-                                            : Text("0.0")),
+                                            ? Text("$R")
+                                            : const Text("0.0")),
                                     Padding(
                                         padding: EdgeInsets.only(
                                             top: size.height * 0.065,
@@ -341,7 +355,7 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                             top: size.height * 0.065,
                                             left: size.width * 0.9),
                                         child: switchOn
-                                            ? Text("${Vsc}")
+                                            ? Text("$Vsc")
                                             : Text("0.0")),
                                     Padding(
                                         padding: EdgeInsets.only(
@@ -460,7 +474,38 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                         right: size.width * 0.87,
                                         top: size.height * 0.061,
                                       ),
-                                      child: _rheostatSlider(),
+                                      child: SfSliderTheme(
+                                          data: SfSliderThemeData(tooltipBackgroundColor: Colors.red),
+                                          child: SfSlider.vertical(
+                                            min: 0.1,
+                                            max: 500.0,
+                                            // onChanged: null,
+                                            onChanged: switchOn
+                                                ? (dynamic values) {
+                                              setState(() {
+                                                rotationSpeed = 0;
+                                                rotationSpeed = values / 2;
+                                                _changeRotation();
+                                                R = values;
+                                                R = roundDouble(R, 1);
+                                                I0 = (Vsc / Zsc);
+                                                W = pow(I0, 2) * Rsc;
+                                                machineOn=true;
+                                                if(values>2){
+                                                  player.play(AssetSource(
+                                                      'audio/machine_audio.mp3'));
+                                                }
+                                                if(values<2){
+                                                  player.stop();
+                                                }
+
+                                              });
+                                            }
+                                                : null,
+                                            value: switchOn ? R : 0,
+                                            // enableTooltip: true,
+                                            numberFormat: NumberFormat('#'),
+                                          )),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
@@ -683,7 +728,7 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                             top: size.height * 0.052,
                                             left: size.width * 0.063),
                                         child: switchOn
-                                            ? Text("${Vsc}")
+                                            ? Text("$Vsc")
                                             : Text("0.0")),
                                     Padding(
                                         padding: EdgeInsets.only(
@@ -707,10 +752,7 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                                 switchOn ? I0 : I0 = 0;
                                                 switchOn ? W : W = 0;
                                                 switchOn ? V2 : V2 = 0;
-                                                print("V=${fieldOne}");
-                                                print(fieldOne.length == 0
-                                                    ? "True"
-                                                    : "False");
+
                                                 I0 = (Vsc / Zsc);
                                                 W = pow(I0, 2) * Rsc;
                                               });
@@ -743,7 +785,6 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                                 switchOn ? I0 : I0 = 0;
                                                 switchOn ? W : W = 0;
                                                 switchOn ? V2 : V2 = 0;
-                                                print("V=${fieldOne}");
                                                 // Toggle light when tapped.
                                               });
                                             },
@@ -755,9 +796,6 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                                                         fieldTwo.add(I0);
                                                         fieldThree.add(W);
                                                         fieldFour.add(V2);
-                                                        print(fieldOne[0]);
-                                                        print(
-                                                            "hh ${fieldTwo[0]}");
                                                       });
                                                     },
                                                     child: Container(
@@ -955,22 +993,22 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                               TableRow(children: [
                                 Column(children: [Text('1st')]),
                                 Column(children: [
-                                  fieldOne.length == 0
+                                  fieldOne.isEmpty
                                       ? Text("0.0")
                                       : Text("${fieldOne[0]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length == 0
+                                  fieldTwo.isEmpty
                                       ? Text("0.0")
                                       : Text("${roundDouble(fieldTwo[0], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length == 0
+                                  fieldThree.isEmpty
                                       ? Text("0.0")
                                       : Text("${roundDouble(fieldThree[0], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length == 0
+                                  fieldFour.isEmpty
                                       ? Text("0.0")
                                       : Text("${fieldFour[0]}")
                                 ]),

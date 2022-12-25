@@ -1,9 +1,12 @@
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:lab_simulation_app/components/add_to_observation_btn.dart';
 import 'package:lab_simulation_app/components/circular_meter.dart';
+import 'package:lab_simulation_app/components/common_divider.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/ocData.dart';
+import 'package:lab_simulation_app/ui/quiz_module/components/question_answer_divider.dart';
 import 'package:lab_simulation_app/ui/quiz_module/screens/start_screen.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
@@ -18,20 +21,40 @@ class OCTestScreen extends StatefulWidget {
 }
 
 class _OCTestScreenState extends State<OCTestScreen> {
-  void _onResistanceChanged(String value) {
-    setState(() => coreLossResistanceByUser = double.parse(value));
-  }
-
-  void _onPhiChanged(String value) {
+  void _onMagnetizingComponentChanged(String value) {
     setState(() {
-      phiValueEntered=true;
-      phiByUser = double.parse(value);
+      magnetizingComponentByUser = double.parse(value);
     });
-
   }
 
-  void _onReactanceChanged(String value) {
-    setState(() => coreLossReactanceByUser = double.parse(value));
+  void _onNoLoadPowerFactorChanged(String value) {
+    setState(() {
+      noLoadPowerFactorByUser = double.parse(value);
+    });
+  }
+
+  void _onCoreLossComponentChanged(String value) {
+    setState(() {
+      coreLossComponentByUser = double.parse(value);
+    });
+  }
+
+  void _onMagnetizingBranchReactanceChanged(String value) {
+    setState(() {
+      magnetizingBranchReactanceByUser = double.parse(value);
+    });
+  }
+
+  void _onResistanceChanged(String value) {
+    setState(() {
+      resistanceByUser = double.parse(value);
+    });
+  }
+
+  SizedBox zero() {
+    return const SizedBox(
+      height: 0,
+    );
   }
 
   SfSliderTheme _activeSlider() {
@@ -61,18 +84,35 @@ class _OCTestScreenState extends State<OCTestScreen> {
         ));
   }
 
-  bool clReactance = false;
-  bool clResistance = false;
-  bool clPhi = false;
-  bool phiValueEntered = false;
+  bool correctNoLoadPowerFactorValueEntered = false;
+  bool correctMagnetizingComponentValueEntered = false;
+  bool correctCoreLossComponentValueEntered = false;
+  bool correctResistanceValueEntered = false;
+  bool correctMagnetizingBranchReactanceValueEntered = false;
+
+  bool noLoadPowerFactorValueEntered = false;
+  bool magnetizingComponentValueEntered = false;
+  bool coreLossComponentValueEntered = false;
   bool resistanceValueEntered = false;
-  bool reactanceValueEntered = false;
+  bool magnetizingBranchReactanceValueEntered = false;
+
+  bool addedToObservation = false;
+
+  double noLoadPowerFactorByUser = 0.0;
+  double magnetizingComponentByUser = 0.0;
+  double coreLossComponentByUser = 0.0;
+  double resistanceByUser = 0.0;
+  double magnetizingBranchReactanceByUser = 0.0;
+
+  double noLoadPowerFactorAnswer = 0.0;
+  double magnetizingComponentAnswer = 0.0;
+  double coreLossComponentAnswer = 0.0;
+  double resistanceAnswer = 0.0;
+  double magnetizingBranchReactanceAnswer = 0.0;
+
   bool switchOn = false;
   double V1 = 0.0;
   double Im = 0.0;
-  double coreLossResistanceByUser = 0.0;
-  double coreLossReactanceByUser = 0.0;
-  double phiByUser = 0.0;
   double R0 = 696.125;
   double X0 = 166.90;
   double Iw = 0.0;
@@ -80,6 +120,13 @@ class _OCTestScreenState extends State<OCTestScreen> {
   double I0 = 0.0;
   double W = 0.0;
   double V2 = 0.0;
+
+  double v1o = 0.0;
+  double i0o = 0.0;
+  double wo = 0.0;
+  double v2o = 0.0;
+  double phio = 0.0;
+
   int theoryIndex = 0;
 
   List<String> getTab() {
@@ -120,7 +167,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                   iconTheme: const IconThemeData(color: Colors.white),
                   backgroundColor: kPrimaryColor,
                   centerTitle: true,
-                  title:  Text(
+                  title: Text(
                     ocTitle,
                     style:
                         TextStyle(fontFamily: 'Poppins', color: Colors.white),
@@ -261,34 +308,52 @@ class _OCTestScreenState extends State<OCTestScreen> {
                           ),
                           theoryIndex == 0
                               ? Column(
-                                  children: str.map((strone) {
-                                    return Row(children: [
-                                      Text(
-                                        "\u2022",
-                                        style: TextStyle(
-                                            fontSize: size.width * 0.07,
-                                            fontFamily: 'Poppins'),
-                                      ),
-                                      //bullet text
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      //space between bullet and text
-                                      Expanded(
-                                        child: Text(
-                                          strone,
-                                          style: TextStyle(
-                                              fontSize: size.width * 0.04,
-                                              fontFamily: 'Poppins'),
-                                        ), //text
-                                      )
-                                    ]);
-                                  }).toList(),
+                                  children: [
+                                    Column(
+                                      children: str.map((strone) {
+                                        return Row(children: [
+                                          Text(
+                                            "\u2022",
+                                            style: TextStyle(
+                                                fontSize: size.width * 0.07,
+                                                fontFamily: 'Poppins'),
+                                          ),
+                                          //bullet text
+                                          SizedBox(
+                                            width: size.width * 0.03,
+                                          ),
+                                          //space between bullet and text
+                                          Expanded(
+                                            child: Text(
+                                              strone,
+                                              style: TextStyle(
+                                                  fontSize: size.width * 0.04,
+                                                  fontFamily: 'Poppins'),
+                                            ), //text
+                                          )
+                                        ]);
+                                      }).toList(),
+                                    ),
+                                    Text(
+                                      'Calculations:',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: size.width * 0.06,
+                                          fontFamily: 'Poppins',
+                                          color: kPrimaryColor),
+                                    ),
+                                    Text(
+                                      ocCalculations,
+                                      style: TextStyle(
+                                          fontSize: size.width * 0.04,
+                                          fontFamily: 'Poppins'),
+                                    )
+                                  ],
                                 )
                               : Row(children: [
                                   Expanded(
                                     child: Text(
-                                      "The physical basis of the transformer is mutual induction between two circuits linked by a common magnetic field . \n\nTransformer is required to pass electrical energy from one circuit to another, via the medium of the pulsating magnetic field, as efficiently and economically as possible. This could be achieved using either iron or steel which serves as a good permeable path for the mutual magnetic flux. \n\nThe shunt parameters can be determined by performing the test. Since the core loss and magnetizing current depend on applying voltage, this test is performed by applying rated voltage at one winding and other winding keeping open (basically H.V.Side winding is kept open and rated voltage applying at L.V.Side winding ). Under no-load condition the power input to the transformer is equal to the sum of losses in the primary winding resistance R1R1 is neglected and core loss. Since, no load current is very small, the loss in winding resistance is neglected. If IoIo and PiPi are the current and input power drawn by the transformer at rated voltage V1V1 respectively.",
+                                      ocTheory,
                                       style: TextStyle(
                                           fontSize: size.width * 0.04,
                                           fontFamily: 'Poppins'),
@@ -320,10 +385,6 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                             switchOn ? I0 : I0 = 0;
                                             switchOn ? W : W = 0;
                                             switchOn ? V2 : V2 = 0;
-                                            print("V=${fieldOne}");
-                                            print(fieldOne.length == 0
-                                                ? "True"
-                                                : "False");
                                             Im = V1 / X0;
                                             Iw = V1 / R0;
                                             I0 = sqrt(pow(Im, 2) + pow(Iw, 2));
@@ -344,50 +405,80 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                     "assets/images/s0.png")),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: size.width * 0.30),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            switchOn ? V1 = 115 : null;
-                                            switchOn ? I0 : I0 = 0;
-                                            switchOn ? W : W = 0;
-                                            switchOn ? V2 : V2 = 0;
-                                            print("V=${fieldOne[0]}");
-                                            // Toggle light when tapped.
-                                          });
-                                        },
-                                        child: switchOn
-                                            ? GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    fieldOne.add(V1);
-                                                    fieldTwo.add(I0);
-                                                    fieldThree.add(W);
-                                                    fieldFour.add(V2);
-                                                    print(fieldOne[0]);
-                                                  });
-                                                },
-                                                child: Container(
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.grey,
-                                                      border: Border.all(
-                                                        width: 2,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                    ),
-                                                    height: size.height * 0.04,
-                                                    width: size.width * 0.4,
-                                                    child: Center(
-                                                        child: Text(
-                                                            "Add to Observation Table"))),
-                                              )
-                                            : Container(
-                                                height: size.height * 0.030,
-                                              ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            top: size.width * 0.03,
+                                            left: size.width * 0.15),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              switchOn ? V1 = 115 : null;
+                                              switchOn ? I0 : I0 = 0;
+                                              switchOn ? W : W = 0;
+                                              switchOn ? V2 : V2 = 0;
+                                              // Toggle light when tapped.
+                                            });
+                                          },
+                                          child: switchOn
+                                              ? AddToObservationBtn(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      addedToObservation = true;
+                                                      v1o = V1;
+                                                      i0o = I0;
+                                                      wo = W;
+                                                      v2o = V2;
+                                                      noLoadPowerFactorAnswer =
+                                                          roundDouble(
+                                                              roundDouble(
+                                                                      wo, 2) /
+                                                                  (v1o *
+                                                                      roundDouble(
+                                                                          i0o,
+                                                                          2)),
+                                                              3);
+                                                      phio = acos(
+                                                          noLoadPowerFactorAnswer);
+                                                      magnetizingComponentAnswer =
+                                                          roundDouble(
+                                                              roundDouble(
+                                                                      i0o, 2) *
+                                                                  sin(phio),
+                                                              3);
+                                                      coreLossComponentAnswer =
+                                                          roundDouble(
+                                                              roundDouble(
+                                                                      i0o, 2) *
+                                                                  cos(phio),
+                                                              3);
+                                                      resistanceAnswer =
+                                                          roundDouble(
+                                                              v1o /
+                                                                  coreLossComponentAnswer,
+                                                              3);
+                                                      magnetizingBranchReactanceAnswer =
+                                                          roundDouble(
+                                                              v1o /
+                                                                  magnetizingComponentAnswer,
+                                                              3);
+                                                      print(
+                                                          ' $V1 $I0 $W $noLoadPowerFactorAnswer');
+                                                      print(
+                                                          ' $phio $magnetizingComponentAnswer');
+                                                      print(
+                                                          ' $phio $coreLossComponentAnswer');
+                                                      print(
+                                                          ' $phio $resistanceAnswer');
+                                                      print(
+                                                          ' $phio $magnetizingBranchReactanceAnswer');
+                                                    });
+                                                  },
+                                                )
+                                              : Container(
+                                                  height: size.height * 0.030,
+                                                ),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -399,7 +490,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                             top: size.height * 0.065,
                                             left: size.width * 0.085),
                                         child: switchOn
-                                            ? Text("${V1}")
+                                            ? Text("$V1")
                                             : Text("0.0")),
                                     Padding(
                                         padding: EdgeInsets.only(
@@ -608,7 +699,13 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                     ),
                                   ],
                                 ),
-                                Text("Transformer Rating: 500kVA 115/230"),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                ),
+                                Text("Transformer Rating: 500kVA 115/230",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                    )),
                               ],
                             )
                           : Row(
@@ -730,7 +827,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                             top: size.height * 0.052,
                                             left: size.width * 0.063),
                                         child: switchOn
-                                            ? Text("${V1}")
+                                            ? Text("$V1")
                                             : Text("0.0")),
                                     Padding(
                                         padding: EdgeInsets.only(
@@ -754,10 +851,6 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                 switchOn ? I0 : I0 = 0;
                                                 switchOn ? W : W = 0;
                                                 switchOn ? V2 : V2 = 0;
-                                                print("V=${fieldOne}");
-                                                print(fieldOne.length == 0
-                                                    ? "True"
-                                                    : "False");
                                                 Im = V1 / X0;
                                                 Iw = V1 / R0;
                                                 I0 = sqrt(
@@ -790,7 +883,7 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              left: size.width * 0.035,
+                                              left: size.width * 0.015,
                                               top: size.height * 0.02),
                                           child: GestureDetector(
                                             onTap: () {
@@ -799,44 +892,19 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                 switchOn ? I0 : I0 = 0;
                                                 switchOn ? W : W = 0;
                                                 switchOn ? V2 : V2 = 0;
-                                                print("V=${fieldOne}");
                                                 // Toggle light when tapped.
                                               });
                                             },
                                             child: switchOn
-                                                ? GestureDetector(
-                                                    onTap: () {
+                                                ? AddToObservationBtnH(
+                                                    onPressed: () {
                                                       setState(() {
                                                         fieldOne.add(V1);
                                                         fieldTwo.add(I0);
                                                         fieldThree.add(W);
                                                         fieldFour.add(V2);
-                                                        print(fieldOne[0]);
-                                                        print(
-                                                            "hh ${fieldTwo[0]}");
                                                       });
                                                     },
-                                                    child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.grey,
-                                                          border: Border.all(
-                                                            width: 2,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(12),
-                                                        ),
-                                                        height:
-                                                            size.height * 0.09,
-                                                        width:
-                                                            size.width * 0.14,
-                                                        child: Center(
-                                                            child: Text(
-                                                          "Add to Observation Table",
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        ))),
                                                   )
                                                 : Container(
                                                     height: size.height * 0.020,
@@ -944,6 +1012,17 @@ class _OCTestScreenState extends State<OCTestScreen> {
                           SizedBox(
                             height: size.height * 0.02,
                           ),
+                          Text(
+                            'Observation Table:',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "Poppins",
+                                color: Colors.black,
+                                fontSize: size.width * 0.055),
+                          ),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
                           Table(
                             defaultColumnWidth:
                                 FixedColumnWidth(size.width * 0.19),
@@ -956,79 +1035,214 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                 Padding(
                                   padding:
                                       EdgeInsets.only(top: size.height * 0.015),
-                                  child: Text('Serial no. of Observation',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: size.width * 0.023)),
+                                  child: Tooltip(
+                                    triggerMode: TooltipTriggerMode.tap,
+                                    textStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Poppins",
+                                        color: Colors.white,
+                                        fontSize: size.width * 0.03),
+                                    message: 'Serial No. of Observation',
+                                    child: Text('Sr. No',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: kPrimaryColor,
+                                            fontSize: size.width * 0.04)),
+                                  ),
                                 ),
                                 Padding(
                                   padding:
                                       EdgeInsets.only(top: size.height * 0.015),
-                                  child: Text('Primary Voltage V1 (L.V. Side)	',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: size.width * 0.023)),
+                                  child: Tooltip(
+                                    triggerMode: TooltipTriggerMode.tap,
+                                    textStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Poppins",
+                                        color: Colors.white,
+                                        fontSize: size.width * 0.03),
+                                    message: 'Primary Voltage V1 (L.V. Side)',
+                                    child: Text('V1',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: kPrimaryColor,
+                                            fontSize: size.width * 0.04)),
+                                  ),
                                 ),
                                 Padding(
                                   padding:
                                       EdgeInsets.only(top: size.height * 0.015),
-                                  child: Text(
-                                      'Primary Current I0 (L.V. Side) (Amp)',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: size.width * 0.023)),
+                                  child: Tooltip(
+                                    triggerMode: TooltipTriggerMode.tap,
+                                    textStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Poppins",
+                                        color: Colors.white,
+                                        fontSize: size.width * 0.03),
+                                    message:
+                                        'Primary Current I0 (L.V. Side) (Amp)',
+                                    child: Text('Io',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: kPrimaryColor,
+                                            fontSize: size.width * 0.04)),
+                                  ),
                                 ),
                                 Padding(
                                   padding:
                                       EdgeInsets.only(top: size.height * 0.015),
-                                  child: Text(
-                                      'Input Power Pi (L.V. Side) (Watt)	',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: size.width * 0.023)),
+                                  child: Tooltip(
+                                    triggerMode: TooltipTriggerMode.tap,
+                                    textStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Poppins",
+                                        color: Colors.white,
+                                        fontSize: size.width * 0.03),
+                                    message:
+                                        'Input Power Pi (L.V. Side) (Watt)',
+                                    child: Text('Wo',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: kPrimaryColor,
+                                            fontSize: size.width * 0.04)),
+                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      top: size.height * 0.0075),
-                                  child: Text(
-                                      'Secondary Voltage V2 (H.V.Side)\n',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: size.width * 0.023)),
+                                      top: size.height * 0.015,
+                                      bottom: size.height * 0.015),
+                                  child: Tooltip(
+                                    triggerMode: TooltipTriggerMode.tap,
+                                    textStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Poppins",
+                                        color: Colors.white,
+                                        fontSize: size.width * 0.03),
+                                    message: 'Secondary Voltage V2 (H.V.Side)',
+                                    child: Text('V2',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: kPrimaryColor,
+                                            fontSize: size.width * 0.04)),
+                                  ),
                                 ),
                               ]),
                               TableRow(children: [
-                                Column(children: [Text('1st')]),
-                                Column(children: [
-                                  fieldOne.length == 0
-                                      ? Text("0.0\n")
-                                      : Text("${fieldOne[0]}\n")
-                                ]),
-                                Column(children: [
-                                  fieldTwo.length == 0
-                                      ? Text("0.0")
-                                      : Text("${roundDouble(fieldTwo[0], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldThree.length == 0
-                                      ? Text("0.0")
-                                      : Text("${roundDouble(fieldThree[0], 2)}")
-                                ]),
-                                Column(children: [
-                                  fieldFour.length == 0
-                                      ? Text("0.0")
-                                      : Text("${fieldFour[0]}")
-                                ]),
+                                Text(
+                                  '\n1\n',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: "Poppins",
+                                      color: Colors.black,
+                                      fontSize: size.width * 0.035),
+                                ),
+                                v1o == 0.0
+                                    ? Text(
+                                        "\n0.0 V",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: Colors.black,
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : Text(
+                                        "\n$v1o V",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: Colors.black,
+                                            fontSize: size.width * 0.035),
+                                      ),
+                                i0o == 0.0
+                                    ? Text(
+                                        "\n0.0 A",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: Colors.black,
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : Text(
+                                        "\n${roundDouble(i0o, 2)} A",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: Colors.black,
+                                            fontSize: size.width * 0.035),
+                                      ),
+                                wo == 0.0
+                                    ? Text(
+                                        "\n0.0 W",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: Colors.black,
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : Text(
+                                        "\n${roundDouble(wo, 2)} W",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: Colors.black,
+                                            fontSize: size.width * 0.035),
+                                      ),
+                                v2o == 0.0
+                                    ? Text(
+                                        "\n0.0 V",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: Colors.black,
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : Text(
+                                        "\n$v2o V",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Poppins",
+                                            color: Colors.black,
+                                            fontSize: size.width * 0.035),
+                                      ),
                               ]),
                             ],
                           ),
                           SizedBox(
                             height: size.height * 0.02,
                           ),
+                          addedToObservation == true?
                           Text(
                             "From the Observation Table Given Above:",
                             style: TextStyle(
-                                fontFamily: "Poppins", fontSize: size.width*0.04,fontWeight: FontWeight.bold),
+                                fontFamily: "Poppins",
+                                fontSize: size.width * 0.04,
+                                fontWeight: FontWeight.bold),
+                          ): Text(
+                            "Add to Observation from Simulation Screen to check Calculations",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: "Poppins",
+                                color: kRedColor,
+                                fontSize: size.width * 0.04,
+                                fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: size.height * 0.01,
@@ -1038,286 +1252,727 @@ class _OCTestScreenState extends State<OCTestScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "1. Calculate the value of No Load Power Factor:",
-                                  style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
+                                addedToObservation == true
+                                    ? Text(
+                                        "1. Calculate the value of No Load Power Factor:",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            letterSpacing: -0.6,
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
-                                Text(
-                                  "The no load power factor, Cos Φo = Wo/V1 x Io",
-                                  style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
+                                addedToObservation == true
+                                    ? Text(
+                                        "The no load power factor, Cos Φo = Wo/V1 x Io",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            letterSpacing: -0.6,
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
+                                addedToObservation == true
+                                    ? Row(
+                                        children: [
+                                          Text(
+                                            "Cos Φo =",
+                                            style: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: size.width * 0.04,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.02,
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.3,
+                                            height: size.height * 0.04,
+                                            child: TextField(
+                                              autofocus: false,
+                                              textAlign: TextAlign.center,
+                                              decoration: InputDecoration(
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                  horizontal: size.width * 0.02,
+                                                ),
+                                                fillColor:
+                                                    noLoadPowerFactorValueEntered
+                                                        ? correctNoLoadPowerFactorValueEntered
+                                                            ? kGreenColor
+                                                            : kRedColor
+                                                        : kGreyColor,
+                                                border:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                                focusedBorder:
+                                                    const OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.zero,
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                focusColor: Colors.black,
+                                                hintText:
+                                                    noLoadPowerFactorValueEntered
+                                                        ? "$noLoadPowerFactorByUser"
+                                                        : '0.0',
+                                                hintStyle: TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: size.width * 0.04,
+                                                    color:
+                                                        noLoadPowerFactorValueEntered
+                                                            ? kWhiteColor
+                                                            : kBlackColor),
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onChanged:
+                                                  _onNoLoadPowerFactorChanged,
+                                              style: TextStyle(
+                                                  fontFamily: "Poppins",
+                                                  fontSize: size.width * 0.04,
+                                                  color:
+                                                      noLoadPowerFactorValueEntered
+                                                          ? kWhiteColor
+                                                          : kBlackColor),
+                                              readOnly:
+                                                  noLoadPowerFactorValueEntered,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : const Zero(),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                noLoadPowerFactorValueEntered == true
+                                    ? Text(
+                                        "The Correct Answer is: $noLoadPowerFactorAnswer",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color: const Color(0xFF31B565)),
+                                      )
+                                    : SizedBox(
+                                        width: size.width * 0.02,
+                                      ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                addedToObservation == true
+                                    ? const CommonDivider()
+                                    : const Zero(),
+                                addedToObservation == true
+                                    ? Text(
+                                        "2. Calculate the Magnetizing component of no load current:",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            letterSpacing: -0.6,
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : const Zero(),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                ),
+                                addedToObservation == true
+                                    ? Text(
+                                        "Magnetizing component of no load current, Im = Io    sin Φo",
+                                        style: TextStyle(
+                                            letterSpacing: -0.6,
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.035),
+                                      )
+                                    : const Zero(),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                ),
+                                addedToObservation == true?
                                 Row(
                                   children: [
-                                    Text("Cos Φo =",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,),),
-                                    SizedBox(width: size.width*0.02,),
+                                    Text(
+                                      "Im =        ",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        fontSize: size.width * 0.04,
+                                      ),
+                                    ),
                                     SizedBox(
-                                      width: size.width*0.3,
-                                      height: size.height*0.04,
+                                      width: size.width * 0.02,
+                                    ),
+                                    SizedBox(
+                                      width: size.width * 0.3,
+                                      height: size.height * 0.04,
                                       child: TextField(
                                         textAlign: TextAlign.center,
-                                        decoration:InputDecoration(
-                                          enabledBorder:  const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.transparent)
+                                        decoration: InputDecoration(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero,
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.02,
                                           ),
-                                          contentPadding:EdgeInsets.symmetric(horizontal: size.width*0.02,),
-                                          fillColor: const Color(0xFF31B565),
+                                          fillColor:
+                                              magnetizingComponentValueEntered
+                                                  ? correctMagnetizingComponentValueEntered
+                                                      ? kGreenColor
+                                                      : kRedColor
+                                                  : kGreyColor,
                                           border: const OutlineInputBorder(
-                                            borderRadius: BorderRadius.zero,
-                                            borderSide: BorderSide(color: Colors.white)
-                                          ),
-                                          focusColor: Colors.white,
-                                          hintText: '0.0',
-                                          hintStyle: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                              borderRadius: BorderRadius.zero,
+                                              borderSide: BorderSide(
+                                                  color: Colors.white)),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero,
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                          focusColor: Colors.black,
+                                          hintText:
+                                              magnetizingComponentValueEntered
+                                                  ? "$magnetizingComponentByUser"
+                                                  : '0.0',
+                                          hintStyle: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: size.width * 0.04,
+                                              color:
+                                                  magnetizingComponentValueEntered
+                                                      ? kWhiteColor
+                                                      : kBlackColor),
                                         ),
                                         keyboardType: TextInputType.number,
-                                        onChanged: _onPhiChanged,
-                                        style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                        onChanged:
+                                            _onMagnetizingComponentChanged,
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color:
+                                                magnetizingComponentValueEntered
+                                                    ? kWhiteColor
+                                                    : kBlackColor),
+                                        readOnly:
+                                            magnetizingComponentValueEntered,
                                       ),
                                     ),
                                   ],
-                                ),
+                                )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
-                                phiValueEntered==true?Text("The Correct Answer is: 0.236",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: const Color(0xFF31B565)),):SizedBox(width: size.width*0.02,),
-                                SizedBox(
-                                  height: size.height * 0.015,
-                                ),
-                                Text(
-                                  "2. Calculate the Magnetizing component of no load current:",
-                                  style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.02,
-                                ),
-                                Text(
-                                  "Magnetizing component of no load current, Im = Io sin Φo",
-                                  style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.02,
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Im =        ",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,),),
-                                    SizedBox(width: size.width*0.02,),
-                                    SizedBox(
-                                      width: size.width*0.3,
-                                      height: size.height*0.04,
-                                      child: TextField(
-                                        textAlign: TextAlign.center,
-                                        decoration:InputDecoration(
-                                          enabledBorder:  const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.transparent)
-                                          ),
-                                          contentPadding:EdgeInsets.symmetric(horizontal: size.width*0.02,),
-                                          fillColor: const Color(0xFF31B565),
-                                          border: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.white)
-                                          ),
-                                          focusColor: Colors.white,
-                                          hintText: '0.0',
-                                          hintStyle: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        onChanged: _onResistanceChanged,
-                                        style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                magnetizingComponentValueEntered == true
+                                    ? Text(
+                                        "The Correct Answer is: $magnetizingComponentAnswer Ampere",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color: const Color(0xFF31B565)),
+                                      )
+                                    : SizedBox(
+                                        width: size.width * 0.02,
                                       ),
-                                    ),
-                                  ],
-                                ),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
-                                phiValueEntered==true?Text("The Correct Answer is: 0.236",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: const Color(0xFF31B565)),):SizedBox(width: size.width*0.02,),
-                                SizedBox(
-                                  height: size.height * 0.015,
-                                ),
+                                addedToObservation == true?
+                                const CommonDivider(): const Zero(),
+                                addedToObservation == true?
                                 Text(
                                   "3. Calculate the Core loss component of no load current:",
                                   style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
+                                      letterSpacing: -0.6,
+                                      fontFamily: "Poppins",
+                                      fontSize: size.width * 0.035),
+                                ): const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
+                                addedToObservation == true?
                                 Text(
                                   "Core loss component of no load current, Ic = Io cos Φo",
                                   style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
+                                      letterSpacing: -0.6,
+                                      fontFamily: "Poppins",
+                                      fontSize: size.width * 0.035),
+                                )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
+                                addedToObservation == true?
                                 Row(
                                   children: [
-                                    Text("Ic =         ",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,),),
-                                    SizedBox(width: size.width*0.02,),
+                                    Text(
+                                      "Ic =         ",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        fontSize: size.width * 0.04,
+                                      ),
+                                    ),
                                     SizedBox(
-                                      width: size.width*0.3,
-                                      height: size.height*0.04,
+                                      width: size.width * 0.02,
+                                    ),
+                                    SizedBox(
+                                      width: size.width * 0.3,
+                                      height: size.height * 0.04,
                                       child: TextField(
                                         textAlign: TextAlign.center,
-                                        decoration:InputDecoration(
-                                          enabledBorder:  const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.transparent)
+                                        decoration: InputDecoration(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero,
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.02,
                                           ),
-                                          contentPadding:EdgeInsets.symmetric(horizontal: size.width*0.02,),
-                                          fillColor: const Color(0xFF31B565),
+                                          fillColor: coreLossComponentValueEntered
+                                              ? correctCoreLossComponentValueEntered
+                                                  ? kGreenColor
+                                                  : kRedColor
+                                              : kGreyColor,
                                           border: const OutlineInputBorder(
                                               borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.white)
-                                          ),
-                                          focusColor: Colors.white,
-                                          hintText: '0.0',
-                                          hintStyle: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white)),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero,
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                          focusColor: Colors.black,
+                                          hintText:
+                                              coreLossComponentValueEntered
+                                                  ? "$coreLossComponentByUser"
+                                                  : '0.0',
+                                          hintStyle: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: size.width * 0.04,
+                                              color:
+                                                  coreLossComponentValueEntered
+                                                      ? kWhiteColor
+                                                      : kBlackColor),
                                         ),
                                         keyboardType: TextInputType.number,
-                                        onChanged: _onResistanceChanged,
-                                        style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                        onChanged: _onCoreLossComponentChanged,
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color: coreLossComponentValueEntered
+                                                ? kWhiteColor
+                                                : kBlackColor),
+                                        readOnly: coreLossComponentValueEntered,
                                       ),
                                     ),
                                   ],
-                                ),
+                                ): const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
-                                phiValueEntered==true?Text("The Correct Answer is: 0.236",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: const Color(0xFF31B565)),):SizedBox(width: size.width*0.02,),
+                                coreLossComponentValueEntered == true
+                                    ? Text(
+                                        "The Correct Answer is: $coreLossComponentAnswer Ampere",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color: const Color(0xFF31B565)),
+                                      )
+                                    : SizedBox(
+                                        width: size.width * 0.02,
+                                      ),
+                                addedToObservation == true?
+                                const CommonDivider(): const Zero(),
+                                addedToObservation == true?
                                 Text(
                                   "4. Calculate the Resistance representing core loss:",
                                   style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
+                                      letterSpacing: -0.6,
+                                      fontFamily: "Poppins",
+                                      fontSize: size.width * 0.035),
+                                ): const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
+                                addedToObservation == true?
                                 Text(
                                   "Resistance representing core loss, Ro = V1 / Ic",
                                   style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
+                                      letterSpacing: -0.6,
+                                      fontFamily: "Poppins",
+                                      fontSize: size.width * 0.035),
+                                )
+                                    : const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
+                                addedToObservation == true?
                                 Row(
                                   children: [
-                                    Text("Ro =        ",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,),),
-                                    SizedBox(width: size.width*0.02,),
+                                    Text(
+                                      "Ro =        ",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        fontSize: size.width * 0.04,
+                                      ),
+                                    ),
                                     SizedBox(
-                                      width: size.width*0.3,
-                                      height: size.height*0.04,
+                                      width: size.width * 0.02,
+                                    ),
+                                    SizedBox(
+                                      width: size.width * 0.3,
+                                      height: size.height * 0.04,
                                       child: TextField(
                                         textAlign: TextAlign.center,
-                                        decoration:InputDecoration(
-                                          enabledBorder:  const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.transparent)
+                                        decoration: InputDecoration(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero,
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.02,
                                           ),
-                                          contentPadding:EdgeInsets.symmetric(horizontal: size.width*0.02,),
-                                          fillColor: const Color(0xFF31B565),
+                                          fillColor: resistanceValueEntered
+                                              ? correctResistanceValueEntered
+                                                  ? kGreenColor
+                                                  : kRedColor
+                                              : kGreyColor,
                                           border: const OutlineInputBorder(
                                               borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.white)
-                                          ),
-                                          focusColor: Colors.white,
-                                          hintText: '0.0',
-                                          hintStyle: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white)),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero,
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                          focusColor: Colors.black,
+                                          hintText: resistanceValueEntered
+                                              ? "$resistanceByUser"
+                                              : '0.0',
+                                          hintStyle: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: size.width * 0.04,
+                                              color: resistanceValueEntered
+                                                  ? kWhiteColor
+                                                  : kBlackColor),
                                         ),
                                         keyboardType: TextInputType.number,
                                         onChanged: _onResistanceChanged,
-                                        style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color: resistanceValueEntered
+                                                ? kWhiteColor
+                                                : kBlackColor),
+                                        readOnly: resistanceValueEntered,
                                       ),
                                     ),
                                   ],
-                                ),
+                                ): const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
-                                phiValueEntered==true?Text("The Correct Answer is: 0.236",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: const Color(0xFF31B565)),):SizedBox(width: size.width*0.02,),
+                                resistanceValueEntered == true
+                                    ? Text(
+                                        "The Correct Answer is: $resistanceAnswer Ohms",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color: const Color(0xFF31B565)),
+                                      )
+                                    : SizedBox(
+                                        width: size.width * 0.02,
+                                      ),
+                                addedToObservation == true?
+                                const CommonDivider(): const Zero(),
+                                addedToObservation == true?
                                 Text(
                                   "5. Calculate the Magnetizing branch reactance:",
                                   style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
+                                      letterSpacing: -0.6,
+                                      fontFamily: "Poppins",
+                                      fontSize: size.width * 0.035),
+                                ): const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
+                                addedToObservation == true?
                                 Text(
                                   "Magnetizing branch reactance, Xo= V1 / Im",
                                   style: TextStyle(
-                                      fontFamily: "Poppins", fontSize: size.width*0.035),
-                                ),
+                                      letterSpacing: -0.6,
+                                      fontFamily: "Poppins",
+                                      fontSize: size.width * 0.035),
+                                ): const Zero(),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
+                                addedToObservation == true?
                                 Row(
                                   children: [
-                                    Text("Xo =        ",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,),),
-                                    SizedBox(width: size.width*0.02,),
+                                    Text(
+                                      "Xo =        ",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        fontSize: size.width * 0.04,
+                                      ),
+                                    ),
                                     SizedBox(
-                                      width: size.width*0.3,
-                                      height: size.height*0.04,
+                                      width: size.width * 0.02,
+                                    ),
+                                    SizedBox(
+                                      width: size.width * 0.3,
+                                      height: size.height * 0.04,
                                       child: TextField(
                                         textAlign: TextAlign.center,
-                                        decoration:InputDecoration(
-                                          enabledBorder:  const OutlineInputBorder(
-                                              borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.transparent)
+                                        decoration: InputDecoration(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero,
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.02,
                                           ),
-                                          contentPadding:EdgeInsets.symmetric(horizontal: size.width*0.02,),
-                                          fillColor: const Color(0xFF31B565),
+                                          fillColor:
+                                              magnetizingBranchReactanceValueEntered
+                                                  ? correctMagnetizingBranchReactanceValueEntered
+                                                      ? kGreenColor
+                                                      : kRedColor
+                                                  : kGreyColor,
                                           border: const OutlineInputBorder(
                                               borderRadius: BorderRadius.zero,
-                                              borderSide: BorderSide(color: Colors.white)
-                                          ),
-                                          focusColor: Colors.white,
-                                          hintText: '0.0',
-                                          hintStyle: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white)),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero,
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                          focusColor: Colors.black,
+                                          hintText:
+                                              magnetizingBranchReactanceValueEntered
+                                                  ? "$magnetizingBranchReactanceByUser"
+                                                  : '0.0',
+                                          hintStyle: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: size.width * 0.04,
+                                              color:
+                                                  magnetizingBranchReactanceValueEntered
+                                                      ? kWhiteColor
+                                                      : kBlackColor),
                                         ),
                                         keyboardType: TextInputType.number,
-                                        onChanged: _onResistanceChanged,
-                                        style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: Colors.white),
+                                        onChanged:
+                                            _onMagnetizingBranchReactanceChanged,
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color:
+                                                magnetizingBranchReactanceValueEntered
+                                                    ? kWhiteColor
+                                                    : kBlackColor),
+                                        readOnly:
+                                            magnetizingBranchReactanceValueEntered,
                                       ),
                                     ),
                                   ],
-                                ),
+                                ): const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
-                                phiValueEntered==true?Text("The Correct Answer is: 0.236",style: TextStyle(fontFamily: "Poppins", fontSize: size.width*0.04,color: const Color(0xFF31B565)),):SizedBox(width: size.width*0.02,),
+                                magnetizingBranchReactanceValueEntered == true
+                                    ? Text(
+                                        "The Correct Answer is: $magnetizingBranchReactanceAnswer Ohms",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: size.width * 0.04,
+                                            color: const Color(0xFF31B565)),
+                                      )
+                                    : SizedBox(
+                                        width: size.width * 0.02,
+                                      ),
+                                addedToObservation == true?
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: size.width*0.25),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: size.width * 0.25,
+                                      vertical: size.height * 0.025),
                                   child: SizedBox(
-                                    height: size.height*0.05,
+                                    height: size.height * 0.05,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        if (coreLossReactanceByUser <= 170.00 &&
-                                            coreLossReactanceByUser >= 162.0) {
-                                          clReactance = true;
-                                        }
-                                        if (coreLossResistanceByUser <= 700.00 &&
-                                            coreLossResistanceByUser >= 690.00) {
-                                          clResistance = true;
-                                        }
-                                        if (phiByUser <= 77.50 &&
-                                            phiByUser >= 75.50) {
-                                          clPhi = true;
-                                        }
-                                        setState(() {});
+                                        setState(() {
+                                          noLoadPowerFactorByUser = 0.0;
+                                          magnetizingComponentByUser = 0.0;
+                                          coreLossComponentByUser = 0.0;
+                                          resistanceByUser = 0.0;
+                                          magnetizingBranchReactanceByUser =
+                                              0.0;
+                                          print(noLoadPowerFactorByUser);
+                                          noLoadPowerFactorValueEntered = false;
+                                          magnetizingComponentValueEntered =
+                                              false;
+                                          coreLossComponentValueEntered = false;
+                                          resistanceValueEntered = false;
+                                          magnetizingBranchReactanceValueEntered =
+                                              false;
+                                          correctMagnetizingComponentValueEntered =
+                                              false;
+                                          correctResistanceValueEntered = false;
+                                          correctNoLoadPowerFactorValueEntered =
+                                              false;
+                                          correctMagnetizingBranchReactanceValueEntered =
+                                              false;
+                                          correctCoreLossComponentValueEntered =
+                                              false;
+
+                                          noLoadPowerFactorAnswer = 0.0;
+                                          magnetizingComponentAnswer = 0.0;
+                                          coreLossComponentAnswer = 0.0;
+                                          resistanceAnswer = 0.0;
+                                          magnetizingBranchReactanceAnswer =
+                                              0.0;
+                                          v1o = 0;
+                                          i0o = 0;
+                                          wo = 0;
+                                          v2o = 0;
+
+                                          addedToObservation = false;
+
+                                          fieldOne.clear();
+                                          fieldTwo.clear();
+                                          fieldThree.clear();
+                                          fieldFour.clear();
+                                        });
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: kPrimaryLightColor,
+                                          elevation: 0),
+                                      child: const Text(
+                                        "Reset",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: "Poppins",
+                                            fontSize: 21),
+                                      ),
+                                    ),
+                                  ),
+                                ): const Zero(),
+                                addedToObservation == true?
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: size.width * 0.25),
+                                  child: SizedBox(
+                                    height: size.height * 0.05,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          if (noLoadPowerFactorValueEntered ==
+                                              false) {
+                                            noLoadPowerFactorValueEntered =
+                                                true;
+                                            if (noLoadPowerFactorByUser <=
+                                                    noLoadPowerFactorAnswer +
+                                                        0.1 &&
+                                                noLoadPowerFactorByUser >=
+                                                    noLoadPowerFactorAnswer -
+                                                        0.1) {
+                                              correctNoLoadPowerFactorValueEntered =
+                                                  true;
+                                            }
+                                          }
+                                          if (magnetizingComponentValueEntered ==
+                                              false) {
+                                            magnetizingComponentValueEntered =
+                                                true;
+                                            if (magnetizingComponentByUser <=
+                                                    magnetizingComponentAnswer +
+                                                        0.1 &&
+                                                magnetizingComponentByUser >=
+                                                    magnetizingComponentAnswer -
+                                                        0.1) {
+                                              correctMagnetizingComponentValueEntered =
+                                                  true;
+                                            }
+                                          }
+                                          if (coreLossComponentValueEntered ==
+                                              false) {
+                                            coreLossComponentValueEntered =
+                                                true;
+                                            if (coreLossComponentByUser <=
+                                                    coreLossComponentAnswer +
+                                                        0.1 &&
+                                                coreLossComponentByUser >=
+                                                    coreLossComponentAnswer -
+                                                        0.1) {
+                                              correctCoreLossComponentValueEntered =
+                                                  true;
+                                            }
+                                          }
+                                          if (resistanceValueEntered == false) {
+                                            resistanceValueEntered = true;
+                                            if (resistanceByUser <=
+                                                    resistanceAnswer + 5 &&
+                                                resistanceByUser >=
+                                                    resistanceAnswer - 5) {
+                                              correctResistanceValueEntered =
+                                                  true;
+                                            }
+                                          }
+                                          if (magnetizingBranchReactanceValueEntered ==
+                                              false) {
+                                            magnetizingBranchReactanceValueEntered =
+                                                true;
+                                            if (magnetizingBranchReactanceByUser <=
+                                                    magnetizingBranchReactanceAnswer +
+                                                        4 &&
+                                                magnetizingBranchReactanceByUser >=
+                                                    magnetizingBranchReactanceAnswer -
+                                                        4) {
+                                              correctMagnetizingBranchReactanceValueEntered =
+                                                  true;
+                                            }
+                                          }
+                                          print(
+                                              magnetizingComponentValueEntered);
+                                          print(magnetizingComponentByUser);
+                                          print(
+                                              correctMagnetizingComponentValueEntered);
+                                        });
                                       },
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: kPrimaryColor,
@@ -1331,97 +1986,122 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                       ),
                                     ),
                                   ),
-                                ),
+                                ): const Zero(),
                                 SizedBox(
                                   height: size.height * 0.015,
                                 ),
+                                // SizedBox(
+                                //   height: size.height * 0.015,
+                                // ),
+                                // Padding(
+                                //   padding: EdgeInsets.symmetric(
+                                //       horizontal: size.width * 0.25),
+                                //   child: SizedBox(
+                                //     height: size.height * 0.05,
+                                //     child: ElevatedButton(
+                                //       onPressed: () {
+                                //         // if (coreLossReactanceByUser <= 170.00 &&
+                                //         //     coreLossReactanceByUser >= 162.0) {
+                                //         //   clReactance = true;
+                                //         // }
+                                //         // if (coreLossResistanceByUser <=
+                                //         //         700.00 &&
+                                //         //     coreLossResistanceByUser >=
+                                //         //         690.00) {
+                                //         //   clResistance = true;
+                                //         // }
+                                //         // if (phiByUser <= 77.50 &&
+                                //         //     phiByUser >= 75.50) {
+                                //         //   clPhi = true;
+                                //         // }
+                                //         // setState(() {});
+                                //       },
+                                //       style: ElevatedButton.styleFrom(
+                                //           backgroundColor: kPrimaryLightColor,
+                                //           elevation: 0),
+                                //       child: const Text(
+                                //         "Retry",
+                                //         style: TextStyle(
+                                //             color: Colors.black,
+                                //             fontFamily: "Poppins",
+                                //             fontSize: 21),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                                // phiByUser == 0.0 ||
+                                //         coreLossResistanceByUser == 0.0 ||
+                                //         coreLossReactanceByUser == 0.0
+                                //     ? const Text("")
+                                //     : Column(
+                                //         children: [
+                                //           Text("$phiByUser"),
+                                //           Text("$coreLossResistanceByUser"),
+                                //           Text("$coreLossReactanceByUser"),
+                                //         ],
+                                //       ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                // ElevatedButton(
+                                //   onPressed: () {
+                                //     setState(() {
+                                //       fieldOne.clear();
+                                //       fieldTwo.clear();
+                                //       fieldThree.clear();
+                                //       fieldFour.clear();
+                                //     });
+                                //   },
+                                //   style: ElevatedButton.styleFrom(
+                                //       backgroundColor: kPrimaryColor,
+                                //       elevation: 0),
+                                //   child: Text(
+                                //     "Reset".toUpperCase(),
+                                //     style: const TextStyle(
+                                //         color: Colors.white,
+                                //         fontFamily: "Poppins",
+                                //         fontSize: 21),
+                                //   ),
+                                // ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: size.width*0.25),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: size.width * 0.25),
                                   child: SizedBox(
-                                    height: size.height*0.05,
+                                    height: size.height * 0.05,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        if (coreLossReactanceByUser <= 170.00 &&
-                                            coreLossReactanceByUser >= 162.0) {
-                                          clReactance = true;
-                                        }
-                                        if (coreLossResistanceByUser <= 700.00 &&
-                                            coreLossResistanceByUser >= 690.00) {
-                                          clResistance = true;
-                                        }
-                                        if (phiByUser <= 77.50 &&
-                                            phiByUser >= 75.50) {
-                                          clPhi = true;
-                                        }
-                                        setState(() {});
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return QuizScreen(
+                                                title: ocTitle,
+                                                optionOne: ocOptionOne,
+                                                optionTwo: ocOptionTwo,
+                                                optionThree: ocOptionThree,
+                                                optionFour: ocOptionFour,
+                                                questionsList: ocQuestionsList,
+                                                experimentScreen:
+                                                    ocExperimentScreen,
+                                                noOfQuestions: ocNoOfQuestions,
+                                                correctAnswers:
+                                                    ocCorrectAnswers,
+                                              );
+                                            },
+                                          ),
+                                        );
                                       },
                                       style: ElevatedButton.styleFrom(
-                                          backgroundColor: kPrimaryLightColor,
+                                          backgroundColor: kPrimaryColor,
                                           elevation: 0),
                                       child: const Text(
-                                        "Retry",
+                                        "Take Quiz",
                                         style: TextStyle(
-                                          color: Colors.black,
+                                            color: Colors.white,
                                             fontFamily: "Poppins",
                                             fontSize: 21),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                phiByUser == 0.0 ||
-                                        coreLossResistanceByUser == 0.0 ||
-                                        coreLossReactanceByUser == 0.0
-                                    ? const Text("")
-                                    : Column(
-                                        children: [
-                                          Text("$phiByUser"),
-                                          Text("$coreLossResistanceByUser"),
-                                          Text("$coreLossReactanceByUser"),
-                                        ],
-                                      ),
-                                SizedBox(
-                                  height: size.height * 0.015,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      fieldOne.clear();
-                                      fieldTwo.clear();
-                                      fieldThree.clear();
-                                      fieldFour.clear();
-                                    });
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: kPrimaryColor,
-                                      elevation: 0),
-                                  child: Text(
-                                    "Reset".toUpperCase(),
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins",
-                                        fontSize: 21),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return  QuizScreen(title: ocTitle, optionOne: ocOptionOne, optionTwo: ocOptionTwo, optionThree: ocOptionThree, optionFour: ocOptionFour, questionsList: ocQuestionsList, experimentScreen: ocExperimentScreen, noOfQuestions: ocNoOfQuestions,);
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: kPrimaryColor,
-                                      elevation: 0),
-                                  child: Text(
-                                    "Quiz".toUpperCase(),
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins",
-                                        fontSize: 21),
                                   ),
                                 ),
                               ],
@@ -1440,4 +2120,15 @@ class _OCTestScreenState extends State<OCTestScreen> {
 double roundDouble(double value, int places) {
   num mod = pow(10.0, places);
   return ((value * mod).round().toDouble() / mod);
+}
+
+class Zero extends StatelessWidget {
+  const Zero({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      height: 0,
+    );
+  }
 }

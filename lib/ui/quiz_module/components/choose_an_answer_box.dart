@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lab_simulation_app/constants.dart';
 class ChooseAnAnswerBox extends StatelessWidget {
   const ChooseAnAnswerBox({
     Key? key,

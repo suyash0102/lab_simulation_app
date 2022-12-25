@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lab_simulation_app/components/left_drawer.dart';
 import 'package:lab_simulation_app/constants.dart';
@@ -43,6 +42,7 @@ class _HomeState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
     List<Widget> widgetOptions = <Widget>[
       Column(
         // mainAxisAlignment: MainAxisAlignment.center,
@@ -50,31 +50,48 @@ class _HomeState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: size.height * 0.02,
+            height: orientation == Orientation.portrait
+                ? size.height * 0.02
+                : size.height * 0.01,
           ),
           Row(
             children: [
               SizedBox(
-                width: size.width * 0.02,
+                width: orientation == Orientation.portrait
+                    ? size.width * 0.02
+                    : size.width * 0.01,
               ),
               Card(
                 elevation: 8,
                 child: Container(
-                  width: size.width * 0.45,
-                  height: size.height * 0.227,
+                  width: orientation == Orientation.portrait
+                      ? size.width * 0.45
+                      : size.width * 0.14,
+                  height: orientation == Orientation.portrait
+                      ? size.height * 0.227
+                      : size.height * 0.29,
                   child: Column(
                     children: [
                       Container(
-                          width: size.width * 0.45,
+                          width: orientation == Orientation.portrait
+                              ? size.width * 0.45
+                              : size.width * 0.14,
                           child: Image.asset('assets/images/mechanical.png')),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: size.width * 0.02, right: size.width * 0.02),
+                            left: orientation == Orientation.portrait
+                                ? size.width * 0.02
+                                : size.width * 0.005,
+                            right: orientation == Orientation.portrait
+                                ? size.width * 0.02
+                                : size.width * 0.005),
                         child: Text(
                           'Mechanical Engineering',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: size.width * 0.031,
+                              fontSize: orientation == Orientation.portrait
+                                  ? size.width * 0.031
+                                  : size.width * 0.01,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700),
                         ),
@@ -82,12 +99,16 @@ class _HomeState extends State<HomeScreen> {
                       Text(
                         'Number of Labs: xx',
                         style: TextStyle(
-                            fontSize: size.width * 0.03,
+                            fontSize: orientation == Orientation.portrait
+                                ? size.width * 0.03
+                                : size.width * 0.01,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w200),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: orientation == Orientation.portrait
+                            ? size.height * 0.02
+                            : size.height * 0.01,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -103,14 +124,21 @@ class _HomeState extends State<HomeScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                               color: kPrimaryColor,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(size.width * 0.01))),
+                              borderRadius: BorderRadius.all(Radius.circular(
+                                  orientation == Orientation.portrait
+                                      ? size.width * 0.01
+                                      : size.width * 0.01))),
                           child: Padding(
-                            padding: EdgeInsets.all(size.width * 0.01),
+                            padding: EdgeInsets.all(
+                                orientation == Orientation.portrait
+                                    ? size.width * 0.01
+                                    : size.width * 0.005),
                             child: Text(
                               'Learn More',
                               style: TextStyle(
-                                  fontSize: size.width * 0.035,
+                                  fontSize: orientation == Orientation.portrait
+                                      ? size.width * 0.035
+                                      : size.width * 0.014,
                                   fontFamily: 'Poppins',
                                   color: Colors.white),
                             ),
@@ -118,33 +146,50 @@ class _HomeState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: orientation == Orientation.portrait
+                            ? size.height * 0.02
+                            : size.height * 0.01,
                       ),
                     ],
                   ),
                 ),
               ),
               SizedBox(
-                width: size.width * 0.02,
+                width: orientation == Orientation.portrait
+                    ? size.width * 0.02
+                    : size.width * 0.01,
               ),
               Card(
                 elevation: 8,
                 child: Container(
-                  width: size.width * 0.45,
-                  height: size.height * 0.227,
+                  width: orientation == Orientation.portrait
+                      ? size.width * 0.45
+                      : size.width * 0.14,
+                  height: orientation == Orientation.portrait
+                      ? size.height * 0.227
+                      : size.height * 0.29,
                   child: Column(
                     children: [
                       Container(
-                          width: size.width * 0.45,
+                          width: orientation == Orientation.portrait
+                              ? size.width * 0.45
+                              : size.width * 0.14,
                           child: Image.asset('assets/images/electrical.png')),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: size.width * 0.02, right: size.width * 0.02),
+                            left: orientation == Orientation.portrait
+                                ? size.width * 0.02
+                                : size.width * 0.005,
+                            right: orientation == Orientation.portrait
+                                ? size.width * 0.02
+                                : size.width * 0.005),
                         child: Text(
                           'Electrical Engineering',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: size.width * 0.031,
+                              fontSize: orientation == Orientation.portrait
+                                  ? size.width * 0.031
+                                  : size.width * 0.01,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700),
                         ),
@@ -152,12 +197,16 @@ class _HomeState extends State<HomeScreen> {
                       Text(
                         'Number of Labs: xx',
                         style: TextStyle(
-                            fontSize: size.width * 0.03,
+                            fontSize: orientation == Orientation.portrait
+                                ? size.width * 0.03
+                                : size.width * 0.01,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w200),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: orientation == Orientation.portrait
+                            ? size.height * 0.02
+                            : size.height * 0.01,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -173,14 +222,21 @@ class _HomeState extends State<HomeScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                               color: kPrimaryColor,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(size.width * 0.01))),
+                              borderRadius: BorderRadius.all(Radius.circular(
+                                  orientation == Orientation.portrait
+                                      ? size.width * 0.01
+                                      : size.width * 0.01))),
                           child: Padding(
-                            padding: EdgeInsets.all(size.width * 0.01),
+                            padding: EdgeInsets.all(
+                                orientation == Orientation.portrait
+                                    ? size.width * 0.01
+                                    : size.width * 0.005),
                             child: Text(
                               'Learn More',
                               style: TextStyle(
-                                  fontSize: size.width * 0.035,
+                                  fontSize: orientation == Orientation.portrait
+                                      ? size.width * 0.035
+                                      : size.width * 0.014,
                                   fontFamily: 'Poppins',
                                   color: Colors.white),
                             ),
@@ -188,7 +244,9 @@ class _HomeState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: orientation == Orientation.portrait
+                            ? size.height * 0.02
+                            : size.height * 0.01,
                       ),
                     ],
                   ),
@@ -197,31 +255,48 @@ class _HomeState extends State<HomeScreen> {
             ],
           ),
           SizedBox(
-            height: size.height * 0.01,
+            height: orientation == Orientation.portrait
+                ? size.height * 0.01
+                : size.height * 0.01,
           ),
           Row(
             children: [
               SizedBox(
-                width: size.width * 0.02,
+                width: orientation == Orientation.portrait
+                    ? size.width * 0.02
+                    : size.width * 0.01,
               ),
               Card(
                 elevation: 8,
                 child: Container(
-                  width: size.width * 0.45,
-                  height: size.height * 0.227,
+                  width: orientation == Orientation.portrait
+                      ? size.width * 0.45
+                      : size.width * 0.14,
+                  height: orientation == Orientation.portrait
+                      ? size.height * 0.227
+                      : size.height * 0.29,
                   child: Column(
                     children: [
                       Container(
-                          width: size.width * 0.45,
+                          width: orientation == Orientation.portrait
+                              ? size.width * 0.45
+                              : size.width * 0.14,
                           child: Image.asset('assets/images/civil.png')),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: size.width * 0.02, right: size.width * 0.02),
+                            left: orientation == Orientation.portrait
+                                ? size.width * 0.02
+                                : size.width * 0.005,
+                            right: orientation == Orientation.portrait
+                                ? size.width * 0.02
+                                : size.width * 0.005),
                         child: Text(
                           'Civil Engineering',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: size.width * 0.031,
+                              fontSize: orientation == Orientation.portrait
+                                  ? size.width * 0.031
+                                  : size.width * 0.01,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700),
                         ),
@@ -229,12 +304,16 @@ class _HomeState extends State<HomeScreen> {
                       Text(
                         'Number of Labs: xx',
                         style: TextStyle(
-                            fontSize: size.width * 0.03,
+                            fontSize: orientation == Orientation.portrait
+                                ? size.width * 0.03
+                                : size.width * 0.01,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w200),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: orientation == Orientation.portrait
+                            ? size.height * 0.02
+                            : size.height * 0.01,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -250,14 +329,21 @@ class _HomeState extends State<HomeScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                               color: kPrimaryColor,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(size.width * 0.01))),
+                              borderRadius: BorderRadius.all(Radius.circular(
+                                  orientation == Orientation.portrait
+                                      ? size.width * 0.01
+                                      : size.width * 0.01))),
                           child: Padding(
-                            padding: EdgeInsets.all(size.width * 0.01),
+                            padding: EdgeInsets.all(
+                                orientation == Orientation.portrait
+                                    ? size.width * 0.01
+                                    : size.width * 0.005),
                             child: Text(
                               'Learn More',
                               style: TextStyle(
-                                  fontSize: size.width * 0.035,
+                                  fontSize: orientation == Orientation.portrait
+                                      ? size.width * 0.035
+                                      : size.width * 0.014,
                                   fontFamily: 'Poppins',
                                   color: Colors.white),
                             ),
@@ -265,33 +351,50 @@ class _HomeState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: orientation == Orientation.portrait
+                            ? size.height * 0.02
+                            : size.height * 0.01,
                       ),
                     ],
                   ),
                 ),
               ),
               SizedBox(
-                width: size.width * 0.02,
+                width: orientation == Orientation.portrait
+                    ? size.width * 0.02
+                    : size.width * 0.01,
               ),
               Card(
                 elevation: 8,
                 child: Container(
-                  width: size.width * 0.45,
-                  height: size.height * 0.227,
+                  width: orientation == Orientation.portrait
+                      ? size.width * 0.45
+                      : size.width * 0.14,
+                  height: orientation == Orientation.portrait
+                      ? size.height * 0.227
+                      : size.height * 0.29,
                   child: Column(
                     children: [
                       Container(
-                          width: size.width * 0.45,
+                          width: orientation == Orientation.portrait
+                              ? size.width * 0.45
+                              : size.width * 0.14,
                           child: Image.asset('assets/images/computer.png')),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: size.width * 0.02, right: size.width * 0.02),
+                            left: orientation == Orientation.portrait
+                                ? size.width * 0.02
+                                : size.width * 0.005,
+                            right: orientation == Orientation.portrait
+                                ? size.width * 0.02
+                                : size.width * 0.005),
                         child: Text(
                           'Computer Science',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: size.width * 0.031,
+                              fontSize: orientation == Orientation.portrait
+                                  ? size.width * 0.031
+                                  : size.width * 0.01,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700),
                         ),
@@ -299,12 +402,16 @@ class _HomeState extends State<HomeScreen> {
                       Text(
                         'Number of Labs: xx',
                         style: TextStyle(
-                            fontSize: size.width * 0.03,
+                            fontSize: orientation == Orientation.portrait
+                                ? size.width * 0.03
+                                : size.width * 0.01,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w200),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: orientation == Orientation.portrait
+                            ? size.height * 0.02
+                            : size.height * 0.01,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -320,14 +427,21 @@ class _HomeState extends State<HomeScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                               color: kPrimaryColor,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(size.width * 0.01))),
+                              borderRadius: BorderRadius.all(Radius.circular(
+                                  orientation == Orientation.portrait
+                                      ? size.width * 0.01
+                                      : size.width * 0.01))),
                           child: Padding(
-                            padding: EdgeInsets.all(size.width * 0.01),
+                            padding: EdgeInsets.all(
+                                orientation == Orientation.portrait
+                                    ? size.width * 0.01
+                                    : size.width * 0.005),
                             child: Text(
                               'Learn More',
                               style: TextStyle(
-                                  fontSize: size.width * 0.035,
+                                  fontSize: orientation == Orientation.portrait
+                                      ? size.width * 0.035
+                                      : size.width * 0.014,
                                   fontFamily: 'Poppins',
                                   color: Colors.white),
                             ),
@@ -335,7 +449,9 @@ class _HomeState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: orientation == Orientation.portrait
+                            ? size.height * 0.01
+                            : size.height * 0.01,
                       ),
                     ],
                   ),
@@ -359,18 +475,47 @@ class _HomeState extends State<HomeScreen> {
           //   ),
           // )
           //     : displayCircleImage(user.profilePictureURL, 80, false),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(user.fullName),
+          SizedBox(
+            height: orientation == Orientation.portrait
+                ? size.height * 0.01
+                : size.height * 0.00,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(user.email),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(user.userID),
-          ),
+          orientation == Orientation.portrait
+              ? Text(
+                  user.fullName,style: TextStyle(fontFamily: 'Poppins',),
+                )
+              : const Text(
+                  '',
+                  style: TextStyle(fontSize: 0,),
+                ),
+          orientation == Orientation.portrait
+              ? Text(
+                  user.email,style: TextStyle(fontFamily: 'Poppins',)
+                )
+              : const Text(
+                  '',
+                  style: TextStyle(fontSize: 0),
+                ),
+          orientation == Orientation.portrait
+              ? Text(
+                  user.userID,style: TextStyle(fontFamily: 'Poppins',)
+                )
+              : const Text(
+                  '',
+                  style: TextStyle(fontSize: 0),
+                ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Text(user.fullName,),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Text(user.email),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Text(user.userID),
+          // ),
         ],
       ),
       DashboardScreen(user: widget.user),

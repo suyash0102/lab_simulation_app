@@ -244,7 +244,6 @@ class _EditProfileDetailsState extends State<EditProfileDetails> {
             ),
             ElevatedButton(
               onPressed: () {
-                print(fullName);
 
                 // firestore
                 //     .collection(usersCollection)

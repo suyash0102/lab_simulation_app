@@ -95,6 +95,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/audio/slide-click.wav
+    - assets/audio/machine_audio.mp3
 
   fonts:
     - family: Poppins

@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lab_simulation_app/constants.dart';
-import 'package:lab_simulation_app/services/helper.dart';
 import 'package:lab_simulation_app/ui/about_us.dart';
 import 'package:lab_simulation_app/ui/auth/authentication_bloc.dart';
 

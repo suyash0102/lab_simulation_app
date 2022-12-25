@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 ///list of strings containing onBoarding titles
 final List<String> titlesList = [

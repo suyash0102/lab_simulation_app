@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lab_simulation_app/components/circular_meter.dart';
 import 'package:lab_simulation_app/constants.dart';
@@ -190,10 +189,6 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                       switchOn ? I0 : I0 = 0;
                                       switchOn ? W : W = 0;
                                       switchOn ? V2 : V2 = 0;
-                                      print("V=${fieldOne}");
-                                      print(fieldOne.length == 0
-                                          ? "True"
-                                          : "False");
                                       I0=(Vsc/Zsc);
                                       W=pow(I0,2)*Rsc;
                                     });
@@ -219,8 +214,6 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                       switchOn ? I0 : I0 = 0;
                                       switchOn ? W : W = 0;
                                       switchOn ? V2 : V2 = 0;
-                                      print("V=${fieldOne[0]}");
-                                      // Toggle light when tapped.
                                     });
                                   },
                                   child: switchOn
@@ -265,7 +258,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                       top: size.height * 0.065,
                                       left: size.width * 0.098),
                                   child: switchOn
-                                      ? Text("${Vsc}")
+                                      ? Text("$Vsc")
                                       : Text("0.0")),
                               Padding(
                                   padding: EdgeInsets.only(
@@ -596,7 +589,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                       top: size.height * 0.052,
                                       left: size.width * 0.063),
                                   child: switchOn
-                                      ? Text("${Vsc}")
+                                      ? Text("$Vsc")
                                       : Text("0.0")),
                               Padding(
                                   padding: EdgeInsets.only(
@@ -620,10 +613,6 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                           switchOn ? I0 : I0 = 0;
                                           switchOn ? W : W = 0;
                                           switchOn ? V2 : V2 = 0;
-                                          print("V=${fieldOne}");
-                                          print(fieldOne.length == 0
-                                              ? "True"
-                                              : "False");
                                           I0=(Vsc/Zsc);
                                           W=pow(I0,2)*Rsc;
                                         });
@@ -656,7 +645,6 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                           switchOn ? I0 : I0 = 0;
                                           switchOn ? W : W = 0;
                                           switchOn ? V2 : V2 = 0;
-                                          print("V=${fieldOne}");
                                           // Toggle light when tapped.
                                         });
                                       },
@@ -668,9 +656,7 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                             fieldTwo.add(I0);
                                             fieldThree.add(W);
                                             fieldFour.add(V2);
-                                            print(fieldOne[0]);
-                                            print(
-                                                "hh ${fieldTwo[0]}");
+
                                           });
                                         },
                                         child: Container(
@@ -868,22 +854,22 @@ class _SCTestScreenState extends State<SCTestScreen> {
                               TableRow(children: [
                                 Column(children: [Text('1st')]),
                                 Column(children: [
-                                  fieldOne.length == 0
+                                  fieldOne.isEmpty
                                       ? Text("0.0")
                                       : Text("${fieldOne[0]}")
                                 ]),
                                 Column(children: [
-                                  fieldTwo.length == 0
+                                  fieldTwo.isEmpty
                                       ? Text("0.0")
                                       : Text("${roundDouble(fieldTwo[0], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldThree.length == 0
+                                  fieldThree.isEmpty
                                       ? Text("0.0")
                                       : Text("${roundDouble(fieldThree[0], 2)}")
                                 ]),
                                 Column(children: [
-                                  fieldFour.length == 0
+                                  fieldFour.isEmpty
                                       ? Text("0.0")
                                       : Text("${fieldFour[0]}")
                                 ]),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lab_simulation_app/constants.dart';
-import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/oc_test.dart';
+import 'package:lab_simulation_app/ui/auth/launcherScreen/launcher_screen.dart';
+import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/ocData.dart';
 import 'package:lab_simulation_app/ui/quiz_module/components/choose_an_answer_box.dart';
 import 'package:lab_simulation_app/ui/quiz_module/components/option_box.dart';
 import 'package:lab_simulation_app/ui/quiz_module/components/question_answer_divider.dart';
@@ -21,11 +22,12 @@ class FirstPage extends StatelessWidget {
   final List questionsList;
   final Widget experimentScreen;
   final int noOfQuestions;
+  final List correctAnswers;
   int indexForQuestionNumber = 1;
   int selectedOption = 0;
   int marksObtainedFromCorrectAnswer = 0;
 
-  FirstPage({super.key, required this.title, required this.optionOne, required this.optionTwo, required this.optionThree, required this.optionFour, required this.questionsList, required this.experimentScreen, required this.noOfQuestions});
+  FirstPage({super.key, required this.title, required this.optionOne, required this.optionTwo, required this.optionThree, required this.optionFour, required this.questionsList, required this.experimentScreen, required this.noOfQuestions, required this.correctAnswers});
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +52,11 @@ class FirstPage extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => OCTestScreen()));
+                    Navigator.pushAndRemoveUntil<void>(
+                      context,
+                      MaterialPageRoute<void>(builder: (BuildContext context) => const LauncherScreen()),
+                      ModalRoute.withName('/'),
+                    );
                   },
                   child: const Text(
                     'Yes',
@@ -195,7 +200,7 @@ class FirstPage extends StatelessWidget {
                                                       optionFour: optionFour,
                                                       questionsList: questionsList,
                                                       marksEarnedFromQuiz:
-                                                      marksObtainedFromCorrectAnswer, title: title, experimentScreen: const OCTestScreen(), noOfQuestions: noOfQuestions,
+                                                      marksObtainedFromCorrectAnswer, title: title, experimentScreen: experimentScreen, noOfQuestions: noOfQuestions, correctAnswers: ocCorrectAnswers,
                                                     ),
                                               ));
                                         }
@@ -241,47 +246,47 @@ class FirstPage extends StatelessWidget {
 
   void marksForCorrectAnswers() {
     if (indexForQuestionNumber == 1) {
-      if (selectedOption == 1) {
+      if (selectedOption == correctAnswers[0]) {
         marksObtainedFromCorrectAnswer++;
       }
     }
     if (indexForQuestionNumber == 2) {
-      if (selectedOption == 3) {
+      if (selectedOption == correctAnswers[1]) {
         marksObtainedFromCorrectAnswer++;
       }
     }
     if (indexForQuestionNumber == 3) {
-      if (selectedOption == 2) {
+      if (selectedOption == correctAnswers[2]) {
         marksObtainedFromCorrectAnswer++;
       }
     }
     if (indexForQuestionNumber == 4) {
-      if (selectedOption == 2) {
+      if (selectedOption == correctAnswers[3]) {
         marksObtainedFromCorrectAnswer++;
       }
     }
     if (indexForQuestionNumber == 5) {
-      if (selectedOption == 1) {
+      if (selectedOption == correctAnswers[4]) {
         marksObtainedFromCorrectAnswer++;
       }
     }
     if (indexForQuestionNumber == 6) {
-      if (selectedOption == 4) {
+      if (selectedOption == correctAnswers[5]) {
         marksObtainedFromCorrectAnswer++;
       }
     }
     if (indexForQuestionNumber == 7) {
-      if (selectedOption == 1) {
+      if (selectedOption == correctAnswers[6]) {
         marksObtainedFromCorrectAnswer++;
       }
     }
     if (indexForQuestionNumber == 8) {
-      if (selectedOption == 3) {
+      if (selectedOption == correctAnswers[7]) {
         marksObtainedFromCorrectAnswer++;
       }
     }
     if (indexForQuestionNumber == 9) {
-      if (selectedOption == 3) {
+      if (selectedOption == correctAnswers[8]) {
         marksObtainedFromCorrectAnswer++;
       }
     }

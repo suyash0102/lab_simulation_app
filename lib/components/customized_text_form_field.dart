@@ -37,10 +37,10 @@ class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
       obscureText: widget.obscureText,
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
-        errorStyle: TextStyle(fontSize: 12,fontFamily: "Poppins",),
-        errorBorder: OutlineInputBorder(
+        errorStyle: const TextStyle(fontSize: 12,fontFamily: "Poppins",),
+        errorBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: Colors.red,
+          borderSide: BorderSide(color: kRedColor,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(

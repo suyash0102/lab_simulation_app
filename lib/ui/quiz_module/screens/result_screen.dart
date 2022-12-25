@@ -1,8 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lab_simulation_app/constants.dart';
-import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/oc_test.dart';
+import 'package:lab_simulation_app/ui/auth/launcherScreen/launcher_screen.dart';
+import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/ocData.dart';
 import 'package:lab_simulation_app/ui/quiz_module/controller/index_controller.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -17,10 +17,11 @@ class ResultPage extends StatelessWidget {
   final List questionsList;
   final Widget experimentScreen;
   final int noOfQuestions;
+  final List correctAnswers;
 
 
 
-  ResultPage({super.key, required this.marksEarnedFromQuiz, required this.title, required this.optionOne, required this.optionTwo, required this.optionThree, required this.optionFour, required this.questionsList, required this.experimentScreen, required this.noOfQuestions,});
+  ResultPage({super.key, required this.marksEarnedFromQuiz, required this.title, required this.optionOne, required this.optionTwo, required this.optionThree, required this.optionFour, required this.questionsList, required this.experimentScreen, required this.noOfQuestions, required this.correctAnswers,});
 
   int marksEarnedFromQuiz = 0;
 
@@ -47,8 +48,11 @@ class ResultPage extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => experimentScreen));
+                    Navigator.pushAndRemoveUntil<void>(
+                      context,
+                      MaterialPageRoute<void>(builder: (BuildContext context) => const LauncherScreen()),
+                      ModalRoute.withName('/'),
+                    );
                   },
                   child: const Text(
                     'Yes',
@@ -78,7 +82,7 @@ class ResultPage extends StatelessWidget {
                     ? IconButton(
                   icon: const Icon(
                     Icons.arrow_back,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                   onPressed: () {
                     showDialog<String>(
@@ -106,7 +110,7 @@ class ResultPage extends StatelessWidget {
                                 'NO',
                                 style: TextStyle(
                                     color:
-                                    Color.fromRGBO(66, 130, 241, 1)),
+                                    kBlueColor),
                               ),
                             ),
                             TextButton(
@@ -114,12 +118,12 @@ class ResultPage extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                       QuizScreen(title: title, optionOne: optionOne, optionTwo: optionTwo, optionThree: optionThree, optionFour: optionFour, questionsList: questionsList, experimentScreen: experimentScreen, noOfQuestions: noOfQuestions,))),
+                                       QuizScreen(title: title, optionOne: optionOne, optionTwo: optionTwo, optionThree: optionThree, optionFour: optionFour, questionsList: questionsList, experimentScreen: experimentScreen, noOfQuestions: noOfQuestions, correctAnswers: correctAnswers,))),
                               child: const Text(
                                 'YES',
                                 style: TextStyle(
                                     color:
-                                    Color.fromRGBO(66, 130, 241, 1)),
+                                    kBlueColor),
                               ),
                             ),
                           ],
@@ -231,7 +235,7 @@ class ResultPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                          QuizScreen(title: title, optionOne: optionOne, optionTwo: optionTwo, optionThree: optionThree, optionFour: optionFour, questionsList: questionsList, experimentScreen: experimentScreen, noOfQuestions: noOfQuestions,)));
+                                          QuizScreen(title: title, optionOne: optionOne, optionTwo: optionTwo, optionThree: optionThree, optionFour: optionFour, questionsList: questionsList, experimentScreen: experimentScreen, noOfQuestions: noOfQuestions, correctAnswers: ocCorrectAnswers,)));
                                 },
                                 child: Text(
                                   'Try Again',
@@ -270,20 +274,29 @@ class ResultPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const OCTestScreen();
-                              },
+                      SizedBox(height: size.height*0.02,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: size.width * 0.18),
+                        child: SizedBox(
+                          height: size.height * 0.05,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushAndRemoveUntil<void>(
+                                context,
+                                MaterialPageRoute<void>(builder: (BuildContext context) => const LauncherScreen()),
+                                ModalRoute.withName('/'),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: kPrimaryColor, elevation: 0),
+                            child: Text(
+                              "Go Back to Home Screen",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                  fontSize: size.width * 0.04),
                             ),
-                          );
-                        },
-                        child: const Text(
-                          "Go Back",
-                          style: TextStyle(fontFamily: "Poppins", fontSize: 21),
+                          ),
                         ),
                       ),
                     ],

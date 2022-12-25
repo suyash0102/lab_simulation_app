@@ -1,16 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/firebase_options.dart';
 import 'package:lab_simulation_app/ui/auth/authentication_bloc.dart';
 import 'package:lab_simulation_app/ui/auth/launcherScreen/launcher_screen.dart';
+import 'package:lab_simulation_app/ui/home/home_screen.dart';
 import 'package:lab_simulation_app/ui/loading_cubit.dart';
 import 'package:lab_simulation_app/ui/quiz_module/controller/index_controller.dart';
-import 'package:lab_simulation_app/ui/quiz_module/screens/start_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
