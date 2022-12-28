@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lab_simulation_app/constants.dart';
-import 'package:lab_simulation_app/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/ocData.dart';
 import 'package:lab_simulation_app/ui/quiz_module/components/question_answer_divider.dart';
 import 'package:lab_simulation_app/ui/quiz_module/controller/index_controller.dart';
@@ -10,6 +8,7 @@ import 'home_screen.dart';
 
 class QuizScreen extends StatelessWidget {
   final String title;
+  final String quizTitle;
   final List optionOne;
   final List optionTwo;
   final List optionThree;
@@ -29,7 +28,7 @@ class QuizScreen extends StatelessWidget {
       required this.questionsList,
       required this.experimentScreen,
       required this.noOfQuestions,
-      required this.correctAnswers});
+      required this.correctAnswers, required this.quizTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +36,6 @@ class QuizScreen extends StatelessWidget {
     return Consumer<IndexController>(builder: (context, provider, child) {
       return Scaffold(
         appBar: AppBar(
-          // leading: GestureDetector(child: Icon(Icons.close)),
-          // automaticallyImplyLeading: true,
           toolbarHeight: size.height * 0.07,
           backgroundColor: kPrimaryColor,
           title: Text(title,
@@ -76,7 +73,7 @@ class QuizScreen extends StatelessWidget {
                     horizontal: size.width * 0.05,
                     vertical: size.height * 0.03),
                 child: Text(
-                  'To Perform O.C. Test on Single Phase Transformer',
+                  quizTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: "Poppins",
@@ -104,7 +101,7 @@ class QuizScreen extends StatelessWidget {
                                 optionTwo: optionTwo,
                                 questionsList: questionsList,
                                 noOfQuestions: noOfQuestions,
-                                correctAnswers: ocCorrectAnswers,
+                                correctAnswers: ocCorrectAnswers, quizTitle: quizTitle,
                               )));
                 },
                 child: Container(

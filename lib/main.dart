@@ -7,7 +7,6 @@ import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/firebase_options.dart';
 import 'package:lab_simulation_app/ui/auth/authentication_bloc.dart';
 import 'package:lab_simulation_app/ui/auth/launcherScreen/launcher_screen.dart';
-import 'package:lab_simulation_app/ui/home/home_screen.dart';
 import 'package:lab_simulation_app/ui/loading_cubit.dart';
 import 'package:lab_simulation_app/ui/quiz_module/controller/index_controller.dart';
 import 'package:provider/provider.dart';

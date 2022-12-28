@@ -15,6 +15,7 @@ import 'result_screen.dart';
 
 class FirstPage extends StatelessWidget {
   final String title;
+  final String quizTitle;
   final List optionOne;
   final List optionTwo;
   final List optionThree;
@@ -37,7 +38,7 @@ class FirstPage extends StatelessWidget {
       required this.questionsList,
       required this.experimentScreen,
       required this.noOfQuestions,
-      required this.correctAnswers});
+      required this.correctAnswers, required this.quizTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +126,6 @@ class FirstPage extends StatelessWidget {
             }),
             Consumer<IndexController>(builder: (context, provider, child) {
               indexForQuestionNumber = provider.currentQuestionIndex;
-
               return QuestionBox(
                   question: questionsList[indexForQuestionNumber]);
             }),
@@ -168,7 +168,6 @@ class FirstPage extends StatelessWidget {
                       builder: (context, provider, child) {
                     indexForQuestionNumber = provider.currentQuestionIndex;
                     selectedOption = provider.optionSelected;
-
                     return selectedOption > 0
                         ? Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -209,6 +208,7 @@ class FirstPage extends StatelessWidget {
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       ResultPage(
+                                                        quizTitle: quizTitle,
                                                     optionOne: optionOne,
                                                     optionTwo: optionTwo,
                                                     optionThree: optionThree,

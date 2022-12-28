@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 class OptionBox extends StatelessWidget {
   OptionBox({
     Key? key,
-    // required this.selectedOption,
     required this.optionIndex,
     required this.indexForQuestionNumber,
     required this.providerIndexForOption,
@@ -24,7 +23,6 @@ class OptionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Consumer<IndexController>(builder: (context, provider, child) {
       Color changeColor() {
         if (provider.optionSelected == 1 && providerIndexForOption == 1) {

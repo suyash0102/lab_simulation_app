@@ -152,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               );
             },
-            child: Text(
+            child: const Text(
               "Edit Profile",
               style: TextStyle(fontFamily: "Poppins", fontSize: 21),
             ),

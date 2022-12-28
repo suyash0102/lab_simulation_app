@@ -102,16 +102,16 @@ class _EditProfileDetailsState extends State<EditProfileDetails> {
                   isDense: false,
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: kPrimaryColor)),
+                      borderSide: const BorderSide(color: kPrimaryColor)),
                   contentPadding: EdgeInsets.zero,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: kPrimaryColor)),
+                      borderSide: const BorderSide(color: kPrimaryColor)),
                 ),
                 isExpanded: true,
                 hint: Text(
                   widget.user.year,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 16,
                       fontFamily: "Poppins",
                       color: Color(0xFF555555)),
@@ -144,6 +144,7 @@ class _EditProfileDetailsState extends State<EditProfileDetails> {
                   if (value == null) {
                     return 'Please select the year.';
                   }
+                  return null;
                 },
                 onChanged: (value) {
                   year = value.toString();
@@ -175,16 +176,16 @@ class _EditProfileDetailsState extends State<EditProfileDetails> {
                   isDense: false,
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: kPrimaryColor)),
+                      borderSide: const BorderSide(color: kPrimaryColor)),
                   contentPadding: EdgeInsets.zero,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: kPrimaryColor)),
+                      borderSide: const BorderSide(color: kPrimaryColor)),
                 ),
                 isExpanded: true,
                 hint: Text(
                   widget.user.branch,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 16,
                       fontFamily: "Poppins",
                       color: Color(0xFF555555)),

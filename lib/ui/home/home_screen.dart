@@ -24,8 +24,7 @@ class _HomeState extends State<HomeScreen> {
   late User user;
 
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -63,7 +62,7 @@ class _HomeState extends State<HomeScreen> {
               ),
               Card(
                 elevation: 8,
-                child: Container(
+                child: SizedBox(
                   width: orientation == Orientation.portrait
                       ? size.width * 0.45
                       : size.width * 0.14,
@@ -72,7 +71,7 @@ class _HomeState extends State<HomeScreen> {
                       : size.height * 0.29,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width: orientation == Orientation.portrait
                               ? size.width * 0.45
                               : size.width * 0.14,
@@ -161,7 +160,7 @@ class _HomeState extends State<HomeScreen> {
               ),
               Card(
                 elevation: 8,
-                child: Container(
+                child: SizedBox(
                   width: orientation == Orientation.portrait
                       ? size.width * 0.45
                       : size.width * 0.14,
@@ -170,7 +169,7 @@ class _HomeState extends State<HomeScreen> {
                       : size.height * 0.29,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width: orientation == Orientation.portrait
                               ? size.width * 0.45
                               : size.width * 0.14,
@@ -268,7 +267,7 @@ class _HomeState extends State<HomeScreen> {
               ),
               Card(
                 elevation: 8,
-                child: Container(
+                child: SizedBox(
                   width: orientation == Orientation.portrait
                       ? size.width * 0.45
                       : size.width * 0.14,
@@ -277,7 +276,7 @@ class _HomeState extends State<HomeScreen> {
                       : size.height * 0.29,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width: orientation == Orientation.portrait
                               ? size.width * 0.45
                               : size.width * 0.14,
@@ -366,7 +365,7 @@ class _HomeState extends State<HomeScreen> {
               ),
               Card(
                 elevation: 8,
-                child: Container(
+                child: SizedBox(
                   width: orientation == Orientation.portrait
                       ? size.width * 0.45
                       : size.width * 0.14,
@@ -375,7 +374,7 @@ class _HomeState extends State<HomeScreen> {
                       : size.height * 0.29,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width: orientation == Orientation.portrait
                               ? size.width * 0.45
                               : size.width * 0.14,
@@ -483,7 +482,7 @@ class _HomeState extends State<HomeScreen> {
           orientation == Orientation.portrait
               ? Text(
                   user.fullName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Poppins',
                   ),
                 )
@@ -495,7 +494,7 @@ class _HomeState extends State<HomeScreen> {
                 ),
           orientation == Orientation.portrait
               ? Text(user.email,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Poppins',
                   ))
               : const Text(
@@ -504,25 +503,36 @@ class _HomeState extends State<HomeScreen> {
                 ),
           orientation == Orientation.portrait
               ? Text(user.userID,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Poppins',
                   ))
               : const Text(
                   '',
                   style: TextStyle(fontSize: 0),
                 ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Text(user.fullName,),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Text(user.email),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Text(user.userID),
-          // ),
+          SizedBox(height: size.height*0.03,),
+          Text('You are a Admin',style: TextStyle(color: kPrimaryColor, fontFamily: "Poppins",fontSize: size.width*0.05,fontWeight: FontWeight.w700),),
+          SizedBox(height: size.height*0.04,),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.2),
+            child: SizedBox(
+              height: size.height * 0.05,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: kPrimaryColor, elevation: 0),
+                child: Text(
+                  "Faculty Dashboard",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Poppins",
+                      fontSize: size.width * 0.04),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
       DashboardScreen(user: widget.user),
@@ -537,41 +547,48 @@ class _HomeState extends State<HomeScreen> {
         }
       },
       child: Scaffold(
-        drawer: LeftDrawer(
-          user: user,
-        ),
-        appBar: AppBar(
-          title: const Text(
-            'Lab Simulation App',
-            style: TextStyle(fontFamily: 'Poppins', color: Colors.white),
+          drawer: LeftDrawer(
+            user: user,
           ),
-          iconTheme: const IconThemeData(color: Colors.white),
-          backgroundColor: kPrimaryColor,
-          centerTitle: true,
-        ),
-        body: widgetOptions.elementAt(_selectedIndex),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              activeIcon: Icon(Icons.home_filled),
-              icon: Icon(Icons.home_filled),
-              label: 'Home',
+          appBar: AppBar(
+            title: const Text(
+              'Lab Simulation App',
+              style: TextStyle(fontFamily: 'Poppins', color: Colors.white),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              label: 'Dashboard',
+            iconTheme: const IconThemeData(color: Colors.white),
+            backgroundColor: kPrimaryColor,
+            centerTitle: true,
+          ),
+          body: widgetOptions.elementAt(_selectedIndex),
+          bottomNavigationBar: BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(
+                activeIcon: Icon(Icons.home_filled),
+                icon: Icon(Icons.home_filled),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.dashboard),
+                label: 'Dashboard',
+              ),
+              BottomNavigationBarItem(
+                activeIcon: Icon(Icons.account_circle),
+                icon: Icon(Icons.account_circle_outlined),
+                label: 'Profile',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: kPrimaryColor,
+            onTap: _onItemTapped,
+            selectedLabelStyle: const TextStyle(
+              fontFamily: 'Poppins',
+              color: kPrimaryColor,
             ),
-            BottomNavigationBarItem(
-              activeIcon: Icon(Icons.account_circle),
-              icon: Icon(Icons.account_circle_outlined),
-              label: 'Profile',
+            unselectedLabelStyle:  const TextStyle(
+              fontFamily: 'Poppins',
+              color: kPrimaryColor,
             ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: kPrimaryColor,
-          onTap: _onItemTapped,
-        ),
-      ),
+          )),
     );
   }
 }

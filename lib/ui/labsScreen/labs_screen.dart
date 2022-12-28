@@ -16,7 +16,6 @@ class LabsScreen extends StatefulWidget {
 class _LabsScreenState extends State<LabsScreen> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -71,7 +70,7 @@ const List<Choice> choices = <Choice>[
 ];
 
 class SelectCard extends StatelessWidget {
-  const SelectCard({required this.choice});
+  const SelectCard({super.key, required this.choice});
 
   final Choice choice;
 

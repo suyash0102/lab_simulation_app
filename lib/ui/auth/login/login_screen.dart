@@ -114,7 +114,7 @@ class _LoginScreen extends State<LoginScreen> {
                           const SizedBox(height: defaultPadding * 2),
                           Row(
                             children: [
-                              Spacer(),
+                              const Spacer(),
                               Expanded(
                                 flex: 12,
                                 child: Column(
@@ -123,7 +123,7 @@ class _LoginScreen extends State<LoginScreen> {
                                       padding: EdgeInsets.only(
                                         right: size.width * 0.335,
                                       ),
-                                      child: Text(
+                                      child: const Text(
                                         "Enter College Email ID:",
                                         style: TextStyle(
                                           fontSize: 18,
@@ -170,7 +170,7 @@ class _LoginScreen extends State<LoginScreen> {
                                       padding: EdgeInsets.only(
                                         right: size.width * 0.472,
                                       ),
-                                      child: Text(
+                                      child: const Text(
                                         "Enter Password:",
                                         style: TextStyle(
                                           fontSize: 18,
@@ -204,9 +204,9 @@ class _LoginScreen extends State<LoginScreen> {
                                     GestureDetector(
                                       onTap: () => push(
                                           context, const ResetPasswordScreen()),
-                                      child: Text(
+                                      child: const Text(
                                         "Forgot password?",
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           decoration: TextDecoration.underline,
                                           color: kPrimaryColor,
                                           fontFamily: "Poppins",
@@ -232,7 +232,7 @@ class _LoginScreen extends State<LoginScreen> {
                                         // }
                                         child: Text(
                                           "Login".toUpperCase(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontFamily: "Poppins",
                                               fontSize: 21),
                                         ),
@@ -255,8 +255,8 @@ class _LoginScreen extends State<LoginScreen> {
                                         );
                                       },
                                     ),
-                                    OrDivider(),
-                                    SigninSinupGoogle(
+                                    const OrDivider(),
+                                    const SigninSinupGoogle(
                                       text: "Login with Google",
                                     ),
                                     SizedBox(
@@ -365,7 +365,7 @@ class _LoginScreen extends State<LoginScreen> {
                                   ],
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                             ],
                           )
                         ],

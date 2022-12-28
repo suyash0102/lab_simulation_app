@@ -28,7 +28,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               height: size.height * 0.37,
               // width: size.width * 0.85,
               child: Image.asset("assets/images/under_construction.png"),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_share_me/flutter_share_me.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/about_us.dart';
 import 'package:lab_simulation_app/ui/auth/authentication_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../model/user.dart';
 
@@ -74,7 +76,7 @@ class LeftDrawer extends StatelessWidget {
           SizedBox(
             height: size.height * 0.015,
           ),
-          Divider(
+          const Divider(
             thickness: 1.5,
             indent: 20,
             endIndent: 20,
@@ -144,7 +146,7 @@ class LeftDrawer extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: size.width * 0.05),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () => onButtonTap(Share.whatsapp),
               child: Row(
                 children: [
                   Icon(
@@ -156,7 +158,36 @@ class LeftDrawer extends StatelessWidget {
                     width: size.width * 0.03,
                   ),
                   Text(
-                    "Share",
+                    "Share App",
+                    style: TextStyle(
+                        fontFamily: "Poppins",
+                        color: kPrimaryColor,
+                        fontSize: size.width * 0.06,
+                        fontWeight: FontWeight.w300),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.015,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: size.width * 0.05),
+            child: GestureDetector(
+              onTap:_launchURL,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.web,
+                    size: size.width * 0.09,
+                    color: kPrimaryColor,
+                  ),
+                  SizedBox(
+                    width: size.width * 0.03,
+                  ),
+                  Text(
+                    "Our Website",
                     style: TextStyle(
                         fontFamily: "Poppins",
                         color: kPrimaryColor,
@@ -209,7 +240,7 @@ class LeftDrawer extends StatelessWidget {
             height: size.height * 0.015,
           ),
           Padding(
-            padding: EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12.0),
             child: ElevatedButton(
               onPressed: () {
                 context.read<AuthenticationBloc>().add(LogoutEvent());
@@ -279,5 +310,52 @@ class LeftDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+  Future<void> onButtonTap(Share share) async {
+    String msg =
+        'Pocket Friendly Lab Simulation App!!\nCheck out the app now \nhttps://play.google.com/store/apps/details?id=com.synchronizers.lab_simulation_app';
+    String? response;
+    final FlutterShareMe flutterShareMe = FlutterShareMe();
+    switch (share) {
+      case Share.whatsapp:
+        response = await flutterShareMe.shareToWhatsApp(msg: msg);
+        break;
+      case Share.whatsapp_business:
+        response = await flutterShareMe.shareToWhatsApp(msg: msg);
+        break;
+      case Share.share_system:
+        response = await flutterShareMe.shareToSystem(msg: msg);
+        break;
+      case Share.whatsapp_personal:
+        response = await flutterShareMe.shareWhatsAppPersonalMessage(
+            message: msg, phoneNumber: 'phone-number-with-country-code');
+        break;
+      case Share.share_instagram:
+      // TODO: Handle this case.
+        break;
+      case Share.share_telegram:
+      // TODO: Handle this case.
+        break;
+    }
+    debugPrint(response);
+  }
+}
+enum Share {
+  whatsapp,
+  whatsapp_personal,
+  whatsapp_business,
+  share_system,
+  share_instagram,
+  share_telegram
+}
+
+
+_launchURL() async {
+  const url = 'https://synchronizers.xyz';
+  final uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri,mode: LaunchMode.externalApplication);
+  } else {
+    throw 'Could not launch $url';
   }
 }

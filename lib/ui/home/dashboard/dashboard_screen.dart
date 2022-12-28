@@ -52,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
-          MyProgressArea(),
+          const MyProgressArea(),
           SizedBox(
             height: size.height * 0.02,
           ),

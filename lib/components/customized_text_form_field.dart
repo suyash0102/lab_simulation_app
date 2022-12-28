@@ -58,7 +58,7 @@ class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
             color: kRedColor,
           ),
         ),
-        focusedErrorBorder: OutlineInputBorder(
+        focusedErrorBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
             color: Colors.blue,
@@ -67,18 +67,18 @@ class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
         fillColor: Colors.white,
         border: InputBorder.none,
         hintText: widget.hintText,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           fontSize: 16,
           color: Color(0xFF555555),
           fontFamily: "Poppins",
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
             color: kPrimaryColor,
           ),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
             color: kPrimaryColor,

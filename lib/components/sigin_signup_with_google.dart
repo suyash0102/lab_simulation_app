@@ -19,21 +19,26 @@ class _SigninSinupGoogleState extends State<SigninSinupGoogle> {
     return GestureDetector(
       onTap: widget.onPress as void Function()?,
       child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xFF555555)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        height: size.height * 0.06,
         child: Row(
           children: [
             SizedBox(
               width: size.width * 0.02,
             ),
-            Container(
-              child: Image.asset("assets/icons/google_icon.png"),
+            SizedBox(
               height: size.height * 0.04,
+              child: Image.asset("assets/icons/google_icon.png"),
             ),
             SizedBox(
               width: size.width * 0.15,
             ),
             Text(
               widget.text,
-              style: TextStyle(
+              style: const TextStyle(
                   fontFamily: "Poppins",
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -41,11 +46,6 @@ class _SigninSinupGoogleState extends State<SigninSinupGoogle> {
             )
           ],
         ),
-        decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFF555555)),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        height: size.height * 0.06,
       ),
     );
   }

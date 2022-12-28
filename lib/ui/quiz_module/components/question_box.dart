@@ -8,17 +8,18 @@ class QuestionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(top: 17.92, right: 80),
+      padding: EdgeInsets.only(top: size.width*0.02, right: size.height*0.04),
       child: SizedBox(
-        width: 270,
-        height: 70,
+        width: size.width*0.8,
+        height: size.height*0.18,
         child: Text(
           question,
           // 'Which of the following\n technology used by zomato for\n food delivery ?',
           textAlign: TextAlign.left,
           style: GoogleFonts.mulish(
-              fontSize: 18, fontWeight: FontWeight.w700, letterSpacing: -0.3),
+              fontSize: size.width*0.04, fontWeight: FontWeight.w700, letterSpacing: -0.3),
         ),
       ),
     );

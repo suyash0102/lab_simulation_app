@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class CircularMeter extends StatefulWidget {
   const CircularMeter(
-      {Key? key, required this.meterName, required this.value, required this.range1, required this.range2, required this.fontSize, required this.showLabels, required this.fontSizeM, required this.showFirstLabel})
+      {Key? key, required this.meterName, required this.value, required this.range1, required this.range2, required this.fontSize, required this.showLabels, required this.fontSizeM, required this.showFirstLabel, required this.firstColorCut, required this.secondColorCut,  required this.thirdColorCut})
       : super(key: key);
   final String meterName;
   final double value;
@@ -14,6 +14,10 @@ class CircularMeter extends StatefulWidget {
   final double fontSizeM;
   final bool showLabels;
   final bool showFirstLabel;
+  final double firstColorCut;
+  final double secondColorCut;
+  final double thirdColorCut;
+
 
   @override
   _CircularMeterState createState() => _CircularMeterState();
@@ -39,7 +43,7 @@ class _CircularMeterState extends State<CircularMeter> {
               ranges: <GaugeRange>[
                 GaugeRange(
                     startValue: 0,
-                    endValue: 100,
+                    endValue:  widget.firstColorCut,
                     // sizeUnit: GaugeSizeUnit.logicalPixel,
                     // gradient: SweepGradient(
                     //   colors: [Colors.red,Colors.blue],stops:[0,2] ,
@@ -51,14 +55,14 @@ class _CircularMeterState extends State<CircularMeter> {
                     startWidth: 5,
                     endWidth: 5),
                 GaugeRange(
-                    startValue: 100,
-                    endValue: 200,
+                    startValue: widget.firstColorCut,
+                    endValue: widget.secondColorCut,
                     color: Colors.orange,
                     startWidth: 5,
                     endWidth: 5),
                 GaugeRange(
-                    startValue: 200,
-                    endValue: 300,
+                    startValue: widget.secondColorCut,
+                    endValue: widget.thirdColorCut,
                     color: kRedColor,
                     startWidth: 5,
                     endWidth: 5)
@@ -74,11 +78,10 @@ class _CircularMeterState extends State<CircularMeter> {
               ],
               annotations: <GaugeAnnotation>[
                 GaugeAnnotation(
-                    widget: Container(
-                        child: Text('${widget.value}',
-                            style: TextStyle(
-                                fontSize: widget.fontSize,
-                                fontWeight: FontWeight.bold))),
+                    widget: Text('${widget.value}',
+                        style: TextStyle(
+                            fontSize: widget.fontSize,
+                            fontWeight: FontWeight.bold)),
                     angle: 90,
                     positionFactor: 0.5)
               ])

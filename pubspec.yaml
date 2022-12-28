@@ -40,7 +40,7 @@ dependencies:
   firebase_auth: ^4.1.1
   cloud_firestore: ^4.0.4
   firebase_storage: ^11.0.4
-
+  flutter_share_me:
   shared_preferences: ^2.0.15
   progress_dialog:
     git:
@@ -69,6 +69,9 @@ dependencies:
   percent_indicator: ^4.2.2
   provider: ^6.0.4
   google_fonts: ^3.0.1
+  syncfusion_flutter_charts: ^20.4.38
+  flutter_sound: ^9.2.13
+
 
 dev_dependencies:
   flutter_test:

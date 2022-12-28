@@ -139,16 +139,16 @@ class _SignUpState extends State<SignUpScreen> {
                             ),
                             Row(
                               children: [
-                                Spacer(),
+                                const Spacer(),
                                 Expanded(
                                   flex: 12,
                                   child: Column(
                                     children: [
                                       const SizedBox(height: defaultPadding),
-                                      SigninSinupGoogle(
+                                      const SigninSinupGoogle(
                                         text: "Sign Up with Google",
                                       ),
-                                      OrDivider(),
+                                      const OrDivider(),
                                       SizedBox(
                                         height: size.height * 0.02,
                                       ),
@@ -156,7 +156,7 @@ class _SignUpState extends State<SignUpScreen> {
                                         padding: EdgeInsets.only(
                                           right: size.width * 0.54,
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           "Enter Name:",
                                           style: TextStyle(
                                             fontSize: 18,
@@ -184,7 +184,7 @@ class _SignUpState extends State<SignUpScreen> {
                                         padding: EdgeInsets.only(
                                           right: size.width * 0.335,
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           "Enter College Email ID:",
                                           style: TextStyle(
                                             fontSize: 18,
@@ -213,7 +213,7 @@ class _SignUpState extends State<SignUpScreen> {
                                         padding: EdgeInsets.only(
                                           right: size.width * 0.5,
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           "Select Branch:",
                                           style: TextStyle(
                                             fontSize: 18,
@@ -232,13 +232,13 @@ class _SignUpState extends State<SignUpScreen> {
                                           enabledBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                   color: kPrimaryColor)),
                                           contentPadding: EdgeInsets.zero,
                                           border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                   color: kPrimaryColor)),
                                         ),
                                         isExpanded: true,
@@ -281,6 +281,7 @@ class _SignUpState extends State<SignUpScreen> {
                                           if (value == null) {
                                             return 'Please select the branch.';
                                           }
+                                          return null;
                                         },
                                         onChanged: (value) {
                                           branch = value.toString();
@@ -296,7 +297,7 @@ class _SignUpState extends State<SignUpScreen> {
                                         padding: EdgeInsets.only(
                                           right: size.width * 0.47,
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           "Enter Password:",
                                           style: TextStyle(
                                             fontSize: 18,
@@ -325,7 +326,7 @@ class _SignUpState extends State<SignUpScreen> {
                                         padding: EdgeInsets.only(
                                           right: size.width * 0.4,
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           "Confirm Password:",
                                           style: TextStyle(
                                             fontSize: 18,
@@ -381,13 +382,13 @@ class _SignUpState extends State<SignUpScreen> {
                                           enabledBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                   color: kPrimaryColor)),
                                           contentPadding: EdgeInsets.zero,
                                           border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                   color: kPrimaryColor)),
                                         ),
                                         isExpanded: true,
@@ -430,6 +431,7 @@ class _SignUpState extends State<SignUpScreen> {
                                           if (value == null) {
                                             return 'Please select the year.';
                                           }
+                                          return null;
                                         },
                                         onChanged: (value) {
                                           year = value.toString();
@@ -503,7 +505,7 @@ class _SignUpState extends State<SignUpScreen> {
                                                 ),
                                         child: Text(
                                           "Sign Up".toUpperCase(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontFamily: "Poppins",
                                               fontSize: 21),
                                         ),
@@ -528,7 +530,7 @@ class _SignUpState extends State<SignUpScreen> {
                                     ],
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                               ],
                             ),
                             // Padding(

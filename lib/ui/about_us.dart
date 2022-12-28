@@ -69,7 +69,7 @@ class _AboutUsState extends State<AboutUs> {
                         SizedBox(
                           width: size.width * 0.5,
                         ),
-                        Container(
+                        SizedBox(
                           width: size.width * 0.43,
                           child:
                               Image.asset('assets/images/Kantilal_Joshi.jpg'),
@@ -120,7 +120,7 @@ class _AboutUsState extends State<AboutUs> {
                         SizedBox(
                           width: size.width * 0.5,
                         ),
-                        Container(
+                        SizedBox(
                           width: size.width * 0.43,
                           child: Image.asset('assets/images/mayuri2.jpg'),
                         ),
@@ -170,7 +170,7 @@ class _AboutUsState extends State<AboutUs> {
                         SizedBox(
                           width: size.width * 0.5,
                         ),
-                        Container(
+                        SizedBox(
                           width: size.width * 0.43,
                           child: Image.asset('assets/images/palak.jpg'),
                         ),
@@ -220,7 +220,7 @@ class _AboutUsState extends State<AboutUs> {
                         SizedBox(
                           width: size.width * 0.5,
                         ),
-                        Container(
+                        SizedBox(
                           width: size.width * 0.43,
                           child: Image.asset('assets/images/shreya.jpg'),
                         ),
@@ -270,7 +270,7 @@ class _AboutUsState extends State<AboutUs> {
                         SizedBox(
                           width: size.width * 0.5,
                         ),
-                        Container(
+                        SizedBox(
                           width: size.width * 0.43,
                           child: Image.asset('assets/images/kunal.jpg'),
                         ),
@@ -320,7 +320,7 @@ class _AboutUsState extends State<AboutUs> {
                         SizedBox(
                           width: size.width * 0.5,
                         ),
-                        Container(
+                        SizedBox(
                           width: size.width * 0.43,
                           child: Image.asset('assets/images/suyash.jpg'),
                         ),
@@ -329,7 +329,33 @@ class _AboutUsState extends State<AboutUs> {
                   ],
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            Text(
+              'Testers',
+              style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: size.width * 0.06,
+                  color: kPrimaryColor),
+            ),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            Text(
+              'Coming Soon',
+              style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: size.width * 0.05,
+                  color: kBlackColor),
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
           ],
         ),
       ),

@@ -11,6 +11,7 @@ import 'start_screen.dart';
 class ResultPage extends StatelessWidget {
   final String title;
   final List optionOne;
+  final String quizTitle;
   final List optionTwo;
   final List optionThree;
   final List optionFour;
@@ -30,7 +31,7 @@ class ResultPage extends StatelessWidget {
     required this.questionsList,
     required this.experimentScreen,
     required this.noOfQuestions,
-    required this.correctAnswers,
+    required this.correctAnswers, required this.quizTitle,
   });
 
   int marksEarnedFromQuiz = 0;
@@ -138,7 +139,7 @@ class ResultPage extends StatelessWidget {
                                                       experimentScreen,
                                                   noOfQuestions: noOfQuestions,
                                                   correctAnswers:
-                                                      correctAnswers,
+                                                      correctAnswers, quizTitle: quizTitle,
                                                 ))),
                                     child: const Text(
                                       'YES',
@@ -269,7 +270,7 @@ class ResultPage extends StatelessWidget {
                                                       experimentScreen,
                                                   noOfQuestions: noOfQuestions,
                                                   correctAnswers:
-                                                      ocCorrectAnswers,
+                                                      ocCorrectAnswers, quizTitle: quizTitle,
                                                 )));
                                   },
                                   child: Text(
