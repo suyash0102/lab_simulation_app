@@ -2159,16 +2159,6 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                     builder: (context) {
                                       return VivaVoiceInstructionsScreen(
                                         title: ocTitle,
-                                        optionOne: ocOptionOne,
-                                        optionTwo: ocOptionTwo,
-                                        optionThree: ocOptionThree,
-                                        optionFour: ocOptionFour,
-                                        questionsList: ocQuestionsList,
-                                        experimentScreen:
-                                        ocExperimentScreen,
-                                        noOfQuestions: ocNoOfQuestions,
-                                        correctAnswers:
-                                        ocCorrectAnswers,
                                         quizTitle: ocAim,
                                       );
                                     },

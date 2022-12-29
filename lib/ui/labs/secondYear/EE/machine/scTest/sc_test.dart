@@ -7,6 +7,7 @@ import 'package:lab_simulation_app/components/common_divider.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/scTest/scData.dart';
 import 'package:lab_simulation_app/ui/quiz_module/screens/start_screen.dart';
+import 'package:lab_simulation_app/ui/viva_voice_module/screens/viva_voice_instructions_page.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:intl/intl.dart' show NumberFormat;
@@ -1770,6 +1771,39 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                     elevation: 0),
                                 child: const Text(
                                   "Take Quiz",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Poppins",
+                                      fontSize: 21),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: size.height*0.02,),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.25),
+                            child: SizedBox(
+                              height: size.height * 0.05,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return VivaVoiceInstructionsScreen(
+                                          title: scTitle,
+                                          quizTitle: scAim,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: kPrimaryColor,
+                                    elevation: 0),
+                                child: const Text(
+                                  "Viva Voice",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "Poppins",

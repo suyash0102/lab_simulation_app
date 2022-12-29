@@ -117,6 +117,37 @@ class LeftDrawer extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: size.width * 0.05),
             child: GestureDetector(
+              onTap: () {
+
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.announcement,
+                    size: size.width * 0.09,
+                    color: kPrimaryColor,
+                  ),
+                  SizedBox(
+                    width: size.width * 0.03,
+                  ),
+                  Text(
+                    "Announcements",
+                    style: TextStyle(
+                        fontFamily: "Poppins",
+                        color: kPrimaryColor,
+                        fontSize: size.width * 0.06,
+                        fontWeight: FontWeight.w300),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.015,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: size.width * 0.05),
+            child: GestureDetector(
               onTap: () {},
               child: Row(
                 children: [

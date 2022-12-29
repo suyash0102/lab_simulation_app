@@ -9,26 +9,12 @@ import 'package:provider/provider.dart';
 class VivaVoiceInstructionsScreen extends StatelessWidget {
   final String title;
   final String quizTitle;
-  final List optionOne;
-  final List optionTwo;
-  final List optionThree;
-  final List optionFour;
-  final List questionsList;
-  final Widget experimentScreen;
-  final int noOfQuestions;
-  final List correctAnswers;
+
 
   const VivaVoiceInstructionsScreen(
       {super.key,
         required this.title,
-        required this.optionOne,
-        required this.optionTwo,
-        required this.optionThree,
-        required this.optionFour,
-        required this.questionsList,
-        required this.experimentScreen,
-        required this.noOfQuestions,
-        required this.correctAnswers, required this.quizTitle});
+ required this.quizTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -257,6 +243,18 @@ class VivaVoiceInstructionsScreen extends StatelessWidget {
                             fontSize: size.width * 0.04),
                       ),
                     ),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
+                Text(
+                  'UI is under development',
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w300,
+                    fontSize: size.width * 0.03,
                   ),
                 ),
               ],

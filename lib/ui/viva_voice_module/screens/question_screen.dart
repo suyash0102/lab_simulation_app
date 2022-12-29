@@ -252,6 +252,18 @@ class QuestionScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+            Text(
+              'UI is under development',
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w300,
+                fontSize: size.width * 0.03,
+              ),
+            ),
           ],
         ),
       ),

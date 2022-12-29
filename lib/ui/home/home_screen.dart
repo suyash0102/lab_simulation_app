@@ -7,6 +7,7 @@ import 'package:lab_simulation_app/services/helper.dart';
 import 'package:lab_simulation_app/ui/auth/authentication_bloc.dart';
 import 'package:lab_simulation_app/ui/auth/welcome/welcome_screen.dart';
 import 'package:lab_simulation_app/ui/coming_soon_screen.dart';
+import 'package:lab_simulation_app/ui/faculty_module/screens/fm_home_screen.dart';
 import 'package:lab_simulation_app/ui/home/dashboard/dashboard_screen.dart';
 import 'package:lab_simulation_app/ui/home/profileScreen/profile_screen.dart';
 import 'package:lab_simulation_app/ui/labsScreen/labs_sub_screen.dart';
@@ -501,17 +502,17 @@ class _HomeState extends State<HomeScreen> {
                   '',
                   style: TextStyle(fontSize: 0),
                 ),
-          orientation == Orientation.portrait
-              ? Text(user.userID,
-                  style: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ))
-              : const Text(
-                  '',
-                  style: TextStyle(fontSize: 0),
-                ),
+          // orientation == Orientation.portrait
+          //     ? Text(user.userID,
+          //         style: const TextStyle(
+          //           fontFamily: 'Poppins',
+          //         ))
+          //     : const Text(
+          //         '',
+          //         style: TextStyle(fontSize: 0),
+          //       ),
           SizedBox(height: size.height*0.03,),
-          Text('You are a Admin',style: TextStyle(color: kPrimaryColor, fontFamily: "Poppins",fontSize: size.width*0.05,fontWeight: FontWeight.w700),),
+          Text('You are an Admin',style: TextStyle(color: kPrimaryColor, fontFamily: "Poppins",fontSize: size.width*0.05,fontWeight: FontWeight.w700),),
           SizedBox(height: size.height*0.04,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.2),
@@ -519,8 +520,14 @@ class _HomeState extends State<HomeScreen> {
               height: size.height * 0.05,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
-                },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return FMHomeScreen(user: user);
+                      },
+                    ),
+                  );                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: kPrimaryColor, elevation: 0),
                 child: Text(
@@ -568,7 +575,8 @@ class _HomeState extends State<HomeScreen> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.dashboard),
+                activeIcon: Icon(Icons.dashboard),
+                icon: Icon(Icons.dashboard_outlined),
                 label: 'Dashboard',
               ),
               BottomNavigationBarItem(

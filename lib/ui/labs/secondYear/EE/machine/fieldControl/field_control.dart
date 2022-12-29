@@ -5,6 +5,8 @@ import 'package:lab_simulation_app/components/add_to_observation_btn.dart';
 import 'package:lab_simulation_app/components/circular_meter.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/fieldControl/fcData.dart';
+import 'package:lab_simulation_app/ui/quiz_module/screens/start_screen.dart';
+import 'package:lab_simulation_app/ui/viva_voice_module/screens/viva_voice_instructions_page.dart';
 import 'package:segment_display/segment_display.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -1942,51 +1944,82 @@ class _FieldControlScreenState extends State<FieldControlScreen>
                   SingleChildScrollView(
                       child: Column(
                     children: [
-                      SizedBox(
-                        height: size.height * 0.02,
+                      SizedBox(height: size.height*0.02,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: size.width * 0.25),
+                        child: SizedBox(
+                          height: size.height * 0.05,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return QuizScreen(
+                                      title: fcTitle,
+                                      optionOne: fcOptionOne,
+                                      optionTwo: fcOptionTwo,
+                                      optionThree: fcOptionThree,
+                                      optionFour: fcOptionFour,
+                                      questionsList: fcQuestionsList,
+                                      experimentScreen:
+                                      fcExperimentScreen,
+                                      noOfQuestions: fcNoOfQuestions,
+                                      correctAnswers:
+                                      fcCorrectAnswers,
+                                      quizTitle: fcAim,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: kPrimaryColor,
+                                elevation: 0),
+                            child: const Text(
+                              "Take Quiz",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                  fontSize: 21),
+                            ),
+                          ),
+                        ),
                       ),
-                      // Padding(
-                      //   padding: EdgeInsets.symmetric(
-                      //       horizontal: size.width * 0.25),
-                      //   child: SizedBox(
-                      //     height: size.height * 0.05,
-                      //     child: ElevatedButton(
-                      //       onPressed: () {
-                      //         Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //             builder: (context) {
-                      //               return QuizScreen(
-                      //                 title: ocTitle,
-                      //                 optionOne: ocOptionOne,
-                      //                 optionTwo: ocOptionTwo,
-                      //                 optionThree: ocOptionThree,
-                      //                 optionFour: ocOptionFour,
-                      //                 questionsList: ocQuestionsList,
-                      //                 experimentScreen:
-                      //                 ocExperimentScreen,
-                      //                 noOfQuestions: ocNoOfQuestions,
-                      //                 correctAnswers:
-                      //                 ocCorrectAnswers,
-                      //                 quizTitle: ocAim,
-                      //               );
-                      //             },
-                      //           ),
-                      //         );
-                      //       },
-                      //       style: ElevatedButton.styleFrom(
-                      //           backgroundColor: kPrimaryColor,
-                      //           elevation: 0),
-                      //       child: const Text(
-                      //         "Take Quiz",
-                      //         style: TextStyle(
-                      //             color: Colors.white,
-                      //             fontFamily: "Poppins",
-                      //             fontSize: 21),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      SizedBox(height: size.height*0.02,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: size.width * 0.25),
+                        child: SizedBox(
+                          height: size.height * 0.05,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return VivaVoiceInstructionsScreen(
+                                      title: fcTitle,
+                                      quizTitle: fcAim,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: kPrimaryColor,
+                                elevation: 0),
+                            child: const Text(
+                              "Viva Voice",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                  fontSize: 21),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ))
                 ],

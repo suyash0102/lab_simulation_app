@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/auth/launcherScreen/launcher_screen.dart';
-import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/ocData.dart';
 import 'package:lab_simulation_app/ui/quiz_module/components/question_answer_divider.dart';
 import 'package:lab_simulation_app/ui/quiz_module/controller/index_controller.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class FinalScreen extends StatelessWidget {
@@ -129,6 +127,18 @@ class FinalScreen extends StatelessWidget {
                           fontSize: size.width * 0.04),
                     ),
                   ),
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.1,
+              ),
+              Text(
+                'UI is under development',
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w300,
+                  fontSize: size.width * 0.03,
                 ),
               ),
             ],
