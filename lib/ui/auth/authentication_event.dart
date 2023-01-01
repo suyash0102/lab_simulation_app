@@ -19,7 +19,8 @@ class LoginWithPhoneNumberEvent extends AuthenticationEvent {
   String? fullName;
   String? branch;
   String? year;
-  Uint8List? imageData;
+  String? profileImageUrl;
+  // Uint8List? imageData;
 
   LoginWithPhoneNumberEvent({
     required this.credential,
@@ -27,25 +28,29 @@ class LoginWithPhoneNumberEvent extends AuthenticationEvent {
     this.fullName,
     this.branch,
     this.year,
-    this.imageData,
+    this.profileImageUrl,
+    // this.imageData,
   });
 }
 
 class SignupWithEmailAndPasswordEvent extends AuthenticationEvent {
   String emailAddress;
   String password;
-  Uint8List? imageData;
+  // Uint8List? imageData;
   String? fullName;
   String? branch;
   String? year;
+  String? profileImageUrl;
+
 
   SignupWithEmailAndPasswordEvent({
     required this.emailAddress,
     required this.password,
-    this.imageData,
+    // this.imageData,
     this.fullName = 'Anonymous',
     this.branch = 'Anonymous',
     this.year = 'Anonymous',
+    this.profileImageUrl='https://ibb.co/HKmgntF',
   });
 }
 

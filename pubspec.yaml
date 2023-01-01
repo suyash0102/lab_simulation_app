@@ -71,7 +71,7 @@ dependencies:
   google_fonts: ^3.0.1
   syncfusion_flutter_charts: ^20.4.38
   flutter_sound: ^9.2.13
-
+  image_cropper: ^3.0.1
 
 dev_dependencies:
   flutter_test:

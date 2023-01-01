@@ -88,10 +88,11 @@ class _SignUpState extends State<SignUpScreen> {
                         .add(SignupWithEmailAndPasswordEvent(
                           emailAddress: email!,
                           password: password!,
-                          imageData: _imageData,
+                          // imageData: _imageData,
                           branch: branch,
                           fullName: fullName,
                           year: year,
+                      profileImageUrl: 'https://firebasestorage.googleapis.com/v0/b/lsapp-68019.appspot.com/o/profile.png?alt=media&token=cabfe847-7474-4731-bae0-b5130ba8e14f',
                         ));
                   } else if (state is SignUpFailureState) {
                     showSnackBar(context, state.errorMessage);

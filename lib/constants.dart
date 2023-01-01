@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 const finishedOnBoardingConst = 'finishedOnBoarding';
@@ -25,3 +27,5 @@ const textColor = Colors.black;
 const lightTextColor = Colors.black26;
 const transparent = Colors.transparent;
 const appPadding = 10.0;
+
+

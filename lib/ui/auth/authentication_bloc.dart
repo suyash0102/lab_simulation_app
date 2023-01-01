@@ -82,7 +82,8 @@ class AuthenticationBloc
               fullName: event.fullName,
               branch: event.branch,
               year: event.year,
-              imageData: event.imageData);
+              profileImageUrl: event.profileImageUrl,
+              );
       if (result is User) {
         user = result;
         emit(AuthenticationState.authenticated(result));
@@ -94,7 +95,7 @@ class AuthenticationBloc
       dynamic result = await FireStoreUtils.signUpWithEmailAndPassword(
           emailAddress: event.emailAddress,
           password: event.password,
-          imageData: event.imageData,
+          // imageData: event.imageData,
           fullName: event.fullName,
           year: event.year,
           branch: event.branch);

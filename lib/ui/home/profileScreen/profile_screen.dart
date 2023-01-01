@@ -22,169 +22,175 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Padding(
-      padding:
-          EdgeInsets.only(left: size.width * 0.05, right: size.width * 0.05),
-      child: Column(
-        children: [
-          SizedBox(
-            height: size.height * 0.03,
-          ),
-          Image.asset('assets/images/profile.png'),
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Name:",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.purple,
-                fontFamily: "Poppins",
-              ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding:
+            EdgeInsets.only(left: size.width * 0.05, right: size.width * 0.05),
+        child: Column(
+          children: [
+            SizedBox(
+              height: size.height * 0.03,
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.008,
-          ),
-          CustomizedTextFormField(
-            readOnly: true,
-            validator: validateName,
-            onSaved: (String? val) {
-              // fullName = val;
-            },
-            hintText: widget.user.fullName,
-            obscureText: false,
-          ),
-          SizedBox(
-            height: size.height * 0.008,
-          ),
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "College Email ID:",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.purple,
-                fontFamily: "Poppins",
-              ),
+            CircleAvatar(
+              radius: size.width * 0.18,
+              backgroundImage:
+              NetworkImage(widget.user.profileImageUrl),
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.008,
-          ),
-          CustomizedTextFormField(
-            readOnly: true,
-            validator: validateName,
-            onSaved: (String? val) {
-              // fullName = val;
-            },
-            hintText: widget.user.email,
-            obscureText: false,
-          ),
-          SizedBox(
-            height: size.height * 0.008,
-          ),
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Year:",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.purple,
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.008,
-          ),
-          CustomizedTextFormField(
-            readOnly: true,
-            validator: validateName,
-            onSaved: (String? val) {
-              // fullName = val;
-            },
-            hintText: widget.user.year,
-            obscureText: false,
-          ),
-          SizedBox(
-            height: size.height * 0.008,
-          ),
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Branch:",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.purple,
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.008,
-          ),
-          Column(
-            children: [
-              CustomizedTextFormField(
-                readOnly: true,
-                validator: validateName,
-                onSaved: (String? val) {
-                  // fullName = val;
-                },
-                hintText: widget.user.branch,
-                obscureText: false,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: size.height * 0.03,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return EditProfileDetails(
-                      user: widget.user,
-                    );
-                  },
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Name:",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.purple,
+                  fontFamily: "Poppins",
                 ),
-              );
-            },
-            child: const Text(
-              "Edit Profile",
-              style: TextStyle(fontFamily: "Poppins", fontSize: 21),
+              ),
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.015,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.read<AuthenticationBloc>().add(LogoutEvent());
-            },
-            style: ElevatedButton.styleFrom(
-                backgroundColor: kPrimaryLightColor, elevation: 0),
-            child: Text(
-              "LogOut".toUpperCase(),
-              style: const TextStyle(
-                  color: Colors.black, fontFamily: "Poppins", fontSize: 21),
+            SizedBox(
+              height: size.height * 0.008,
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.01,
-          ),
-          Text(
-            'UI is under development',
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w300,
-              fontSize: size.width * 0.03,
+            CustomizedTextFormField(
+              readOnly: true,
+              validator: validateName,
+              onSaved: (String? val) {
+                // fullName = val;
+              },
+              hintText: widget.user.fullName,
+              obscureText: false,
             ),
-          ),
-        ],
+            SizedBox(
+              height: size.height * 0.008,
+            ),
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "College Email ID:",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.purple,
+                  fontFamily: "Poppins",
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.008,
+            ),
+            CustomizedTextFormField(
+              readOnly: true,
+              validator: validateName,
+              onSaved: (String? val) {
+                // fullName = val;
+              },
+              hintText: widget.user.email,
+              obscureText: false,
+            ),
+            SizedBox(
+              height: size.height * 0.008,
+            ),
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Year:",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.purple,
+                  fontFamily: "Poppins",
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.008,
+            ),
+            CustomizedTextFormField(
+              readOnly: true,
+              validator: validateName,
+              onSaved: (String? val) {
+                // fullName = val;
+              },
+              hintText: widget.user.year,
+              obscureText: false,
+            ),
+            SizedBox(
+              height: size.height * 0.008,
+            ),
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Branch:",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.purple,
+                  fontFamily: "Poppins",
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.008,
+            ),
+            Column(
+              children: [
+                CustomizedTextFormField(
+                  readOnly: true,
+                  validator: validateName,
+                  onSaved: (String? val) {
+                    // fullName = val;
+                  },
+                  hintText: widget.user.branch,
+                  obscureText: false,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return EditProfileDetails(
+                        user: widget.user,
+                      );
+                    },
+                  ),
+                );
+              },
+              child: const Text(
+                "Edit Profile",
+                style: TextStyle(fontFamily: "Poppins", fontSize: 21),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.015,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.read<AuthenticationBloc>().add(LogoutEvent());
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: kPrimaryLightColor, elevation: 0),
+              child: Text(
+                "LogOut".toUpperCase(),
+                style: const TextStyle(
+                    color: Colors.black, fontFamily: "Poppins", fontSize: 21),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            Text(
+              'UI is under development',
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w300,
+                fontSize: size.width * 0.03,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

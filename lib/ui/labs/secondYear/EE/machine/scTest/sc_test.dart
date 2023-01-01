@@ -62,7 +62,6 @@ class _SCTestScreenState extends State<SCTestScreen> {
   }
 
   bool switchOn = false;
-  double v1 = 0.0;
   double vsc = 10.0;
   double rsc = 4.41;
   double zsc = 4.6;
@@ -73,7 +72,6 @@ class _SCTestScreenState extends State<SCTestScreen> {
   double phi = 0.0;
   double i0 = 0.0;
   double W = 0.0;
-  double v2 = 0.0;
 
 
   double vSco = 0.0;
@@ -353,10 +351,9 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                             player.play(AssetSource(
                                                 'audio/slide-click.wav'));
                                             switchOn = !switchOn;
-                                            switchOn ? v1 = 20 : null;
+                                            switchOn ? vsc = 10 : null;
                                             switchOn ? i0 : i0 = 0;
                                             switchOn ? W : W = 0;
-                                            switchOn ? v2 : v2 = 0;
                                             i0 = (vsc / zsc);
                                             W = pow(i0, 2) * rsc;
                                           });
@@ -380,10 +377,9 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                         child: GestureDetector(
                                           onTap: () {
                                             setState(() {
-                                              switchOn ? v1 = 230 : null;
+                                              switchOn ? vsc = 10 : null;
                                               switchOn ? i0 : i0 = 0;
                                               switchOn ? W : W = 0;
-                                              switchOn ? v2 : v2 = 0;
                                             });
                                           },
                                           child: switchOn
@@ -391,10 +387,10 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                             onPressed: () {
                                               setState(() {
                                                 addedToObservation = true;
-                                                vSco = v1;
+                                                vSco = vsc;
                                                 iSco = i0;
                                                 wSco = W;
-                                                v2o = v2;
+
                                                 // noLoadPowerFactorAnswer =
                                                 //     roundDouble(
                                                 //         roundDouble(

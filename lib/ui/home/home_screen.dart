@@ -112,14 +112,14 @@ class _HomeState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const ComingSoonScreen();
-                              },
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) {
+                          //       return const MyHomePage();
+                          //     },
+                          //   ),
+                          // );
                         },
                         child: Container(
                           decoration: BoxDecoration(

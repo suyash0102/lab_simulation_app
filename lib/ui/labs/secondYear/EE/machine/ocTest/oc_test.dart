@@ -569,7 +569,8 @@ class _OCTestScreenState extends State<OCTestScreen> {
                                                   ? roundDouble(v2, 1)
                                                   : 0.0,
                                               range1: 0,
-                                              range2: 300,firstColorCut: 100, secondColorCut: 200, thirdColorCut: 300,)),
+                                              range2: 30,
+                                            firstColorCut: 100, secondColorCut: 200, thirdColorCut: 300,)),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(

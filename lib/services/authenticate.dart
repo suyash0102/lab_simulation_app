@@ -117,13 +117,15 @@ class FireStoreUtils {
     String fullName = '';
     String branch = '';
     String year = '';
+    String profileImageUrl='';
+
     // if (fullName.isNotEmpty) {
     //   fullName = fullName.first;
     //   lastName = fullName.skip(1).join(' ');
     // }
 
     if (user != null) {
-      user.profilePictureURL = userData['picture']['data']['url'];
+      user.profileImageUrl = profileImageUrl;
       user.fullName = fullName;
       user.branch = branch;
       user.year = year;
@@ -136,7 +138,7 @@ class FireStoreUtils {
           fullName: fullName,
           branch: branch,
           year: year,
-          profilePictureURL: userData['picture']['data']['url'] ?? '',
+          profileImageUrl: profileImageUrl ?? '',
           userID: authResult.user?.uid ?? '');
       String? errorMessage = await createNewUser(user);
       if (errorMessage == null) {
@@ -158,28 +160,29 @@ class FireStoreUtils {
   static signUpWithEmailAndPassword({
     required String emailAddress,
     required String password,
-    Uint8List? imageData,
+    // Uint8List? imageData,
     fullName = 'Anonymous',
     year = 'XXX',
     branch = 'XX',
+    profileImageUrl='https://firebasestorage.googleapis.com/v0/b/lsapp-68019.appspot.com/o/profile.png?alt=media&token=cabfe847-7474-4731-bae0-b5130ba8e14f'
   }) async {
     try {
       auth.UserCredential result = await auth.FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: emailAddress, password: password);
-      String profilePicUrl = '';
-      if (imageData != null) {
-        updateProgress('Uploading image, Please wait...');
-        profilePicUrl =
-            await uploadUserImageToServer(imageData, result.user?.uid ?? '');
-      }
+      // String profileImageUrl = '';
+      // if (imageData != null) {
+      //   updateProgress('Uploading image, Please wait...');
+      //   profileImageUrl =
+      //       await uploadUserImageToServer(imageData, result.user?.uid ?? '');
+      // }
       User user = User(
           email: emailAddress,
           fullName: fullName,
           userID: result.user?.uid ?? '',
           branch: branch,
           year: year,
-          profilePictureURL: profilePicUrl);
+          profileImageUrl: profileImageUrl);
       String? errorMessage = await createNewUser(user);
       if (errorMessage == null) {
         return user;
@@ -233,7 +236,8 @@ class FireStoreUtils {
     String? fullName = 'Anonymous',
     String? branch = 'XX',
     String? year = 'XXX',
-    Uint8List? imageData,
+    String? profileImageUrl = 'https://firebasestorage.googleapis.com/v0/b/lsapp-68019.appspot.com/o/profile.png?alt=media&token=cabfe847-7474-4731-bae0-b5130ba8e14f',
+    // Uint8List? imageData,
   }) async {
     auth.UserCredential userCredential =
         await auth.FirebaseAuth.instance.signInWithCredential(credential);
@@ -243,10 +247,10 @@ class FireStoreUtils {
     } else {
       /// create a new user from phone login
       String profileImageUrl = '';
-      if (imageData != null) {
-        profileImageUrl = await uploadUserImageToServer(
-            imageData, userCredential.user?.uid ?? '');
-      }
+      // if (imageData != null) {
+      //   profileImageUrl = await uploadUserImageToServer(
+      //       imageData, userCredential.user?.uid ?? '');
+      // }
       User user = User(
           // firstName:
           // firstName!.trim().isNotEmpty ? firstName.trim() : 'Anonymous',
@@ -255,7 +259,7 @@ class FireStoreUtils {
           year: '',
           branch: '',
           email: '',
-          profilePictureURL: profileImageUrl,
+          profileImageUrl: profileImageUrl,
           userID: userCredential.user?.uid ?? '');
       String? errorMessage = await createNewUser(user);
       if (errorMessage == null) {

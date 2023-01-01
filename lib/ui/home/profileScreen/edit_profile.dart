@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/model/user.dart';
+import 'package:lab_simulation_app/ui/auth/launcherScreen/launcher_screen.dart';
 
 import '../../../components/customized_text_form_field.dart';
 import '../../../services/helper.dart';
@@ -16,8 +21,85 @@ class EditProfileDetails extends StatefulWidget {
 }
 
 class _EditProfileDetailsState extends State<EditProfileDetails> {
-  static FirebaseFirestore firestore = FirebaseFirestore.instance;
+  late File image;
+  String uploadFileUrl ='';
+  String uploadFileUrlCAdmin = "https://i.ibb.co/VHB6y9Q/camera-image.png";
+
+  // late String profileImageUrl =
+  //     'https://firebasestorage.googleapis.com/v0/b/lsapp-68019.appspot.com/o/ProfileImages%2Fee.2019.spdahake%40bitwardha.ac.in?alt=media&token=93974ab8-bf83-48d3-ad67-6176ca7b2a6e';
+  // static FirebaseFirestore firestore = FirebaseFirestore.instance;
   String? fullName, year, branch;
+  final picker = ImagePicker();
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext ctxt) {
+          return SafeArea(
+              child: Container(
+            child: ListTile(
+                leading: new Icon(Icons.photo_library),
+                title: new Text('Photo Library'),
+                onTap: () {
+                  _imgFromGallery();
+                  Navigator.of(context).pop();
+                }),
+          ));
+        });
+  }
+
+  Future _imgFromGallery() async {
+    final pickedFile = await picker.pickImage(
+        imageQuality: 100,
+        source: ImageSource.gallery,
+        maxWidth: 400,
+        maxHeight: 400);
+
+    setState(() {
+      if (pickedFile != null) {
+        image = File(pickedFile.path);
+      } else {
+        print("No image selected");
+      }
+    });
+    uploadFile(image);
+  }
+
+  Future uploadFile(File img) async {
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child('ProfileImages/${widget.user.email}');
+    await ref.putFile(img).whenComplete(() {
+      ref.getDownloadURL().then((fileUrl) {
+        print(fileUrl);
+        setState(() {
+          // FirebaseFirestore.instance
+          //     .collection('users')
+          //     .doc(widget.user.userID)
+          //     .update({
+          //   'profileImageUrl': fileUrl,
+          // });
+          uploadFileUrl = fileUrl;
+        });
+      });
+    });
+  }
+
+  Future updateDetails() async {
+    // print(fileUrl);
+    setState(() {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.user.userID)
+          .update({
+        'profileImageUrl': uploadFileUrl,
+        'fullName': fullName,
+        'year': year,
+        'branch': branch,
+      });
+      uploadFileUrl = uploadFileUrl;
+    });
+  }
 
   final List<String> branchNames = [
     'Electrical Engineering',
@@ -55,7 +137,40 @@ class _EditProfileDetailsState extends State<EditProfileDetails> {
               SizedBox(
                 height: size.height * 0.03,
               ),
-              Image.asset('assets/images/profile.png'),
+              GestureDetector(
+                onTap: () {
+                  _showPicker(context);
+                },
+                child: SizedBox(
+                  child: widget.user.profileImageUrl ==
+                          uploadFileUrl
+                      ? CircleAvatar(
+                          radius: size.width * 0.3,
+                          backgroundImage:
+                              NetworkImage(widget.user.profileImageUrl),
+                        )
+                      : CircleAvatar(
+                          radius: size.width * 0.3,
+                          backgroundImage: NetworkImage(uploadFileUrl),
+                        ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: TextButton(
+                  child: const Text(
+                    "Add Profile Pic",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.purple,
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                  onPressed: () {
+                    _showPicker(context);
+                  },
+                ),
+              ),
               const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -73,6 +188,9 @@ class _EditProfileDetailsState extends State<EditProfileDetails> {
               CustomizedTextFormField(
                 readOnly: false,
                 validator: validateName,
+                onChanged: (String? val) {
+                  fullName = val;
+                },
                 onSaved: (String? val) {
                   fullName = val;
                 },
@@ -231,21 +349,23 @@ class _EditProfileDetailsState extends State<EditProfileDetails> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // firestore
-                  //     .collection(usersCollection)
-                  //     .doc(widget.user.userID)
-                  //     .update({'fullName':fullName})
-                  //     .then((document) {
-                  //   return widget.user;
-                  // });
-                  // FirebaseFirestore.instance
-                  //     .collection('users')
-                  //     .doc(widget.user.userID)
-                  //     .get()
-                  //     .then((document) {
-                  //   return widget.user;
-                  // });
-                  // print(widget.user.fullName);
+                  if(fullName==null){
+                    fullName=widget.user.fullName;
+                  }
+                  if(year==null){
+                    year=widget.user.year;
+                  }
+                  if(branch==null){
+                    branch=widget.user.branch;
+                  }
+                  updateDetails();
+                  Navigator.pushAndRemoveUntil<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                        const LauncherScreen()),
+                    ModalRoute.withName('/'),
+                  );
                 },
                 child: const Text(
                   "Make Changes",

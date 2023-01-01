@@ -41,10 +41,14 @@ class LeftDrawer extends StatelessWidget {
           ),
           Row(
             children: [
-              Container(
-                  padding: EdgeInsets.only(left: size.width * 0.02),
-                  width: size.width * 0.25,
-                  child: Image.asset('assets/images/profile.png')),
+              SizedBox(
+                width: size.width * 0.03,
+              ),
+              CircleAvatar(
+                radius: size.width * 0.12,
+                backgroundImage:
+                NetworkImage(user.profileImageUrl),
+              ),
               SizedBox(
                 width: size.width * 0.03,
               ),
