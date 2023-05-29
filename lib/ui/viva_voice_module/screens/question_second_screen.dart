@@ -1,13 +1,14 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lab_simulation_app/constants.dart';
+import 'package:lab_simulation_app/model/user.dart';
 import 'package:lab_simulation_app/ui/viva_voice_module/screens/final_screen.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data' show Uint8List;
 import 'package:audio_session/audio_session.dart';
-import 'package:lab_simulation_app/ui/viva_voice_module/screens/question_second_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart' show DateFormat;
@@ -36,21 +37,23 @@ enum AudioState {
   isRecordingPaused,
 }
 
-class QuestionScreen extends StatefulWidget {
+class QuestionSecondScreen extends StatefulWidget {
   final String title;
   final String quizTitle;
+  final String answer1;
 
-  QuestionScreen({super.key, required this.title, required this.quizTitle});
+  const QuestionSecondScreen({super.key, required this.title, required this.quizTitle, required this.answer1});
 
   @override
-  State<QuestionScreen> createState() => _QuestionScreenState();
+  State<QuestionSecondScreen> createState() => _QuestionSecondScreenState();
 }
 
-class _QuestionScreenState extends State<QuestionScreen> {
+class _QuestionSecondScreenState extends State<QuestionSecondScreen> {
   bool _isRecording = false;
   bool starRecording = true;
   bool startPlayer01 = true;
   late String _filePath;
+  late bool _isUploading;
 
   final List<String?> _path = [
     null,
@@ -99,6 +102,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Codec _codec = Codec.aacMP4;
 
   bool? _encoderSupported = true;
+  var path = '';
 
   // Optimist
   StreamController<Food>? recordingDataController;
@@ -134,11 +138,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
     await session.configure(AudioSessionConfiguration(
       avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
       avAudioSessionCategoryOptions:
-          AVAudioSessionCategoryOptions.allowBluetooth |
-              AVAudioSessionCategoryOptions.defaultToSpeaker,
+      AVAudioSessionCategoryOptions.allowBluetooth |
+      AVAudioSessionCategoryOptions.defaultToSpeaker,
       avAudioSessionMode: AVAudioSessionMode.spokenAudio,
       avAudioSessionRouteSharingPolicy:
-          AVAudioSessionRouteSharingPolicy.defaultPolicy,
+      AVAudioSessionRouteSharingPolicy.defaultPolicy,
       avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
       androidAudioAttributes: const AndroidAudioAttributes(
         contentType: AndroidAudioContentType.speech,
@@ -155,7 +159,34 @@ class _QuestionScreenState extends State<QuestionScreen> {
     super.initState();
     init();
   }
-
+  Future<void> _onFileUploadButtonPressed() async {
+    FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+    setState(() {
+      _isUploading = true;
+    });
+    try {
+      await firebaseStorage
+          .ref("VivaVoice/$userId")
+          .child("Subject/LabName/answer2.mp4")
+          .putFile(File(_filePath));
+      await firebaseStorage
+          .ref("VivaVoice/$userId")
+          .child("Subject/LabName/answer1.mp4")
+          .putFile(File(widget.answer1));
+      // widget.onUploadComplete();
+    } catch (error) {
+      print('Error occured while uplaoding to Firebase ${error.toString()}');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error occured while uplaoding'),
+        ),
+      );
+    } finally {
+      setState(() {
+        _isUploading = false;
+      });
+    }
+  }
   void cancelRecorderSubscriptions() {
     if (_recorderSubscription != null) {
       _recorderSubscription!.cancel();
@@ -202,14 +233,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
               'Microphone permission not granted');
         }
       }
-      var path = '';
       if (!kIsWeb) {
         var tempDir = await getTemporaryDirectory();
-        path = '${tempDir.path}/answer1${ext[_codec.index]}';
+        path = '${tempDir.path}/answer2${ext[_codec.index]}';
         _filePath = path;
+
       } else {
         path = '_flutter_sound${ext[_codec.index]}';
         _filePath = path;
+
       }
       await recorderModule.startRecorder(
         toFile: path,
@@ -465,9 +497,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
           ),
           _isRecording
               ? LinearProgressIndicator(
-                  value: 100.0 / 160.0 * (_dbLevel ?? 1) / 100,
-                  valueColor: AlwaysStoppedAnimation<Color>(kGreenColor),
-                  backgroundColor: kRedColor)
+              value: 100.0 / 160.0 * (_dbLevel ?? 1) / 100,
+              valueColor: AlwaysStoppedAnimation<Color>(kGreenColor),
+              backgroundColor: kRedColor)
               : Container(),
           SizedBox(
             height: size.height * 0.01,
@@ -525,19 +557,19 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     //padding: EdgeInsets.all(8.0),
                     child: startPlayer01 == true
                         ? Icon(
-                            Icons.play_arrow_rounded,
-                            color: kPrimaryColor,
-                            size: size.width * 0.08,
-                          )
+                      Icons.play_arrow_rounded,
+                      color: kPrimaryColor,
+                      size: size.width * 0.08,
+                    )
                         : Icon(
-                            Icons.pause,
-                            color: kPrimaryColor,
-                            size: size.width * 0.08,
-                          )),
+                      Icons.pause,
+                      color: kPrimaryColor,
+                      size: size.width * 0.08,
+                    )),
               ),
             ),
             Slider(
-                // focusNode: FocusNode(),
+              // focusNode: FocusNode(),
                 activeColor: kPrimaryColor,
                 inactiveColor: kGreyColor,
                 value: min(sliderCurrentPosition, maxDuration),
@@ -692,8 +724,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return QuestionSecondScreen(
-                            answer1: _filePath,
+                          return FinalScreen(
                               title: widget.title, quizTitle: widget.quizTitle);
                         },
                       ),
@@ -702,7 +733,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: kPrimaryColor, elevation: 0),
                   child: Text(
-                    "Next Question",
+                    "Submit",
                     style: TextStyle(
                         color: Colors.white,
                         fontFamily: "Poppins",
@@ -710,6 +741,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ),
                 ),
               ),
+            ),
+            IconButton(
+              icon: Icon(Icons.upload_file),
+              onPressed: _onFileUploadButtonPressed,
             ),
           ],
         ),

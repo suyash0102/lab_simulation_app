@@ -51,3 +51,13 @@ class User {
     };
   }
 }
+
+class MyGlobalVariables {
+  static String userId = User().userID;
+}
+
+String userId='';
+String email='';
+int phoneNo=00;
+String branch='';
+String year='';

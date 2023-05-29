@@ -1500,8 +1500,6 @@ class _SCTestScreenState extends State<SCTestScreen> {
                                                 Colors.white)),
                                         focusedBorder:
                                         const OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.zero,
                                             borderSide: BorderSide(
                                                 color: Colors
                                                     .transparent)),

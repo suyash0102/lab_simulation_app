@@ -72,6 +72,11 @@ dependencies:
   syncfusion_flutter_charts: ^20.4.38
   flutter_sound: ^9.2.13
   image_cropper: ^3.0.1
+  permission_handler: ^6.0.1
+  just_audio: ^0.9.11
+  audio_session: ^0.1.6
+  intl: ^0.17.0
+  shimmer:
 
 dev_dependencies:
   flutter_test:

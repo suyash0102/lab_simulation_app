@@ -26,7 +26,6 @@ class _HomeState extends State<HomeScreen> {
 
   int _selectedIndex = 0;
 
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -37,6 +36,7 @@ class _HomeState extends State<HomeScreen> {
   void initState() {
     super.initState();
     user = widget.user;
+    userId=user.userID;
   }
 
   @override
@@ -511,35 +511,53 @@ class _HomeState extends State<HomeScreen> {
           //         '',
           //         style: TextStyle(fontSize: 0),
           //       ),
-          SizedBox(height: size.height*0.03,),
-          Text('You are an Admin',style: TextStyle(color: kPrimaryColor, fontFamily: "Poppins",fontSize: size.width*0.05,fontWeight: FontWeight.w700),),
-          SizedBox(height: size.height*0.04,),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.2),
-            child: SizedBox(
-              height: size.height * 0.05,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return FMHomeScreen(user: user);
-                      },
-                    ),
-                  );                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: kPrimaryColor, elevation: 0),
-                child: Text(
-                  "Faculty Dashboard",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Poppins",
-                      fontSize: size.width * 0.04),
-                ),
-              ),
-            ),
+          SizedBox(
+            height: size.height * 0.03,
           ),
+          validateStudent(user.email)
+              ? const Text("")
+              : Text(
+                  'You are an Admin',
+                  style: TextStyle(
+                      color: kPrimaryColor,
+                      fontFamily: "Poppins",
+                      fontSize: size.width * 0.05,
+                      fontWeight: FontWeight.w700),
+                ),
+          SizedBox(
+            height: size.height * 0.04,
+          ),
+          validateStudent(user.email)
+              ? SizedBox(
+                  width: 0.0,
+                )
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.2),
+                  child: SizedBox(
+                    height: size.height * 0.05,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return FMHomeScreen(user: user);
+                            },
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: kPrimaryColor, elevation: 0),
+                      child: Text(
+                        "Faculty Dashboard",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Poppins",
+                            fontSize: size.width * 0.04),
+                      ),
+                    ),
+                  ),
+                ),
         ],
       ),
       DashboardScreen(user: widget.user),
@@ -592,7 +610,7 @@ class _HomeState extends State<HomeScreen> {
               fontFamily: 'Poppins',
               color: kPrimaryColor,
             ),
-            unselectedLabelStyle:  const TextStyle(
+            unselectedLabelStyle: const TextStyle(
               fontFamily: 'Poppins',
               color: kPrimaryColor,
             ),

@@ -109,6 +109,7 @@ class AuthenticationBloc
             message: 'Couldn\'t sign up'));
       }
     });
+
     on<LogoutEvent>((event, emit) async {
       await FireStoreUtils.logout();
       user = null;

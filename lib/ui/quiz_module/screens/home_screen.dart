@@ -11,6 +11,7 @@ import 'package:lab_simulation_app/ui/quiz_module/components/question_mark_icon.
 import 'package:lab_simulation_app/ui/quiz_module/components/question_number_index.dart';
 import 'package:lab_simulation_app/ui/quiz_module/controller/index_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 import 'result_screen.dart';
 
 class FirstPage extends StatelessWidget {
@@ -38,7 +39,8 @@ class FirstPage extends StatelessWidget {
       required this.questionsList,
       required this.experimentScreen,
       required this.noOfQuestions,
-      required this.correctAnswers, required this.quizTitle});
+      required this.correctAnswers,
+      required this.quizTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +202,8 @@ class FirstPage extends StatelessWidget {
                                       child: ListTile(
                                         onTap: () {
                                           marksForCorrectAnswers();
-                                          if (indexForQuestionNumber < noOfQuestions) {
+                                          if (indexForQuestionNumber <
+                                              noOfQuestions) {
                                             provider.updateIndexForQuestion();
                                           } else {
                                             Navigator.push(
@@ -208,7 +211,7 @@ class FirstPage extends StatelessWidget {
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       ResultPage(
-                                                        quizTitle: quizTitle,
+                                                    quizTitle: quizTitle,
                                                     optionOne: optionOne,
                                                     optionTwo: optionTwo,
                                                     optionThree: optionThree,

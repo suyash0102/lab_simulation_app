@@ -11,6 +11,15 @@ class FireStoreUtils {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
   static Reference storage = FirebaseStorage.instance.ref();
 
+  // static Future<User?> getUserDetails(String uid) async {
+  //   DocumentSnapshot<Map<String, dynamic>> userDocument =
+  //   await firestore.collection(usersCollection).doc(uid).get();
+  //   if (userDocument.data() != null && userDocument.exists) {
+  //     return User.fromJson(userDocument.data()!);
+  //   } else {
+  //     return null;
+  //   }
+  // }
   static Future<User?> getCurrentUser(String uid) async {
     DocumentSnapshot<Map<String, dynamic>> userDocument =
         await firestore.collection(usersCollection).doc(uid).get();

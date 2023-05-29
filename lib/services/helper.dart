@@ -43,6 +43,18 @@ String? validateEmail(String? value) {
   }
 }
 
+bool validateStudent(String? value) {
+  // String pattern = r'^[a-zA-Z ]*$.+^[0-9]*$.+^[a-zA-Z ]*$+@bitwardha.ac.in';
+  // RegExp regex = RegExp(pattern);
+  final split=value?.split('.');
+
+  if (split?.length==4) {
+    print(split);
+    return false;
+  } else {
+    return true;
+  }
+}
 String? validateConfirmPassword(String? password, String? confirmPassword) {
   if (password != confirmPassword) {
     return 'Password doesn\'t match';
