@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/model/user.dart';
-import 'package:lab_simulation_app/services/helper.dart';
 
 class FireStoreUtils {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -97,66 +95,6 @@ class FireStoreUtils {
     }
   }
 
-  static loginWithFacebook() async {
-    FacebookAuth facebookAuth = FacebookAuth.instance;
-    bool isLogged = await facebookAuth.accessToken != null;
-    if (!isLogged) {
-      LoginResult result = await facebookAuth
-          .login(); // by default we request the email and the public profile
-      if (result.status == LoginStatus.success) {
-        // you are logged
-        AccessToken? token = await facebookAuth.accessToken;
-        return await handleFacebookLogin(
-            await facebookAuth.getUserData(), token!);
-      }
-    } else {
-      AccessToken? token = await facebookAuth.accessToken;
-      return await handleFacebookLogin(
-          await facebookAuth.getUserData(), token!);
-    }
-  }
-
-  static handleFacebookLogin(
-      Map<String, dynamic> userData, AccessToken token) async {
-    auth.UserCredential authResult = await auth.FirebaseAuth.instance
-        .signInWithCredential(
-            auth.FacebookAuthProvider.credential(token.token));
-    User? user = await getCurrentUser(authResult.user?.uid ?? '');
-    // List<String> fullName = (userData['name'] as String).split(' ');
-    String fullName = '';
-    String branch = '';
-    String year = '';
-    String profileImageUrl='';
-
-    // if (fullName.isNotEmpty) {
-    //   fullName = fullName.first;
-    //   lastName = fullName.skip(1).join(' ');
-    // }
-
-    if (user != null) {
-      user.profileImageUrl = profileImageUrl;
-      user.fullName = fullName;
-      user.branch = branch;
-      user.year = year;
-      user.email = userData['email'];
-      dynamic result = await updateCurrentUser(user);
-      return result;
-    } else {
-      user = User(
-          email: userData['email'] ?? '',
-          fullName: fullName,
-          branch: branch,
-          year: year,
-          profileImageUrl: profileImageUrl ?? '',
-          userID: authResult.user?.uid ?? '');
-      String? errorMessage = await createNewUser(user);
-      if (errorMessage == null) {
-        return user;
-      } else {
-        return errorMessage;
-      }
-    }
-  }
 
   /// save a new user document in the USERS table in firebase firestore
   /// returns an error message on failure or null on success

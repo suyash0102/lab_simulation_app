@@ -40,12 +40,11 @@ dependencies:
   firebase_auth: ^4.1.1
   cloud_firestore: ^4.0.4
   firebase_storage: ^11.0.4
-  flutter_share_me:
+#  flutter_share_me:
   shared_preferences: ^2.0.15
   progress_dialog:
     git:
       url: https://github.com/mostafaAbdelazim/progress_dialog.git
-  flutter_facebook_auth: ^5.0.6
   http: ^0.13.5
   image_picker: ^0.8.6
   cached_network_image: ^3.2.2

@@ -49,18 +49,6 @@ class AuthenticationBloc
             message: 'Login failed, Please try again.'));
       }
     });
-    on<LoginWithFacebookEvent>((event, emit) async {
-      dynamic result = await FireStoreUtils.loginWithFacebook();
-      if (result != null && result is User) {
-        user = result;
-        emit(AuthenticationState.authenticated(user!));
-      } else if (result != null && result is String) {
-        emit(AuthenticationState.unauthenticated(message: result));
-      } else {
-        emit(const AuthenticationState.unauthenticated(
-            message: 'Facebook login failed, Please try again.'));
-      }
-    });
     // on<LoginWithAppleEvent>((event, emit) async {
     //   dynamic result = await FireStoreUtils.loginWithApple();
     //   if (result != null && result is User) {
