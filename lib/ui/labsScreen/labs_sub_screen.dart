@@ -57,11 +57,11 @@ const List<Choice> choices = <Choice>[
       year: 2,
       labsScreen: LabsScreen()),
   Choice(
-      labSubName: 'Measurement & Instrumentation',
+      labSubName: 'Network Analysis',
       noExp: 4,
       sem: 3,
       year: 2,
-      labsScreen: ComingSoonScreen()),
+      labsScreen: LabsScreen()),
   Choice(
       labSubName: 'Power Electronics',
       noExp: 4,

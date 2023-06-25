@@ -3,8 +3,8 @@ import 'package:lab_simulation_app/constants.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/fieldControl/field_control.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/ocTest/oc_test.dart';
 import 'package:lab_simulation_app/ui/labs/secondYear/EE/machine/scTest/sc_test.dart';
-
-import '../labs/secondYear/EE/machine/rotate.dart';
+import '../labs/secondYear/EE/network-analysis/nortons_theorem/northon-theorem.dart';
+import '../labs/secondYear/EE/network-analysis/thevneis-theorem/thevneis-theorem.dart';
 
 class LabsScreen extends StatefulWidget {
   const LabsScreen({Key? key}) : super(key: key);
@@ -50,6 +50,16 @@ class Choice {
 
 const List<Choice> choices = <Choice>[
   Choice(
+      expName:
+      'Thevneis Theorem',
+      expNo: 1,
+      simulationScreen: ThevneisTheoremScreen()),
+  Choice(
+      expName:
+      'Norton\'s Theorem',
+      expNo: 2,
+      simulationScreen: NortonTheoremScreen()),
+  Choice(
       expName: 'To perform Open Circuit test on Single Phase Transformer.',
       expNo: 1,
       simulationScreen: OCTestScreen()),
@@ -62,11 +72,7 @@ const List<Choice> choices = <Choice>[
           'To Control the Speed of DC Shunt motor by using Field Control Method.',
       expNo: 3,
       simulationScreen: FieldControlScreen()),
-  Choice(
-      expName:
-          'To Control the Speed of DC Shunt motor by using Armature Control Method.',
-      expNo: 4,
-      simulationScreen: LogoRotate()),
+
 ];
 
 class SelectCard extends StatelessWidget {
