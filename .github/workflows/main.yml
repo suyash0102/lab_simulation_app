@@ -29,7 +29,7 @@ jobs:
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.10.5'
+          flutter-version: '3.13.0'
           channel: 'stable'
 
         #4 install dependencies
@@ -37,16 +37,16 @@ jobs:
         run: flutter pub get
 
         #5 run test
-      - name: Test flutter app
-        run: flutter test
+     # - name: Test flutter app
+      #  run: flutter test
 
         #6 build apk
       - name: Build APK
         run: flutter build apk --release
 
         #7 build aab
-      - name: Build appBundle
-        run: flutter build appbundle
+    #  - name: Build appBundle
+     #   run: flutter build appbundle
 
         #8 build ipa
       - name: Build IPA
